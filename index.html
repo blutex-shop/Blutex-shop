@@ -107,6 +107,26 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .dsh{font-family:var(--display);font-size:20px;margin:6px 0 0;letter-spacing:.04em}
 @media (min-width:900px){#sheet{left:auto;right:16px;bottom:16px;width:420px;max-height:calc(100% - 120px);border-radius:20px;border:1px solid var(--line)}#strip{justify-content:center}}
 @media (prefers-reduced-motion:reduce){#sheet,#bubble{transition:none}}
+
+#projbtn{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--gold);color:#1a1300;border:0;border-radius:999px;padding:11px 20px;font-weight:700;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.35);white-space:nowrap}
+#hint{bottom:calc(140px + env(safe-area-inset-bottom,0px))!important}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px}
+.pcard{display:grid;gap:3px;text-align:left;background:#10285e;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--ink)}
+.pcard b{font-size:15px}.pcard span{font-size:12px;color:var(--mute)}
+.pcard:hover,.pcard:focus-visible{border-color:var(--gold)}
+.parea{display:grid;gap:6px;font-size:13px;color:var(--mute)}
+.prow{display:flex;gap:8px}
+.prow input{flex:1;min-width:0;height:44px;border-radius:10px;border:1px solid var(--line);background:#0a1a44;color:var(--ink);padding:0 12px;font:16px var(--body)}
+.punit{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.punit button{background:transparent;border:0;color:var(--mute);padding:0 12px;font-size:14px}
+.punit button[aria-pressed="true"]{background:#1e4fb0;color:#fff}
+.plist{display:grid;gap:8px}
+.prec{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;background:#0d2252;border:1px solid var(--line);border-radius:12px;padding:8px}
+.prec.main{border-color:var(--gold)}
+.prec img,.pimg0{width:52px;height:52px;object-fit:cover;border-radius:8px;background:#fff}
+.pt{display:grid;gap:2px;min-width:0}.pt small{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}.pt b{font-size:15px}.pt span{font-size:13px;color:var(--mute)}
+.pv{padding:8px 12px;font-size:13px}
+.pnote{margin:0;font-size:12px;color:var(--mute)}
 </style>
 
 </head>
@@ -267,7 +287,7 @@ const VOICE={greet:{en:'m_greet_en.mp3',ml:'m_greet_ml.mp3'},home:{en:'m_home_en
 const player=new Audio(); player.preload="auto";
 function setSpeaker(w){ const n=T[lang][w==="anjali"?"anjaliName":"arunName"]; const who=document.getElementById("who"); if(who) who.textContent=n;
   const av=document.getElementById("av"); av.textContent=w==="anjali"?"A":"A"; av.style.borderColor=w==="anjali"?"#2ec4b6":"var(--blue)"; av.style.background=w==="anjali"?"linear-gradient(160deg,#14a3b8,#0b1f4b)":"";
-  av.textContent=n.trim()[0]; }
+  av.textContent="T"; }
 function stopAll(){ try{player.pause();}catch(e){} try{speechSynthesis.cancel();}catch(e){} }
 let speaker="arun";
 function speak(text,key,who="arun",then){
@@ -1052,6 +1072,117 @@ $("#enter").addEventListener("click",()=>{
   setTimeout(()=>{ flyTo(new THREE.Vector3(0,1.6,-1.0),{y:0,p:-.1},1000); speak(T[lang].greet,"greet","arun"); },3600);
   try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch(e){}
 });
+/* ---------------- project selection: pick the job, Tex recommends products + quantities ---------------- */
+const PROJ=[
+ {id:"bath",main:"ce",items:["ce","aq","l2","ep","ro","jf"],
+  name:{en:"Bathroom / Toilet",ml:"ബാത്ത്റൂം / ടോയ്‌ലറ്റ്"},sub:{en:"Floor & wet walls",ml:"തറയും നനയുന്ന ചുമരും"},
+  en:"For a bathroom, first waterproof the floor and the lower walls with Ceralastic, in two coats. Use AquaArm Latex 45 in the sunken portion and in the screed. After that, fix the tiles with Tile Master L2 and fill the joints with epoxy grout, so no water gets in.",
+  ml:"ബാത്ത്റൂമിന് ആദ്യം തറയും ചുമരിന്റെ താഴ്ഭാഗവും സെറാലാസ്റ്റിക് കൊണ്ട് 2 കോട്ട് വാട്ടർപ്രൂഫ് ചെയ്യുക. സൺക് ഭാഗത്തും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക. പിന്നെ ടൈൽ മാസ്റ്റർ L2 കൊണ്ട് ടൈൽ ഒട്ടിച്ച്, ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക. അപ്പോൾ വെള്ളം ഒട്ടും ഇറങ്ങില്ല."},
+ {id:"terrace",main:"tg",items:["tg","ce","aq"],
+  name:{en:"Terrace / Roof",ml:"ടെറസ് / മേൽക്കൂര"},sub:{en:"Open slab, rain & sun",ml:"മഴയും വെയിലും ഏൽക്കുന്ന സ്ലാബ്"},
+  en:"For a terrace or roof, use AquaArm TopGuard. It is flexible, breathable and self-curing, and handles rain and hot sun. Apply two coats on the wet slab. Ceralastic is also a good choice. Use AquaArm Latex 45 to repair cracks and in the protective screed.",
+  ml:"ടെറസിനും മേൽക്കൂരയ്ക്കും അക്വാആം ടോപ്ഗാർഡ് ഉപയോഗിക്കുക. വഴക്കമുള്ളതും സ്വയം ക്യൂർ ആകുന്നതുമാണ്, മഴയും വെയിലും താങ്ങും. നനച്ച സ്ലാബിൽ 2 കോട്ട് അടിക്കുക. സെറാലാസ്റ്റിക്കും നല്ലതാണ്. വിള്ളലുകൾ നന്നാക്കാനും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
+ {id:"tank",main:"ce",items:["ce"],
+  name:{en:"Water tank",ml:"വാട്ടർ ടാങ്ക്"},sub:{en:"Drinking water safe",ml:"കുടിവെള്ളത്തിന് സുരക്ഷിതം"},
+  en:"For a water tank, use Ceralastic. It is non-toxic, so it is safe for drinking water tanks. Apply at least two coats on the inside of the tank, and let it cure well before filling water.",
+  ml:"വാട്ടർ ടാങ്കിന് സെറാലാസ്റ്റിക് ഉപയോഗിക്കുക. വിഷാംശം ഇല്ലാത്തതുകൊണ്ട് കുടിവെള്ള ടാങ്കിനും സുരക്ഷിതമാണ്. ടാങ്കിന്റെ ഉള്ളിൽ കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക, വെള്ളം നിറയ്ക്കുന്നതിന് മുമ്പ് നന്നായി ഉണങ്ങാൻ വിടുക."},
+ {id:"balcony",main:"tg",items:["tg","aq"],
+  name:{en:"Balcony / Sunshade",ml:"ബാൽക്കണി / സൺഷേഡ്"},sub:{en:"Chajja, ledges",ml:"ഛജ്ജ, ലെഡ്ജ്"},
+  en:"For balconies and sunshades, use AquaArm TopGuard in two coats. For small areas and repairs, AquaArm Latex 45 mixed with cement also works well as a waterproof coat.",
+  ml:"ബാൽക്കണിക്കും സൺഷേഡിനും അക്വാആം ടോപ്ഗാർഡ് 2 കോട്ട് അടിക്കുക. ചെറിയ ഭാഗങ്ങൾക്കും റിപ്പയറിനും അക്വാആം ലാറ്റക്സ് 45 സിമന്റുമായി ചേർത്ത് വാട്ടർപ്രൂഫ് കോട്ടായും ഉപയോഗിക്കാം."},
+ {id:"basement",main:"ce",items:["ce","aq"],
+  name:{en:"Basement / Wet wall",ml:"ബേസ്‌മെന്റ് / നനവുള്ള ചുമർ"},sub:{en:"Damp, seepage",ml:"ഈർപ്പം, ചോർച്ച"},
+  en:"For basements and damp walls, use Ceralastic in at least two coats. Use AquaArm Latex 45 to repair and bond the plaster before coating.",
+  ml:"ബേസ്‌മെന്റിനും നനവുള്ള ചുമരിനും സെറാലാസ്റ്റിക് കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക. കോട്ട് ചെയ്യുന്നതിന് മുമ്പ് പ്ലാസ്റ്റർ നന്നാക്കാനും ബോണ്ട് ചെയ്യാനും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
+ {id:"indoor",main:"l2",items:["l2","ep","ro","jf"],
+  name:{en:"Indoor tiling",ml:"വീടിനുള്ളിലെ ടൈൽ"},sub:{en:"Floor & wall, tile on tile",ml:"ഫ്ലോറും ചുമരും, ടൈലിന് മുകളിൽ ടൈൽ"},
+  en:"For indoor floor and wall tiles, use Tile Master L2. It also works for tile on tile. Finish the joints with SyrexEasy or Roff Starlike epoxy grout, or the joint filler in a matching colour.",
+  ml:"വീടിനുള്ളിലെ ഫ്ലോറിനും ചുമരിനും ടൈൽ മാസ്റ്റർ L2 ഉപയോഗിക്കുക. പഴയ ടൈലിന് മുകളിലും ഒട്ടിക്കാം. ജോയിന്റുകൾ സൈറെക്സ് ഈസി അല്ലെങ്കിൽ റോഫ് സ്റ്റാർലൈക്ക് എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ടോ, ചേരുന്ന നിറത്തിലുള്ള ജോയിന്റ് ഫില്ലർ കൊണ്ടോ നിറയ്ക്കുക."},
+ {id:"outdoor",main:"l3",items:["l3","ep","ro"],
+  name:{en:"Outdoor / Exterior tiling",ml:"പുറം ചുമർ / പുറത്തെ ടൈൽ"},sub:{en:"Exterior walls, sit-outs",ml:"പുറം ചുമർ, സിറ്റൗട്ട്"},
+  en:"For exterior walls and outdoor floors, use Tile Master L3. It is water resistant and bonds strongly outside. Finish the joints with epoxy grout so rain water cannot get behind the tiles.",
+  ml:"പുറം ചുമരിനും പുറത്തെ ഫ്ലോറിനും ടൈൽ മാസ്റ്റർ L3 ഉപയോഗിക്കുക. വെള്ളത്തെ ചെറുക്കും, പുറത്ത് നല്ല ഉറപ്പോടെ ഒട്ടും. മഴവെള്ളം ടൈലിന് പിന്നിൽ കയറാതിരിക്കാൻ ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക."}
+];
+const PT={
+ en:{btn:"Choose your project",title:"What are you working on?",areaQ:"Area (optional)",areaPh:"e.g. 40",show:"Show products",back:"Back",
+     rec:"Recommended for",main:"Main product",also:"Also used",need:"You need about",view:"View",calcNote:"Estimates from the data sheets. Actual use depends on the surface – confirm on WhatsApp.",
+     noArea:"Add the area above to see quantities.",estTile:"1 bag covers about 35 sq ft",dep:"Depends on tile size and joint width",change:"Change project"},
+ ml:{btn:"പ്രോജക്ട് തിരഞ്ഞെടുക്കൂ",title:"എന്ത് ജോലിയാണ് ചെയ്യുന്നത്?",areaQ:"ഏരിയ (ഇല്ലെങ്കിലും മതി)",areaPh:"ഉദാ. 40",show:"ഉൽപ്പന്നങ്ങൾ കാണിക്കൂ",back:"തിരികെ",
+     rec:"ഇതിന് നല്ലത്",main:"പ്രധാന ഉൽപ്പന്നം",also:"ഇതും വേണം",need:"ഏകദേശം വേണ്ടത്",view:"കാണുക",calcNote:"ഡാറ്റാ ഷീറ്റ് അനുസരിച്ചുള്ള ഏകദേശ കണക്ക്. പ്രതലം അനുസരിച്ച് മാറാം – WhatsApp-ൽ ഉറപ്പാക്കൂ.",
+     noArea:"അളവ് കാണാൻ മുകളിൽ ഏരിയ കൊടുക്കൂ.",estTile:"ഒരു ബാഗ് ഏകദേശം 35 sq ft",dep:"ടൈലിന്റെ വലിപ്പവും ജോയിന്റ് വീതിയും അനുസരിച്ച്",change:"പ്രോജക്ട് മാറ്റുക"}
+};
+let currentProject=null, projArea=null, projUnit="sqft";
+function qtyFor(id,m2){
+  const ml=lang==="ml", r=n=>Math.ceil(n), f=n=>(Math.round(n*10)/10).toString();
+  if(!m2) return null;
+  if(id==="ce"){ const kg=m2/0.625; let n24=Math.floor(kg/24), rest=kg-n24*24, n6=r(rest/6); if(n6>=4){n24++;n6=0;}
+    return ml?`≈ ${r(kg)} കിലോ (2 കോട്ട്) → ${n24?n24+" × 24 കിലോ":""}${n24&&n6?" + ":""}${n6?n6+" × 6 കിലോ":""}`
+             :`≈ ${r(kg)} kg (2 coats) → ${n24?n24+" × 24 kg":""}${n24&&n6?" + ":""}${n6?n6+" × 6 kg":""}`; }
+  if(id==="tg"){ const lo=m2*1.5, hi=m2*2.5, kits=r(m2*2/32);
+    return ml?`≈ ${r(lo)}–${r(hi)} കിലോ മിക്സ് → ഏകദേശം ${kits} കിറ്റ് (24 കിലോ പൗഡർ + ലിക്വിഡ്)`:`≈ ${r(lo)}–${r(hi)} kg mixed → about ${kits} kit${kits>1?"s":""} (24 kg powder + liquid)`; }
+  if(id==="aq"){ const L=m2/2, cem=L*1.75;
+    return ml?`≈ ${f(L)} ലിറ്റർ + ${r(cem)} കിലോ സിമന്റ് (വാട്ടർപ്രൂഫ് കോട്ട്, 2 കോട്ട്)`:`≈ ${f(L)} L + ${r(cem)} kg cement (waterproof coat, 2 coats)`; }
+  if(id==="l2"||id==="l3"){ const bags=r(m2*10.764/35);
+    return ml?`≈ ${bags} ബാഗ് (20 കിലോ) – ${PT.ml.estTile}`:`≈ ${bags} bag${bags>1?"s":""} of 20 kg – ${PT.en.estTile}`; }
+  return PT[lang].dep;
+}
+function projPanel(step){
+  const L=PT[lang], body=$("#sh");
+  if(step==="pick"){
+    body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.btn}</div><h2>${L.title}</h2></div>
+      <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
+<label class="parea" for="parea">${L.areaQ}
+        <span class="prow"><input id="parea" inputmode="decimal" placeholder="${L.areaPh}" value="${projArea||""}">
+        <span class="punit" role="group"><button type="button" data-unit="sqft" aria-pressed="${projUnit==="sqft"}">sq ft</button><button type="button" data-unit="m2" aria-pressed="${projUnit==="m2"}">m²</button></span></span></label>
+      <div class="pgrid">${PROJ.map(p=>`<button type="button" class="pcard" data-proj="${p.id}"><b>${p.name[lang]}</b><span>${p.sub[lang]}</span></button>`).join("")}</div>`;
+    $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
+    body.querySelectorAll("[data-unit]").forEach(b=>b.onclick=()=>{ projUnit=b.dataset.unit; body.querySelectorAll("[data-unit]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.unit===projUnit)); });
+    body.querySelectorAll("[data-proj]").forEach(b=>b.onclick=()=>{ const v=parseFloat(($("#parea").value||"").replace(",",".")); projArea=v>0?v:null; goProject(b.dataset.proj); });
+    $("#sheet").classList.add("open");
+    return;
+  }
+  const pj=PROJ.find(x=>x.id===step), m2=projArea?(projUnit==="sqft"?projArea/10.764:projArea):null;
+  const row=(id,isMain)=>{ const p=P.find(x=>x.id===id); const q=qtyFor(id,m2);
+    return `<div class="prec${isMain?" main":""}">${p.img?`<img src="${p.img}" alt="">`:`<div class="pimg0"></div>`}
+      <div class="pt"><small>${isMain?L.main:L.also}</small><b>${p.short||p.name}</b>${q?`<span>${q}</span>`:""}</div>
+      <button type="button" class="btn pv" data-go="${id}">${L.view}</button></div>`; };
+  body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.rec}</div><h2>${pj.name[lang]}</h2></div>
+     <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
+     ${m2?`<div class="badge" style="justify-self:start">${projUnit==="sqft"?projArea+" sq ft ≈ "+(Math.round(m2*10)/10)+" m²":projArea+" m²"}</div>`:""}
+     <p class="desc">${pj[lang]}</p>
+     <div class="plist">${pj.items.map(id=>row(id,id===pj.main)).join("")}</div>
+     <p class="pnote">${m2?L.calcNote:L.noArea}</p>
+     <div class="acts"><button type="button" class="btn" id="pchange">${L.change}</button>
+     <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${PHONE}?text=${encodeURIComponent((lang==="ml"?"ഹലോ ബ്ലൂടെക്സ്, എന്റെ പ്രോജക്ട്: ":"Hello Blutex, my project: ")+pj.name[lang]+(m2?(" – "+(projUnit==="sqft"?projArea+" sq ft":projArea+" m²")):"")+". "+(lang==="ml"?"ഉൽപ്പന്നങ്ങളും വിലയും അറിയിക്കാമോ?":"Please share products and price."))}">${T[lang].order}</a></div>`;
+  $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
+  $("#pchange").onclick=()=>projPanel("pick");
+  body.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ currentProject=null; goProduct(b.dataset.go); });
+  $("#sheet").classList.add("open");
+}
+function goProject(pid){
+  const pj=PROJ.find(x=>x.id===pid); if(!pj) return;
+  currentProject=pid; current=null; buildStrip();
+  const s=STOPS[pj.main];
+  flyTo(s.cam,lookYP(s.cam,s.target.clone().add(new THREE.Vector3(0,-.1,0))));
+  Object.assign(STAFF.arun,{target:s.man.clone(),pointAt:s.target.clone(),face:null});
+  projPanel(pid);
+  setTimeout(()=>speak(pj[lang],"proj_"+pid,"arun"),700);
+  try{ if(typeof gcEvent==="function") gcEvent("project: "+pj.name.en, pj.name.en); }catch(e){}
+}
+(function(){
+  const og=goHome; goHome=function(){ currentProject=null; return og.apply(this,arguments); };
+  const op=goProduct; goProduct=function(){ currentProject=null; return op.apply(this,arguments); };
+  document.addEventListener("click",e=>{ const b=e.target.closest("[data-lang]"); if(!b||!entered) return;
+    setTimeout(()=>{ const pb=$("#projbtn"); if(pb) pb.textContent=PT[lang].btn;
+      if(currentProject){ projPanel(currentProject); const pj=PROJ.find(x=>x.id===currentProject); speak(pj[lang],"proj_"+currentProject,"arun"); }
+      else if($("#sheet").classList.contains("open")&&$("#sh .pgrid")) projPanel("pick"); },0); });
+  const btn=document.createElement("button"); btn.type="button"; btn.id="projbtn"; btn.hidden=true; btn.textContent=PT[lang].btn;
+  btn.onclick=()=>{ currentProject=null; projPanel("pick"); };
+  document.body.appendChild(btn);
+  $("#enter").addEventListener("click",()=>{ btn.hidden=false; btn.textContent=PT[lang].btn; setTimeout(()=>{ if(!current&&!currentProject) projPanel("pick"); },5200); });
+  PROJ.forEach(p=>{ VOICE["proj_"+p.id]={en:"m_proj_"+p.id+"_en.mp3",ml:"m_proj_"+p.id+"_ml.mp3"}; });
+})();
+
 </script>
 
 <script data-goatcounter="https://blutex-shop.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1060,9 +1191,16 @@ $("#enter").addEventListener("click",()=>{
 function gcEvent(name,title){ try{ if(window.goatcounter&&goatcounter.count) goatcounter.count({path:name,title:title||name,event:true}); }catch(e){} }
 document.addEventListener("click",e=>{
   if(e.target.closest("#enter")) gcEvent("enter-shop","Entered the shop");
-  const c=e.target.closest("[data-pid]"); if(c) gcEvent("product-"+c.dataset.pid,"Opened product "+c.dataset.pid);
   if(e.target.closest(".btn.wa")) gcEvent("whatsapp-order","WhatsApp order tapped");
 },true);
+// every way of opening a product (shelf tap, list tap, language switch) goes through goProduct
+(function(){ const orig=window.goProduct; if(typeof orig!=="function") return;
+  let lastId=null,lastT=0;
+  window.goProduct=function(id){ const now=Date.now();
+    if(id!==lastId||now-lastT>5000){ const p=(typeof P!=="undefined")&&P.find(x=>x.id===id); const nm=p?(p.short||p.name):id;
+      gcEvent("product: "+nm, nm); lastId=id; lastT=now; }
+    return orig.apply(this,arguments); };
+})();
 </script>
 </body>
 </html>
