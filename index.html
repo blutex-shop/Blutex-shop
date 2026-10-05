@@ -1054,5 +1054,15 @@ $("#enter").addEventListener("click",()=>{
 });
 </script>
 
+<script data-goatcounter="https://blutex-shop.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+// extra events: who entered the shop, which products were opened
+function gcEvent(name,title){ try{ if(window.goatcounter&&goatcounter.count) goatcounter.count({path:name,title:title||name,event:true}); }catch(e){} }
+document.addEventListener("click",e=>{
+  if(e.target.closest("#enter")) gcEvent("enter-shop","Entered the shop");
+  const c=e.target.closest("[data-pid]"); if(c) gcEvent("product-"+c.dataset.pid,"Opened product "+c.dataset.pid);
+  if(e.target.closest(".btn.wa")) gcEvent("whatsapp-order","WhatsApp order tapped");
+},true);
+</script>
 </body>
 </html>
