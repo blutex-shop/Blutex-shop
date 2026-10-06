@@ -34,7 +34,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 /* intro */
 #intro{position:fixed;inset:0;z-index:20;background:transparent;display:flex;flex-direction:column;justify-content:flex-end}
 #intro::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,19,48,0) 0%,rgba(6,19,48,0) 52%,rgba(6,19,48,.96) 82%)}
-.intro-in{position:relative;padding:24px 16px calc(28px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;width:100%;display:grid;gap:14px;text-align:center}
+.intro-in{position:relative;padding:24px 16px calc(28px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;width:100%;box-sizing:border-box;display:grid;gap:14px;text-align:center}
 .intro-in .eb{font-family:var(--display);letter-spacing:.2em;color:var(--gold);font-size:14px;text-transform:uppercase}
 .intro-in h1{font-family:var(--display);font-size:clamp(34px,9vw,52px);margin:0;line-height:1}
 .intro-in p{margin:0;color:var(--mute)}
@@ -182,13 +182,13 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 <script>
 /* ---------------- content ---------------- */
 const T={
- en:{introEb:"Virtual showroom",introTitle:"Walk into Blutex",introSub:"Visit our shop from your phone. Our salesman will show you every product, price and data sheet.",
+ en:{introEb:"Virtual showroom",introTitle:"Walk into Blutex",introSub:"Visit our shop from your phone. Our salesman will show you every product, how to use it and its data sheet.",
   enter:"Enter the shop",home:"Home",outside:"Outside",arunName:"Tex · Blutex",anjaliName:"Anjali · Waterproofing",anjaliHi:"Hi, I'm Anjali. I take care of our waterproofing products for roofs, bathrooms and basements. Tap any of them on the left and I'll explain.",hint:"Drag to look around · Tap a product",
   wp:"Waterproofing",ta:"Tile adhesive",demoPrice:"Demo price",listen:"Listen",ds:"Data sheet",order:"Order on WhatsApp",
   sample:"Sample details – to be updated",noVoice:"",
   greet:"Welcome to Blutex! I'm Tex. Waterproofing products are on the left, tile adhesives on the right. Tap any product and I will explain it.",
   homeSay:"Take your time. Tap any product you want to know about.",loading:"Loading the shop…"},
- ml:{introEb:"വെർച്വൽ ഷോറൂം",introTitle:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം",introSub:"ഫോണിലൂടെ ഞങ്ങളുടെ കടയിൽ കയറൂ. ഓരോ ഉൽപ്പന്നവും വിലയും ഡാറ്റാ ഷീറ്റും സെയിൽസ്മാൻ കാണിച്ചുതരും.",
+ ml:{introEb:"വെർച്വൽ ഷോറൂം",introTitle:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം",introSub:"ഫോണിലൂടെ ഞങ്ങളുടെ കടയിൽ കയറൂ. ഓരോ ഉൽപ്പന്നവും അതിന്റെ ഉപയോഗവും ഡാറ്റാ ഷീറ്റും സെയിൽസ്മാൻ കാണിച്ചുതരും.",
   enter:"കടയിൽ കയറൂ",home:"തുടക്കം",outside:"പുറത്ത്",arunName:"ടെക്സ് · ബ്ലൂടെക്സ്",anjaliName:"അഞ്ജലി · വാട്ടർപ്രൂഫിംഗ്",anjaliHi:"നമസ്കാരം, ഞാൻ അഞ്ജലി. ടെറസ്, ബാത്ത്റൂം, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ ഞാനാണ് നോക്കുന്നത്. ഇടതുവശത്തുള്ള ഏതെങ്കിലും ഉൽപ്പന്നത്തിൽ തൊട്ടാൽ ഞാൻ വിശദീകരിക്കാം.",hint:"ചുറ്റും നോക്കാൻ വലിക്കൂ · ഉൽപ്പന്നത്തിൽ തൊടൂ",
   wp:"വാട്ടർപ്രൂഫിംഗ്",ta:"ടൈൽ അഡ്ഹെസിവ്",demoPrice:"ഡെമോ വില",listen:"കേൾക്കൂ",ds:"ഡാറ്റാ ഷീറ്റ്",order:"WhatsApp-ൽ ഓർഡർ ചെയ്യൂ",
   sample:"സാമ്പിൾ വിവരം – പിന്നീട് മാറ്റും",noVoice:"ഈ ഫോണിൽ മലയാളം ശബ്ദം ഇല്ല, എഴുത്ത് വായിക്കൂ.",
@@ -735,7 +735,7 @@ function buildExterior(){
   add(new THREE.BoxGeometry(11.5,.12,.95),NAVY,0,5.56,.46);
   add(new THREE.BoxGeometry(11.2,.06,.7),new THREE.MeshStandardMaterial({color:0x0a1736,roughness:.6}),0,3.63,.36);
   // Blutex logo + tagline
-  const tag=canvasTex(2048,128,(g,w,h)=>{g.textAlign="center";g.fillStyle="#ffffff";g.font="500 58px 'Barlow',Arial";g.fillText("WATERPROOFING CHEMICALS    |    WATERPROOFING SOLUTIONS    |    TILE ADHESIVES",w/2,84);});
+  const tag=canvasTex(2048,128,(g,w,h)=>{g.textAlign="center";g.textBaseline="middle";g.fillStyle="#ffffff";const tl="WATERPROOFING CHEMICALS   |   WATERPROOFING SOLUTIONS   |   TILE ADHESIVES";let fs=60;do{g.font="600 "+fs+"px 'Barlow',Arial,sans-serif";fs-=2;}while(g.measureText(tl).width>w*0.92&&fs>20);g.fillText(tl,w/2,h/2+2);});
   add(new THREE.PlaneGeometry(8.6,.54),new THREE.MeshBasicMaterial({map:tag,transparent:true,toneMapped:false}),0,4.0,.725);
   const LOGO=tex("blutex_logo.png");
   add(new THREE.PlaneGeometry(3.6,1.37),new THREE.MeshBasicMaterial({map:LOGO,transparent:true,toneMapped:false,depthWrite:false}),0,4.8,.73);
