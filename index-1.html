@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1339">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blutex">
 <meta name="description" content="Walk into the Blutex showroom in 3D: tile adhesives, epoxy grout and waterproofing products with data sheets.">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -12,11 +20,11 @@ img{max-width:100%}
 </style>
 <title>Blutex Virtual Shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+Malayalam:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+Malayalam:wght@400;600&family=Montserrat:wght@500&display=swap">
 <style>
 /* Layout: full-screen 3D shop; storefront photo intro; top bar (language, home); salesman speech bubble; bottom product strip + slide-up product sheet */
 :root{
-  --navy:#0b1f4b; --navy-d:#061330; --panel:rgba(6,19,48,.94); --line:#24427a;
+  --navy:#0f1339; --navy-d:#0b0e2b; --panel:rgba(15,19,57,.95); --line:#2a3170;
   --blue:#1e90ff; --gold:#f5a623; --ink:#ffffff; --mute:#a7b8d6;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Barlow","Noto Sans Malayalam",system-ui,sans-serif;
@@ -33,12 +41,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 
 /* intro */
 #intro{position:fixed;inset:0;z-index:20;background:transparent;display:flex;flex-direction:column;justify-content:flex-end}
-#intro::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,19,48,0) 0%,rgba(6,19,48,0) 52%,rgba(6,19,48,.96) 82%)}
-.intro-in{position:relative;padding:24px 16px calc(28px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;width:100%;display:grid;gap:14px;text-align:center}
+#intro::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,19,57,0) 0%,rgba(15,19,57,0) 52%,rgba(15,19,57,.96) 82%)}
+.intro-in{position:relative;padding:24px 16px calc(28px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;width:100%;box-sizing:border-box;display:grid;gap:14px;text-align:center}
 .intro-in .eb{font-family:var(--display);letter-spacing:.2em;color:var(--gold);font-size:14px;text-transform:uppercase}
 .intro-in h1{font-family:var(--display);font-size:clamp(34px,9vw,52px);margin:0;line-height:1}
 .intro-in p{margin:0;color:var(--mute)}
-.lang{display:flex;justify-content:center;gap:0;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content;margin:0 auto;background:rgba(6,19,48,.6)}
+.lang{display:flex;justify-content:center;gap:0;border:1px solid var(--line);border-radius:999px;overflow:hidden;width:max-content;margin:0 auto;background:rgba(15,19,57,.6)}
 .lang button{background:transparent;border:0;padding:8px 18px;font-size:15px;color:var(--mute)}
 .lang button[aria-pressed="true"]{background:var(--blue);color:#fff}
 .enter{background:var(--blue);border:0;border-radius:14px;padding:16px;font-weight:600;font-size:18px;color:#fff;box-shadow:0 8px 24px rgba(30,144,255,.35)}
@@ -46,11 +54,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 
 /* top bar */
 #top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px;
-  padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:linear-gradient(180deg,rgba(6,19,48,.85),transparent)}
+  padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:linear-gradient(180deg,rgba(15,19,57,.85),transparent)}
 .brand{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.04em}
 .brand span{color:var(--blue)}
 .tb{display:flex;gap:8px;align-items:center}
-.icon{background:rgba(6,19,48,.7);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:14px;white-space:nowrap}
+.icon{background:rgba(15,19,57,.7);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:14px;white-space:nowrap}
 [hidden]{display:none!important}
 #top .lang button{padding:7px 11px;font-size:14px}
 @media (max-width:460px){#top .brand{font-size:18px}.tb{gap:5px}.icon{padding:6px 9px;font-size:13px}#top .lang button{padding:6px 9px;font-size:13px}}
@@ -68,16 +76,16 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .vnote{font-size:12px;color:var(--mute);margin-top:4px}
 
 /* hint */
-#hint{position:fixed;z-index:4;left:50%;transform:translateX(-50%);bottom:calc(112px + env(safe-area-inset-bottom,0px));background:rgba(6,19,48,.75);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--mute);white-space:nowrap;transition:opacity .4s}
+#hint{position:fixed;z-index:4;left:50%;transform:translateX(-50%);bottom:calc(112px + env(safe-area-inset-bottom,0px));background:rgba(15,19,57,.75);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--mute);white-space:nowrap;transition:opacity .4s}
 
 /* product strip */
 #strip{position:fixed;z-index:5;left:0;right:0;bottom:0;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));
-  background:linear-gradient(0deg,rgba(6,19,48,.95) 60%,transparent);display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+  background:linear-gradient(0deg,rgba(15,19,57,.95) 60%,transparent);display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
 #strip::-webkit-scrollbar{display:none}
-.chip{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:rgba(11,31,75,.9);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-width:118px;text-align:left}
+.chip{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:rgba(15,19,57,.92);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-width:118px;text-align:left}
 .chip small{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
 .chip span{font-weight:600;font-size:15px;white-space:nowrap}
-.chip.on{border-color:var(--blue);background:#123274}
+.chip.on{border-color:var(--blue);background:#1d2463}
 .chip.wp small{color:#6fc1ff}.chip.ta small{color:var(--gold)}
 
 /* product sheet */
@@ -99,7 +107,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .pimg{width:min(46%,200px);height:auto;border-radius:10px;justify-self:center}
 .desc{margin:0;line-height:1.55;font-size:15px}
 .acts{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:#123274;border-radius:12px;padding:11px 14px;font-weight:600;font-size:15px;display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--ink)}
+.btn{border:1px solid var(--line);background:#1d2463;border-radius:12px;padding:11px 14px;font-weight:600;font-size:15px;display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--ink)}
 .btn.wa{background:#1f9d55;border-color:#1f9d55}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
@@ -107,6 +115,28 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .dsh{font-family:var(--display);font-size:20px;margin:6px 0 0;letter-spacing:.04em}
 @media (min-width:900px){#sheet{left:auto;right:16px;bottom:16px;width:420px;max-height:calc(100% - 120px);border-radius:20px;border:1px solid var(--line)}#strip{justify-content:center}}
 @media (prefers-reduced-motion:reduce){#sheet,#bubble{transition:none}}
+
+#projbtn{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--gold);color:#1a1300;border:0;border-radius:999px;padding:11px 20px;font-weight:700;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.35);white-space:nowrap}
+#hint{bottom:calc(140px + env(safe-area-inset-bottom,0px))!important}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px}
+.pcard{display:grid;gap:3px;text-align:left;background:#161b4a;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--ink)}
+.pcard b{font-size:15px}.pcard span{font-size:12px;color:var(--mute)}
+.pcard:hover,.pcard:focus-visible{border-color:var(--gold)}
+.parea{display:grid;gap:6px;font-size:13px;color:var(--mute)}
+.prow{display:flex;gap:8px}
+.prow input{flex:1;min-width:0;height:44px;border-radius:10px;border:1px solid var(--line);background:#0b0e2b;color:var(--ink);padding:0 12px;font:16px var(--body)}
+.punit{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.punit button{background:transparent;border:0;color:var(--mute);padding:0 12px;font-size:14px}
+.punit button[aria-pressed="true"]{background:#1e4fb0;color:#fff}
+.plist{display:grid;gap:8px}
+.prec{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;background:#121640;border:1px solid var(--line);border-radius:12px;padding:8px}
+.prec.main{border-color:var(--gold)}
+.prec img,.pimg0{width:52px;height:52px;object-fit:cover;border-radius:8px;background:#fff}
+.pt{display:grid;gap:2px;min-width:0}.pt small{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}.pt b{font-size:15px}.pt span{font-size:13px;color:var(--mute)}
+.pv{padding:8px 12px;font-size:13px}
+.pnote{margin:0;font-size:12px;color:var(--mute)}
+.install{justify-self:center;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px}
+.ioshint{font-size:13px;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:8px 12px}
 </style>
 
 </head>
@@ -124,6 +154,8 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
     </div>
     <button type="button" class="enter" id="enter" data-t="enter"></button>
     <div class="loading" id="loading"></div>
+    <button type="button" class="install" id="installBtn" hidden></button>
+    <div class="ioshint" id="iosHint" hidden></div>
   </div>
 </div>
 
@@ -162,13 +194,13 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 <script>
 /* ---------------- content ---------------- */
 const T={
- en:{introEb:"Virtual showroom",introTitle:"Walk into Blutex",introSub:"Visit our shop from your phone. Our salesman will show you every product, price and data sheet.",
+ en:{introEb:"Virtual showroom",introTitle:"Walk into Blutex",introSub:"Visit our shop from your phone. Our salesman will show you every product, how to use it and its data sheet.",
   enter:"Enter the shop",home:"Home",outside:"Outside",arunName:"Tex · Blutex",anjaliName:"Anjali · Waterproofing",anjaliHi:"Hi, I'm Anjali. I take care of our waterproofing products for roofs, bathrooms and basements. Tap any of them on the left and I'll explain.",hint:"Drag to look around · Tap a product",
   wp:"Waterproofing",ta:"Tile adhesive",demoPrice:"Demo price",listen:"Listen",ds:"Data sheet",order:"Order on WhatsApp",
   sample:"Sample details – to be updated",noVoice:"",
   greet:"Welcome to Blutex! I'm Tex. Waterproofing products are on the left, tile adhesives on the right. Tap any product and I will explain it.",
   homeSay:"Take your time. Tap any product you want to know about.",loading:"Loading the shop…"},
- ml:{introEb:"വെർച്വൽ ഷോറൂം",introTitle:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം",introSub:"ഫോണിലൂടെ ഞങ്ങളുടെ കടയിൽ കയറൂ. ഓരോ ഉൽപ്പന്നവും വിലയും ഡാറ്റാ ഷീറ്റും സെയിൽസ്മാൻ കാണിച്ചുതരും.",
+ ml:{introEb:"വെർച്വൽ ഷോറൂം",introTitle:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം",introSub:"ഫോണിലൂടെ ഞങ്ങളുടെ കടയിൽ കയറൂ. ഓരോ ഉൽപ്പന്നവും അതിന്റെ ഉപയോഗവും ഡാറ്റാ ഷീറ്റും സെയിൽസ്മാൻ കാണിച്ചുതരും.",
   enter:"കടയിൽ കയറൂ",home:"തുടക്കം",outside:"പുറത്ത്",arunName:"ടെക്സ് · ബ്ലൂടെക്സ്",anjaliName:"അഞ്ജലി · വാട്ടർപ്രൂഫിംഗ്",anjaliHi:"നമസ്കാരം, ഞാൻ അഞ്ജലി. ടെറസ്, ബാത്ത്റൂം, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ ഞാനാണ് നോക്കുന്നത്. ഇടതുവശത്തുള്ള ഏതെങ്കിലും ഉൽപ്പന്നത്തിൽ തൊട്ടാൽ ഞാൻ വിശദീകരിക്കാം.",hint:"ചുറ്റും നോക്കാൻ വലിക്കൂ · ഉൽപ്പന്നത്തിൽ തൊടൂ",
   wp:"വാട്ടർപ്രൂഫിംഗ്",ta:"ടൈൽ അഡ്ഹെസിവ്",demoPrice:"ഡെമോ വില",listen:"കേൾക്കൂ",ds:"ഡാറ്റാ ഷീറ്റ്",order:"WhatsApp-ൽ ഓർഡർ ചെയ്യൂ",
   sample:"സാമ്പിൾ വിവരം – പിന്നീട് മാറ്റും",noVoice:"ഈ ഫോണിൽ മലയാളം ശബ്ദം ഇല്ല, എഴുത്ത് വായിക്കൂ.",
@@ -267,7 +299,7 @@ const VOICE={greet:{en:'m_greet_en.mp3',ml:'m_greet_ml.mp3'},home:{en:'m_home_en
 const player=new Audio(); player.preload="auto";
 function setSpeaker(w){ const n=T[lang][w==="anjali"?"anjaliName":"arunName"]; const who=document.getElementById("who"); if(who) who.textContent=n;
   const av=document.getElementById("av"); av.textContent=w==="anjali"?"A":"A"; av.style.borderColor=w==="anjali"?"#2ec4b6":"var(--blue)"; av.style.background=w==="anjali"?"linear-gradient(160deg,#14a3b8,#0b1f4b)":"";
-  av.textContent=n.trim()[0]; }
+  av.textContent="T"; }
 function stopAll(){ try{player.pause();}catch(e){} try{speechSynthesis.cancel();}catch(e){} }
 let speaker="arun";
 function speak(text,key,who="arun",then){
@@ -346,7 +378,7 @@ camera.rotation.order="YXZ";
 function resize(){ const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.fov=w<h?72:60; camera.updateProjectionMatrix(); }
 addEventListener("resize",resize); resize();
 
-const NAVY=0x16306b, NAVY_D=0x0e2252;
+const NAVY=0x0f1339, NAVY_D=0x0b0e2b;
 const loader=new THREE.TextureLoader();
 const tex=(u)=>{const t=loader.load(u); t.encoding=THREE.sRGBEncoding; t.anisotropy=4; return t;};
 function canvasTex(w,h,draw){ const c=document.createElement("canvas"); c.width=w;c.height=h; draw(c.getContext("2d"),w,h); const t=new THREE.CanvasTexture(c); t.encoding=THREE.sRGBEncoding; t.anisotropy=4; return t; }
@@ -355,7 +387,7 @@ const mat=(o)=>new THREE.MeshStandardMaterial(Object.assign({roughness:.7,metaln
 const pickables=[];
 function build(){
   renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=.88;
-  scene.background=new THREE.Color(0x0a1638); scene.fog=new THREE.Fog(0x0a1638,16,32);
+  scene.background=new THREE.Color(0x0f1339); scene.fog=new THREE.Fog(0x0f1339,16,32);
   const basic=(o)=>new THREE.MeshBasicMaterial(Object.assign({toneMapped:false},o));
   const W=10,D=12,Hh=3.6;
 
@@ -369,7 +401,7 @@ function build(){
   }catch(e){}
 
   // lights: warm gallery light
-  scene.add(new THREE.HemisphereLight(0xfff3e0,0x0c1838,.22));
+  scene.add(new THREE.HemisphereLight(0xfff3e0,0x0f1339,.22));
   scene.add(new THREE.AmbientLight(0xffffff,.08));
   [[0,-3],[0,-7.5],[0,-10.4]].forEach(([x,z])=>{const l=new THREE.PointLight(0xffe8cc,.5,9,2); l.position.set(x,3.2,z); scene.add(l);});
   // gallery spotlights on every shelf bay + the podiums
@@ -379,7 +411,7 @@ function build(){
 
   // textures
   const rnd=(()=>{let s=7;return()=>{s=(s*16807)%2147483647;return s/2147483647;};})();
-  const navyMarbleT=canvasTex(1024,1024,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,h);gr.addColorStop(0,"#0d1630");gr.addColorStop(.5,"#122046");gr.addColorStop(1,"#0b1329");g.fillStyle=gr;g.fillRect(0,0,w,h);
+  const navyMarbleT=canvasTex(1024,1024,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,h);gr.addColorStop(0,"#0d1133");gr.addColorStop(.5,"#141a48");gr.addColorStop(1,"#0b0e2b");g.fillStyle=gr;g.fillRect(0,0,w,h);
     for(let i=0;i<5000;i++){g.fillStyle=`rgba(${80+rnd()*60|0},${100+rnd()*60|0},${160+rnd()*60|0},${rnd()*.06})`;g.fillRect(rnd()*w,rnd()*h,2+rnd()*3,2+rnd()*3);}
     for(let i=0;i<34;i++){const gold=rnd()<.25;g.strokeStyle=gold?`rgba(212,170,90,${.18+rnd()*.25})`:`rgba(220,228,245,${.06+rnd()*.2})`;g.lineWidth=.5+rnd()*1.8;g.beginPath();let x=rnd()*w,y=0;g.moveTo(x,y);
       while(y<h){const nx=x+(rnd()-.5)*140,ny=y+30+rnd()*80;g.quadraticCurveTo(x+(rnd()-.5)*90,(y+ny)/2,nx,ny);x=nx;y=ny;}g.stroke();}
@@ -399,7 +431,7 @@ function build(){
 
   const GOLD=mat({color:0xd4a64a,metalness:1,roughness:.28});
   const LED=basic({color:0xeaf3ff}), LEDB=basic({color:0x3d8bff});
-  const panelT=canvasTex(512,512,(g,w,h)=>{g.fillStyle="#0c1844";g.fillRect(0,0,w,h);for(let i=0;i<3000;i++){g.fillStyle=`rgba(255,255,255,${rnd()*.02})`;g.fillRect(rnd()*w,rnd()*h,2,2);}
+  const panelT=canvasTex(512,512,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);for(let i=0;i<3000;i++){g.fillStyle=`rgba(255,255,255,${rnd()*.02})`;g.fillRect(rnd()*w,rnd()*h,2,2);}
     for(let x=0;x<w;x+=128){g.fillStyle="rgba(0,0,0,.45)";g.fillRect(x,0,3,h);g.fillStyle="rgba(120,150,220,.12)";g.fillRect(x+3,0,2,h);}});
   panelT.wrapS=panelT.wrapT=THREE.RepeatWrapping; panelT.repeat.set(6,1);
   const wallM=mat({map:panelT,roughness:.55,metalness:.05,envMapIntensity:.25,side:THREE.DoubleSide});
@@ -414,7 +446,7 @@ function build(){
   floor.rotation.x=-Math.PI/2; floor.position.set(0,0,-D/2); scene.add(floor);
   const ceil=new THREE.Mesh(new THREE.PlaneGeometry(W,D),mat({color:0x0a0f1e,roughness:.9}));
   ceil.rotation.x=Math.PI/2; ceil.position.set(0,Hh,-D/2); scene.add(ceil);
-  const raft=new THREE.Mesh(new THREE.BoxGeometry(6,.08,8.5),mat({color:0x0e1730,roughness:.7,envMapIntensity:.2})); raft.position.set(0,Hh-.25,-6); scene.add(raft);
+  const raft=new THREE.Mesh(new THREE.BoxGeometry(6,.08,8.5),mat({color:0x0f1339,roughness:.7,envMapIntensity:.2})); raft.position.set(0,Hh-.25,-6); scene.add(raft);
   [[0,-1.75,6,.03],[0,-10.25,6,.03]].forEach(([x,z,w,d])=>{const s=new THREE.Mesh(new THREE.BoxGeometry(w,.02,d),LED);s.position.set(x,Hh-.3,z);scene.add(s);});
   [[-3,-6],[3,-6]].forEach(([x,z])=>{const s=new THREE.Mesh(new THREE.BoxGeometry(.03,.02,8.5),LED);s.position.set(x,Hh-.3,z);scene.add(s);});
   for(let x=-2;x<=2;x+=2)for(let z=-2.8;z>=-9.5;z-=2.2){const d=new THREE.Mesh(new THREE.CircleGeometry(.11,24),basic({color:0xfff6e8}));d.rotation.x=Math.PI/2;d.position.set(x,Hh-.295,z);scene.add(d);}
@@ -441,14 +473,14 @@ function build(){
 
   // tile showcase wall (back right): premium tile samples
   const tileCols=["#efe9df","#d8d2c6","#b9b2a6","#2d2f36","#f4f1ea","#c9b79a","#8c8f94","#e7e0d2","#5a5048"];
-  const tsT=canvasTex(512,768,(g,w,h)=>{g.fillStyle="#0f1e44";g.fillRect(0,0,w,h);g.fillStyle="#f3e2bf";g.font="600 40px 'Barlow Condensed',Arial";g.fillText("TILE SHOWCASE",28,58);
+  const tsT=canvasTex(512,768,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);g.fillStyle="#f3e2bf";g.font="600 40px 'Barlow Condensed',Arial";g.fillText("TILE SHOWCASE",28,58);
     for(let r=0;r<3;r++)for(let c=0;c<3;c++){const x=28+c*156,y=90+r*220;g.fillStyle=tileCols[r*3+c];g.fillRect(x,y,140,200);
       for(let k=0;k<6;k++){g.strokeStyle="rgba(255,255,255,.18)";g.lineWidth=1.4;g.beginPath();g.moveTo(x+rnd()*140,y);g.quadraticCurveTo(x+rnd()*140,y+100,x+rnd()*140,y+200);g.stroke();}}});
   const ts=new THREE.Mesh(new THREE.PlaneGeometry(1.6,2.4),mat({map:tsT,roughness:.3})); ts.position.set(3.85,1.65,-D+.03); scene.add(ts);
   const tsf=new THREE.Mesh(new THREE.BoxGeometry(1.7,2.5,.02),GOLD); tsf.position.set(3.85,1.65,-D+.015); scene.add(tsf);
 
   // side wall signs
-  const sideSign=(title,items,color)=>canvasTex(512,768,(g,w,h)=>{g.fillStyle="#0f1e44";g.fillRect(0,0,w,h);g.fillStyle="#fff";g.font="700 70px 'Barlow Condensed',Arial";
+  const sideSign=(title,items,color)=>canvasTex(512,768,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);g.fillStyle="#fff";g.font="700 70px 'Barlow Condensed',Arial";
     title.split("\n").forEach((l,i)=>g.fillText(l,30,100+i*72));g.fillStyle=color;g.fillRect(30,250,90,6);g.fillStyle="#e3e9f5";g.font="500 44px 'Barlow',Arial";items.forEach((t,i)=>{g.strokeStyle=color;g.lineWidth=3;g.strokeRect(30,310+i*95,46,46);g.fillText(t,100,348+i*95);});});
   const s1=new THREE.Mesh(new THREE.PlaneGeometry(1.4,2.1),basic({map:sideSign("WATERPROOFING\nSOLUTIONS",["Roofing","Bathrooms","Basements","Terraces"],"#3d9bff")}));
   s1.rotation.y=Math.PI/2; s1.position.set(-W/2+.02,1.85,-1.15); scene.add(s1);
@@ -456,8 +488,8 @@ function build(){
   s2.rotation.y=-Math.PI/2; s2.position.set(W/2-.02,1.85,-1.15); scene.add(s2);
 
   // reception counter: marble top, fluted navy front, LED underglow
-  const ctr=new THREE.Mesh(new THREE.BoxGeometry(2.6,1.0,.7),mat({color:0x0e2252,roughness:.5})); ctr.position.set(-.5,.52,-10.6); scene.add(ctr);
-  for(let i=0;i<24;i++){const f=new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.92,10),mat({color:0x13306e,roughness:.45}));f.position.set(-1.72+i*.106,.5,-10.24);scene.add(f);}
+  const ctr=new THREE.Mesh(new THREE.BoxGeometry(2.6,1.0,.7),mat({color:0x0f1339,roughness:.5})); ctr.position.set(-.5,.52,-10.6); scene.add(ctr);
+  for(let i=0;i<24;i++){const f=new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.92,10),mat({color:0x161b4a,roughness:.45}));f.position.set(-1.72+i*.106,.5,-10.24);scene.add(f);}
   const ct=marbleT.clone(); ct.needsUpdate=true;
   const ctrTop=new THREE.Mesh(new THREE.BoxGeometry(2.75,.06,.82),mat({map:ct,roughness:.12})); ctrTop.position.set(-.5,1.05,-10.6); scene.add(ctrTop);
   const cg=new THREE.Mesh(new THREE.BoxGeometry(2.6,.02,.02),GOLD); cg.position.set(-.5,.98,-10.2); scene.add(cg);
@@ -494,7 +526,7 @@ function build(){
   const lidC={aq:0x22b03e,ce:0xd81e1e,tg:0x3fb54a};
 
   // premium wall shelves: walnut, backlit panel, LED under each shelf, gold edges
-  const backLit=basic({color:0x18306a});
+  const backLit=basic({color:0x1a2050});
   function shelfUnit(x,zc,face){
     const g=new THREE.Group(); g.position.set(x,0,zc);
     const back=new THREE.Mesh(new THREE.BoxGeometry(.03,2.62,2.1),backLit); back.position.set(-face*.22,1.33,0); g.add(back);
@@ -516,7 +548,7 @@ function build(){
     [.065,.72,1.37,2.02].forEach(y=>{ for(let k=0;k<4;k++){ const m=new THREE.Mesh(geo,m6); m.position.set(face*.06,y+.29,-.75+k*.5); m.userData.pid=id; g.add(m); pickables.push(m);} });
   }
   const LX=-4.7, RX=4.7, Z=[-3.2,-5.5,-7.8];
-  const header=(txt,x,z,face,acc)=>{const t=canvasTex(1024,160,(g,w,h)=>{g.fillStyle="#0c1d47";g.fillRect(0,0,w,h);g.fillStyle=acc;g.fillRect(0,h-10,w,10);
+  const header=(txt,x,z,face,acc)=>{const t=canvasTex(1024,160,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);g.fillStyle=acc;g.fillRect(0,h-10,w,10);
       g.textAlign="center";g.fillStyle="#ffffff";g.font="700 92px 'Barlow Condensed',Arial";g.fillText(txt,w/2,108);});
     const m=new THREE.Mesh(new THREE.PlaneGeometry(2.14,.34),new THREE.MeshBasicMaterial({map:t,toneMapped:false}));
     m.rotation.y=face>0?Math.PI/2:-Math.PI/2; m.position.set(x+face*.29,2.9,z); scene.add(m);
@@ -573,7 +605,7 @@ function build(){
     [[-.22,0,-.2],[.22,0,-.2],[-.22,0,.22],[.0,.46,0]].forEach(([dx,dy,dz])=>{const m=new THREE.Mesh(geo,[side,lid,bot]);m.position.set(-3.9+dx,.35+dy,-1.45+dz);m.rotation.y=Math.PI/2;m.userData.pid="aq";scene.add(m);pickables.push(m);});})();
 
   // hotspot pins
-  const pinT=canvasTex(128,128,(g,w,h)=>{g.fillStyle="#0f2a66";g.beginPath();g.arc(64,64,52,0,7);g.fill();g.strokeStyle="#d4a64a";g.lineWidth=8;g.stroke();g.fillStyle="#fff";g.font="700 72px Georgia";g.textAlign="center";g.fillText("i",64,90);});
+  const pinT=canvasTex(128,128,(g,w,h)=>{g.fillStyle="#0f1339";g.beginPath();g.arc(64,64,52,0,7);g.fill();g.strokeStyle="#d4a64a";g.lineWidth=8;g.stroke();g.fillStyle="#fff";g.font="700 72px Georgia";g.textAlign="center";g.fillText("i",64,90);});
   const pinM=new THREE.SpriteMaterial({map:pinT,depthTest:false,toneMapped:false});
   [["aq",LX+.5,Z[0],3.22],["ce",LX+.5,Z[1],3.22],["tg",LX+.5,Z[2],3.22],["l2",RX-.5,Z[0],3.22],["l3",RX-.5,Z[1],3.22],["ep",RX-.5,Z[2]+.55,3.22],["ro",RX-.5,Z[2]-.55,3.22],["jf",-.35,-6.0,1.45]].forEach(([id,x,z,y])=>{
     const s=new THREE.Sprite(pinM); s.scale.set(.32,.32,1); s.position.set(x,y,z); s.userData.baseY=y; s.userData.pid=id; s.userData.pin=true; scene.add(s); pickables.push(s); pins.push(s);
@@ -662,19 +694,19 @@ function buildExterior(){
   plasterT.wrapS=plasterT.wrapT=THREE.RepeatWrapping; plasterT.repeat.set(4,2);
   const plaster=ext(0xffffff,.3,{map:plasterT});
   // upper floors: charcoal ACP cladding, stone bands, tinted glass windows, sunshades, AC units
-  const acpT=canvasTex(1024,512,(g,w,h)=>{g.fillStyle="#1a2c5c";g.fillRect(0,0,w,h);
-    for(let y=0;y<h;y+=128)for(let x=0;x<w;x+=256){const l=25+rnd()*3;g.fillStyle=`hsl(222,52%,${l}%)`;g.fillRect(x+3,y+3,250,122);
+  const acpT=canvasTex(1024,512,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);
+    for(let y=0;y<h;y+=128)for(let x=0;x<w;x+=256){const l=25+rnd()*3;g.fillStyle=`hsl(234,58%,${l-12}%)`;g.fillRect(x+3,y+3,250,122);
       const gr=g.createLinearGradient(x,y,x+256,y+128);gr.addColorStop(0,"rgba(255,255,255,.06)");gr.addColorStop(1,"rgba(0,0,0,.08)");g.fillStyle=gr;g.fillRect(x+3,y+3,250,122);}});
   acpT.wrapS=acpT.wrapT=THREE.RepeatWrapping; acpT.repeat.set(3,3);
-  const acpM=mat({map:acpT,roughness:.5,metalness:.2,envMapIntensity:.4,emissive:0x16285a,emissiveIntensity:.35});
+  const acpM=mat({map:acpT,roughness:.5,metalness:.2,envMapIntensity:.4,emissive:0x0f1339,emissiveIntensity:.2});
   const above=new THREE.Mesh(new THREE.BoxGeometry(11.2,5,12.4),[acpM,acpM,acpM,acpM,acpM,acpM]); above.position.set(0,8.1,-6.0); scene.add(above);
-  const stoneM=mat({color:new THREE.Color(0x203c78).convertSRGBToLinear(),roughness:.6,emissive:new THREE.Color(0x1a3266).convertSRGBToLinear(),emissiveIntensity:.35});
-  [5.75,8.15,10.55].forEach(y=>{const b=new THREE.Mesh(new THREE.BoxGeometry(11.4,.22,.5),stoneM); b.position.set(0,y,.25); scene.add(b);});
+  const stoneM=mat({color:new THREE.Color(0x0f1339).convertSRGBToLinear(),roughness:.6,emissive:new THREE.Color(0x0f1339).convertSRGBToLinear(),emissiveIntensity:.35});
+  [10.55].forEach(y=>{const b=new THREE.Mesh(new THREE.BoxGeometry(11.4,.22,.5),stoneM); b.position.set(0,y,.25); scene.add(b);});
   const winGlass=new THREE.MeshStandardMaterial({color:0x1b2a44,metalness:.9,roughness:.06,envMapIntensity:1.4,emissive:0x0d1626,emissiveIntensity:.4});
   const alu=mat({color:0x8d939b,metalness:.8,roughness:.3});
   const skyRefl=canvasTex(64,256,(g,w,h)=>{const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,"#bcd3ec");gr.addColorStop(.6,"#6f8db0");gr.addColorStop(1,"#26354d");g.fillStyle=gr;g.fillRect(0,0,w,h);});
   const reflM=new THREE.MeshBasicMaterial({map:skyRefl,transparent:true,opacity:.55,toneMapped:false});
-  [6.95,9.35].forEach((y,fl)=>{ [-3.6,0,3.6].forEach((x,i)=>{
+  [].forEach((y,fl)=>{ [-3.6,0,3.6].forEach((x,i)=>{
     const ww=2.4, wh=1.55;
     const rec=new THREE.Mesh(new THREE.BoxGeometry(ww+.16,wh+.16,.06),alu); rec.position.set(x,y,.21); scene.add(rec);
     const gl=new THREE.Mesh(new THREE.PlaneGeometry(ww,wh),winGlass); gl.position.set(x,y,.245); scene.add(gl);
@@ -700,7 +732,7 @@ function buildExterior(){
   const shut=new THREE.Mesh(new THREE.PlaneGeometry(4.4,3.2),ext(0xffffff,.4,{map:shutT,roughness:.6})); shut.position.set(8.4,G+1.6,.21); scene.add(shut);
 
   // ---- storefront ----
-  const NAVY=new THREE.MeshStandardMaterial({color:new THREE.Color(0x13305e).convertSRGBToLinear(),emissive:new THREE.Color(0x0d2350).convertSRGBToLinear(),emissiveIntensity:.14,roughness:.6,metalness:0,envMapIntensity:.1});
+  const NAVY=new THREE.MeshBasicMaterial({color:new THREE.Color(0x0f1339).convertSRGBToLinear(),toneMapped:false,fog:false});
   const add=(geo,m,x,y,z)=>{const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);scene.add(o);return o;};
   // granite plinth
   const graniteT=canvasTex(512,128,(g,w,h)=>{g.fillStyle="#7d8188";g.fillRect(0,0,w,h);for(let i=0;i<5000;i++){const v=90+rnd()*90|0;g.fillStyle=`rgba(${v},${v},${v+6},.55)`;g.fillRect(rnd()*w,rnd()*h,1.5,1.5);}});
@@ -713,10 +745,28 @@ function buildExterior(){
   add(new THREE.BoxGeometry(.58,3.62,.5),NAVY,0,1.81,.25);
   add(new THREE.BoxGeometry(11.2,1.9,.72),NAVY,0,4.55,.36);
   add(new THREE.BoxGeometry(11.5,.12,.95),NAVY,0,5.56,.46);
-  add(new THREE.BoxGeometry(11.2,.06,.7),new THREE.MeshStandardMaterial({color:0x0a1736,roughness:.6}),0,3.63,.36);
+  const GOLDLINE=new THREE.MeshBasicMaterial({color:new THREE.Color(0xf4c142).convertSRGBToLinear(),toneMapped:false,fog:false});
+  add(new THREE.BoxGeometry(11.52,.11,.08),GOLDLINE,0,5.565,.94); add(new THREE.BoxGeometry(11.52,.04,.96),GOLDLINE,0,5.63,.46);
+  add(new THREE.BoxGeometry(11.2,.06,.7),new THREE.MeshStandardMaterial({color:0x0b0e2b,roughness:.6}),0,3.63,.36);
   // Blutex logo + tagline
-  const tag=canvasTex(2048,128,(g,w,h)=>{g.textAlign="center";g.fillStyle="#ffffff";g.font="500 58px 'Barlow',Arial";g.fillText("WATERPROOFING CHEMICALS    |    WATERPROOFING SOLUTIONS    |    TILE ADHESIVES",w/2,84);});
+  const tag=canvasTex(2048,128,(g,w,h)=>{g.textAlign="center";g.textBaseline="middle";g.fillStyle="#ffffff";const tl="WATERPROOFING CHEMICALS   |   WATERPROOFING SOLUTIONS   |   TILE ADHESIVES";let fs=60;do{g.font="600 "+fs+"px 'Barlow',Arial,sans-serif";fs-=2;}while(g.measureText(tl).width>w*0.92&&fs>20);g.fillText(tl,w/2,h/2+2);});
   add(new THREE.PlaneGeometry(8.6,.54),new THREE.MeshBasicMaterial({map:tag,transparent:true,toneMapped:false}),0,4.0,.725);
+  // upper building: board-blue panel with the slogan in white
+  add(new THREE.BoxGeometry(11.2,4.75,.1),new THREE.MeshBasicMaterial({color:new THREE.Color(0x0f1339).convertSRGBToLinear(),toneMapped:false,fog:false}),0,8.05,.23);
+  // slogan: spaced Montserrat capitals, all in logo yellow; redrawn once the web fonts arrive
+  const slogC=document.createElement("canvas"); slogC.width=2048; slogC.height=880;
+  const slog=new THREE.CanvasTexture(slogC); slog.encoding=THREE.sRGBEncoding; slog.anisotropy=4;
+  const drawSlog=()=>{ const g=slogC.getContext("2d"),w=2048,h=880, Y="#f4c142"; g.clearRect(0,0,w,h);
+    g.textAlign="center"; g.textBaseline="middle"; g.fillStyle=Y;
+    const fit=(t,font,size,maxW,ls)=>{ if(g.letterSpacing!==undefined) g.letterSpacing=ls+"px"; let z=size; do{g.font=font.replace("{s}",z);z-=2;}while(g.measureText(t).width>maxW&&z>20); };
+    const L1="BLUTEX IS NOT JUST A SHOP", L2="IT'S AN EXPERIENCE", F="500 {s}px Montserrat,'Helvetica Neue',Arial,sans-serif";
+    fit(L1,F,170,w*.76,16); const s1=parseInt(g.font); g.fillText(L1,w/2,h*.33);
+    g.fillRect(w*.2,h*.5,w*.6,4);
+    fit(L2,F,s1,w*.72,22); g.fillText(L2,w/2,h*.67);
+    slog.needsUpdate=true; };
+  drawSlog();
+  try{ Promise.all([document.fonts.load("500 60px Montserrat")]).then(drawSlog,()=>{}); }catch(e){}
+  add(new THREE.PlaneGeometry(10.6,4.55),new THREE.MeshBasicMaterial({map:slog,transparent:true,toneMapped:false,fog:false}),0,8.05,.285);
   const LOGO=tex("blutex_logo.png");
   add(new THREE.PlaneGeometry(3.6,1.37),new THREE.MeshBasicMaterial({map:LOGO,transparent:true,toneMapped:false,depthWrite:false}),0,4.8,.73);
   // frameless glass: two bays, door beside the centre column in each bay
@@ -1052,6 +1102,117 @@ $("#enter").addEventListener("click",()=>{
   setTimeout(()=>{ flyTo(new THREE.Vector3(0,1.6,-1.0),{y:0,p:-.1},1000); speak(T[lang].greet,"greet","arun"); },3600);
   try{ speechSynthesis.speak(new SpeechSynthesisUtterance("")); }catch(e){}
 });
+/* ---------------- project selection: pick the job, Tex recommends products + quantities ---------------- */
+const PROJ=[
+ {id:"bath",main:"ce",items:["ce","aq","l2","ep","ro","jf"],
+  name:{en:"Bathroom / Toilet",ml:"ബാത്ത്റൂം / ടോയ്‌ലറ്റ്"},sub:{en:"Floor & wet walls",ml:"തറയും നനയുന്ന ചുമരും"},
+  en:"For a bathroom, first waterproof the floor and the lower walls with Ceralastic, in two coats. Use AquaArm Latex 45 in the sunken portion and in the screed. After that, fix the tiles with Tile Master L2 and fill the joints with epoxy grout, so no water gets in.",
+  ml:"ബാത്ത്റൂമിന് ആദ്യം തറയും ചുമരിന്റെ താഴ്ഭാഗവും സെറാലാസ്റ്റിക് കൊണ്ട് 2 കോട്ട് വാട്ടർപ്രൂഫ് ചെയ്യുക. സൺക് ഭാഗത്തും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക. പിന്നെ ടൈൽ മാസ്റ്റർ L2 കൊണ്ട് ടൈൽ ഒട്ടിച്ച്, ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക. അപ്പോൾ വെള്ളം ഒട്ടും ഇറങ്ങില്ല."},
+ {id:"terrace",main:"tg",items:["tg","ce","aq"],
+  name:{en:"Terrace / Roof",ml:"ടെറസ് / മേൽക്കൂര"},sub:{en:"Open slab, rain & sun",ml:"മഴയും വെയിലും ഏൽക്കുന്ന സ്ലാബ്"},
+  en:"For a terrace or roof, use AquaArm TopGuard. It is flexible, breathable and self-curing, and handles rain and hot sun. Apply two coats on the wet slab. Ceralastic is also a good choice. Use AquaArm Latex 45 to repair cracks and in the protective screed.",
+  ml:"ടെറസിനും മേൽക്കൂരയ്ക്കും അക്വാആം ടോപ്ഗാർഡ് ഉപയോഗിക്കുക. വഴക്കമുള്ളതും സ്വയം ക്യൂർ ആകുന്നതുമാണ്, മഴയും വെയിലും താങ്ങും. നനച്ച സ്ലാബിൽ 2 കോട്ട് അടിക്കുക. സെറാലാസ്റ്റിക്കും നല്ലതാണ്. വിള്ളലുകൾ നന്നാക്കാനും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
+ {id:"tank",main:"ce",items:["ce"],
+  name:{en:"Water tank",ml:"വാട്ടർ ടാങ്ക്"},sub:{en:"Drinking water safe",ml:"കുടിവെള്ളത്തിന് സുരക്ഷിതം"},
+  en:"For a water tank, use Ceralastic. It is non-toxic, so it is safe for drinking water tanks. Apply at least two coats on the inside of the tank, and let it cure well before filling water.",
+  ml:"വാട്ടർ ടാങ്കിന് സെറാലാസ്റ്റിക് ഉപയോഗിക്കുക. വിഷാംശം ഇല്ലാത്തതുകൊണ്ട് കുടിവെള്ള ടാങ്കിനും സുരക്ഷിതമാണ്. ടാങ്കിന്റെ ഉള്ളിൽ കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക, വെള്ളം നിറയ്ക്കുന്നതിന് മുമ്പ് നന്നായി ഉണങ്ങാൻ വിടുക."},
+ {id:"balcony",main:"tg",items:["tg","aq"],
+  name:{en:"Balcony / Sunshade",ml:"ബാൽക്കണി / സൺഷേഡ്"},sub:{en:"Chajja, ledges",ml:"ഛജ്ജ, ലെഡ്ജ്"},
+  en:"For balconies and sunshades, use AquaArm TopGuard in two coats. For small areas and repairs, AquaArm Latex 45 mixed with cement also works well as a waterproof coat.",
+  ml:"ബാൽക്കണിക്കും സൺഷേഡിനും അക്വാആം ടോപ്ഗാർഡ് 2 കോട്ട് അടിക്കുക. ചെറിയ ഭാഗങ്ങൾക്കും റിപ്പയറിനും അക്വാആം ലാറ്റക്സ് 45 സിമന്റുമായി ചേർത്ത് വാട്ടർപ്രൂഫ് കോട്ടായും ഉപയോഗിക്കാം."},
+ {id:"basement",main:"ce",items:["ce","aq"],
+  name:{en:"Basement / Wet wall",ml:"ബേസ്‌മെന്റ് / നനവുള്ള ചുമർ"},sub:{en:"Damp, seepage",ml:"ഈർപ്പം, ചോർച്ച"},
+  en:"For basements and damp walls, use Ceralastic in at least two coats. Use AquaArm Latex 45 to repair and bond the plaster before coating.",
+  ml:"ബേസ്‌മെന്റിനും നനവുള്ള ചുമരിനും സെറാലാസ്റ്റിക് കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക. കോട്ട് ചെയ്യുന്നതിന് മുമ്പ് പ്ലാസ്റ്റർ നന്നാക്കാനും ബോണ്ട് ചെയ്യാനും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
+ {id:"indoor",main:"l2",items:["l2","ep","ro","jf"],
+  name:{en:"Indoor tiling",ml:"വീടിനുള്ളിലെ ടൈൽ"},sub:{en:"Floor & wall, tile on tile",ml:"ഫ്ലോറും ചുമരും, ടൈലിന് മുകളിൽ ടൈൽ"},
+  en:"For indoor floor and wall tiles, use Tile Master L2. It also works for tile on tile. Finish the joints with SyrexEasy or Roff Starlike epoxy grout, or the joint filler in a matching colour.",
+  ml:"വീടിനുള്ളിലെ ഫ്ലോറിനും ചുമരിനും ടൈൽ മാസ്റ്റർ L2 ഉപയോഗിക്കുക. പഴയ ടൈലിന് മുകളിലും ഒട്ടിക്കാം. ജോയിന്റുകൾ സൈറെക്സ് ഈസി അല്ലെങ്കിൽ റോഫ് സ്റ്റാർലൈക്ക് എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ടോ, ചേരുന്ന നിറത്തിലുള്ള ജോയിന്റ് ഫില്ലർ കൊണ്ടോ നിറയ്ക്കുക."},
+ {id:"outdoor",main:"l3",items:["l3","ep","ro"],
+  name:{en:"Outdoor / Exterior tiling",ml:"പുറം ചുമർ / പുറത്തെ ടൈൽ"},sub:{en:"Exterior walls, sit-outs",ml:"പുറം ചുമർ, സിറ്റൗട്ട്"},
+  en:"For exterior walls and outdoor floors, use Tile Master L3. It is water resistant and bonds strongly outside. Finish the joints with epoxy grout so rain water cannot get behind the tiles.",
+  ml:"പുറം ചുമരിനും പുറത്തെ ഫ്ലോറിനും ടൈൽ മാസ്റ്റർ L3 ഉപയോഗിക്കുക. വെള്ളത്തെ ചെറുക്കും, പുറത്ത് നല്ല ഉറപ്പോടെ ഒട്ടും. മഴവെള്ളം ടൈലിന് പിന്നിൽ കയറാതിരിക്കാൻ ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക."}
+];
+const PT={
+ en:{btn:"Choose your project",title:"What are you working on?",areaQ:"Area (optional)",areaPh:"e.g. 40",show:"Show products",back:"Back",
+     rec:"Recommended for",main:"Main product",also:"Also used",need:"You need about",view:"View",calcNote:"Estimates from the data sheets. Actual use depends on the surface – confirm on WhatsApp.",
+     noArea:"Add the area above to see quantities.",estTile:"1 bag covers about 35 sq ft",dep:"Depends on tile size and joint width",change:"Change project"},
+ ml:{btn:"പ്രോജക്ട് തിരഞ്ഞെടുക്കൂ",title:"എന്ത് ജോലിയാണ് ചെയ്യുന്നത്?",areaQ:"ഏരിയ (ഇല്ലെങ്കിലും മതി)",areaPh:"ഉദാ. 40",show:"ഉൽപ്പന്നങ്ങൾ കാണിക്കൂ",back:"തിരികെ",
+     rec:"ഇതിന് നല്ലത്",main:"പ്രധാന ഉൽപ്പന്നം",also:"ഇതും വേണം",need:"ഏകദേശം വേണ്ടത്",view:"കാണുക",calcNote:"ഡാറ്റാ ഷീറ്റ് അനുസരിച്ചുള്ള ഏകദേശ കണക്ക്. പ്രതലം അനുസരിച്ച് മാറാം – WhatsApp-ൽ ഉറപ്പാക്കൂ.",
+     noArea:"അളവ് കാണാൻ മുകളിൽ ഏരിയ കൊടുക്കൂ.",estTile:"ഒരു ബാഗ് ഏകദേശം 35 sq ft",dep:"ടൈലിന്റെ വലിപ്പവും ജോയിന്റ് വീതിയും അനുസരിച്ച്",change:"പ്രോജക്ട് മാറ്റുക"}
+};
+let currentProject=null, projArea=null, projUnit="sqft";
+function qtyFor(id,m2){
+  const ml=lang==="ml", r=n=>Math.ceil(n), f=n=>(Math.round(n*10)/10).toString();
+  if(!m2) return null;
+  if(id==="ce"){ const kg=m2/0.625; let n24=Math.floor(kg/24), rest=kg-n24*24, n6=r(rest/6); if(n6>=4){n24++;n6=0;}
+    return ml?`≈ ${r(kg)} കിലോ (2 കോട്ട്) → ${n24?n24+" × 24 കിലോ":""}${n24&&n6?" + ":""}${n6?n6+" × 6 കിലോ":""}`
+             :`≈ ${r(kg)} kg (2 coats) → ${n24?n24+" × 24 kg":""}${n24&&n6?" + ":""}${n6?n6+" × 6 kg":""}`; }
+  if(id==="tg"){ const lo=m2*1.5, hi=m2*2.5, kits=r(m2*2/32);
+    return ml?`≈ ${r(lo)}–${r(hi)} കിലോ മിക്സ് → ഏകദേശം ${kits} കിറ്റ് (24 കിലോ പൗഡർ + ലിക്വിഡ്)`:`≈ ${r(lo)}–${r(hi)} kg mixed → about ${kits} kit${kits>1?"s":""} (24 kg powder + liquid)`; }
+  if(id==="aq"){ const L=m2/2, cem=L*1.75;
+    return ml?`≈ ${f(L)} ലിറ്റർ + ${r(cem)} കിലോ സിമന്റ് (വാട്ടർപ്രൂഫ് കോട്ട്, 2 കോട്ട്)`:`≈ ${f(L)} L + ${r(cem)} kg cement (waterproof coat, 2 coats)`; }
+  if(id==="l2"||id==="l3"){ const bags=r(m2*10.764/35);
+    return ml?`≈ ${bags} ബാഗ് (20 കിലോ) – ${PT.ml.estTile}`:`≈ ${bags} bag${bags>1?"s":""} of 20 kg – ${PT.en.estTile}`; }
+  return PT[lang].dep;
+}
+function projPanel(step){
+  const L=PT[lang], body=$("#sh");
+  if(step==="pick"){
+    body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.btn}</div><h2>${L.title}</h2></div>
+      <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
+<label class="parea" for="parea">${L.areaQ}
+        <span class="prow"><input id="parea" inputmode="decimal" placeholder="${L.areaPh}" value="${projArea||""}">
+        <span class="punit" role="group"><button type="button" data-unit="sqft" aria-pressed="${projUnit==="sqft"}">sq ft</button><button type="button" data-unit="m2" aria-pressed="${projUnit==="m2"}">m²</button></span></span></label>
+      <div class="pgrid">${PROJ.map(p=>`<button type="button" class="pcard" data-proj="${p.id}"><b>${p.name[lang]}</b><span>${p.sub[lang]}</span></button>`).join("")}</div>`;
+    $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
+    body.querySelectorAll("[data-unit]").forEach(b=>b.onclick=()=>{ projUnit=b.dataset.unit; body.querySelectorAll("[data-unit]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.unit===projUnit)); });
+    body.querySelectorAll("[data-proj]").forEach(b=>b.onclick=()=>{ const v=parseFloat(($("#parea").value||"").replace(",",".")); projArea=v>0?v:null; goProject(b.dataset.proj); });
+    $("#sheet").classList.add("open");
+    return;
+  }
+  const pj=PROJ.find(x=>x.id===step), m2=projArea?(projUnit==="sqft"?projArea/10.764:projArea):null;
+  const row=(id,isMain)=>{ const p=P.find(x=>x.id===id); const q=qtyFor(id,m2);
+    return `<div class="prec${isMain?" main":""}">${p.img?`<img src="${p.img}" alt="">`:`<div class="pimg0"></div>`}
+      <div class="pt"><small>${isMain?L.main:L.also}</small><b>${p.short||p.name}</b>${q?`<span>${q}</span>`:""}</div>
+      <button type="button" class="btn pv" data-go="${id}">${L.view}</button></div>`; };
+  body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.rec}</div><h2>${pj.name[lang]}</h2></div>
+     <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
+     ${m2?`<div class="badge" style="justify-self:start">${projUnit==="sqft"?projArea+" sq ft ≈ "+(Math.round(m2*10)/10)+" m²":projArea+" m²"}</div>`:""}
+     <p class="desc">${pj[lang]}</p>
+     <div class="plist">${pj.items.map(id=>row(id,id===pj.main)).join("")}</div>
+     <p class="pnote">${m2?L.calcNote:L.noArea}</p>
+     <div class="acts"><button type="button" class="btn" id="pchange">${L.change}</button>
+     <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${PHONE}?text=${encodeURIComponent((lang==="ml"?"ഹലോ ബ്ലൂടെക്സ്, എന്റെ പ്രോജക്ട്: ":"Hello Blutex, my project: ")+pj.name[lang]+(m2?(" – "+(projUnit==="sqft"?projArea+" sq ft":projArea+" m²")):"")+". "+(lang==="ml"?"ഉൽപ്പന്നങ്ങളും വിലയും അറിയിക്കാമോ?":"Please share products and price."))}">${T[lang].order}</a></div>`;
+  $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
+  $("#pchange").onclick=()=>projPanel("pick");
+  body.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ currentProject=null; goProduct(b.dataset.go); });
+  $("#sheet").classList.add("open");
+}
+function goProject(pid){
+  const pj=PROJ.find(x=>x.id===pid); if(!pj) return;
+  currentProject=pid; current=null; buildStrip();
+  const s=STOPS[pj.main];
+  flyTo(s.cam,lookYP(s.cam,s.target.clone().add(new THREE.Vector3(0,-.1,0))));
+  Object.assign(STAFF.arun,{target:s.man.clone(),pointAt:s.target.clone(),face:null});
+  projPanel(pid);
+  setTimeout(()=>speak(pj[lang],"proj_"+pid,"arun"),700);
+  try{ if(typeof gcEvent==="function") gcEvent("project: "+pj.name.en, pj.name.en); }catch(e){}
+}
+(function(){
+  const og=goHome; goHome=function(){ currentProject=null; return og.apply(this,arguments); };
+  const op=goProduct; goProduct=function(){ currentProject=null; return op.apply(this,arguments); };
+  document.addEventListener("click",e=>{ const b=e.target.closest("[data-lang]"); if(!b||!entered) return;
+    setTimeout(()=>{ const pb=$("#projbtn"); if(pb) pb.textContent=PT[lang].btn;
+      if(currentProject){ projPanel(currentProject); const pj=PROJ.find(x=>x.id===currentProject); speak(pj[lang],"proj_"+currentProject,"arun"); }
+      else if($("#sheet").classList.contains("open")&&$("#sh .pgrid")) projPanel("pick"); },0); });
+  const btn=document.createElement("button"); btn.type="button"; btn.id="projbtn"; btn.hidden=true; btn.textContent=PT[lang].btn;
+  btn.onclick=()=>{ currentProject=null; projPanel("pick"); };
+  document.body.appendChild(btn);
+  $("#enter").addEventListener("click",()=>{ btn.hidden=false; btn.textContent=PT[lang].btn; setTimeout(()=>{ if(!current&&!currentProject) projPanel("pick"); },5200); });
+  PROJ.forEach(p=>{ VOICE["proj_"+p.id]={en:"m_proj_"+p.id+"_en.mp3",ml:"m_proj_"+p.id+"_ml.mp3"}; });
+})();
+
 </script>
 
 <script data-goatcounter="https://blutex-shop.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1069,6 +1230,31 @@ document.addEventListener("click",e=>{
     if(id!==lastId||now-lastT>5000){ const p=(typeof P!=="undefined")&&P.find(x=>x.id===id); const nm=p?(p.short||p.name):id;
       gcEvent("product: "+nm, nm); lastId=id; lastT=now; }
     return orig.apply(this,arguments); };
+})();
+</script>
+
+<script>
+/* ---- installable app (PWA) ---- */
+(function(){
+  const TXT={en:{btn:"📲 Install Blutex app",ios:"To install: tap Share ⬆️ then “Add to Home Screen”."},
+             ml:{btn:"📲 Blutex ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ",ios:"ഇൻസ്റ്റാൾ ചെയ്യാൻ: Share ⬆️ അമർത്തി “Add to Home Screen” തിരഞ്ഞെടുക്കൂ."}};
+  const L=()=>(typeof lang!=="undefined"&&lang==="ml")?"ml":"en";
+  const btn=document.getElementById("installBtn"), hint=document.getElementById("iosHint");
+  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  let deferred=null;
+  function label(){ btn.textContent=TXT[L()].btn; hint.textContent=TXT[L()].ios; }
+  if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferred=e; if(!standalone){ label(); btn.hidden=false; } });
+  btn.addEventListener("click",async()=>{
+    if(deferred){ deferred.prompt(); const r=await deferred.userChoice.catch(()=>null); deferred=null; btn.hidden=true;
+      try{ if(r&&r.outcome==="accepted"&&typeof gcEvent==="function") gcEvent("app-installed","App installed"); }catch(e){} }
+    else if(ios){ hint.hidden=!hint.hidden; }
+  });
+  if(ios&&!standalone){ label(); btn.hidden=false; }
+  document.addEventListener("click",e=>{ if(e.target.closest("[data-lang]")) setTimeout(label,0); });
+  addEventListener("appinstalled",()=>{ btn.hidden=true; hint.hidden=true; });
+  if(standalone){ try{ addEventListener("load",()=>{ setTimeout(()=>{ if(typeof gcEvent==="function") gcEvent("opened-from-app","Opened from installed app"); },3000); }); }catch(e){} }
 })();
 </script>
 </body>
