@@ -74,6 +74,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .bt b{font-size:13px;color:var(--gold);display:block}
 .bt p{margin:2px 0 0;font-size:15px;line-height:1.45}
 .vnote{font-size:12px;color:var(--mute);margin-top:4px}
+/* while a product/project panel is open the full text is in the panel: keep Tex's bubble to 2 lines (tap to expand) */
+body.sheet-open #say{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+body.sheet-open #bubble{cursor:pointer}
+body.sheet-open #bubble.full{z-index:8;max-height:60vh;overflow:auto}
+body.sheet-open #bubble.full #say{display:block;-webkit-line-clamp:unset}
 
 /* hint */
 #hint{position:fixed;z-index:4;left:50%;transform:translateX(-50%);bottom:calc(112px + env(safe-area-inset-bottom,0px));background:rgba(15,19,57,.75);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--mute);white-space:nowrap;transition:opacity .4s}
@@ -1255,6 +1260,13 @@ document.addEventListener("click",e=>{
   document.addEventListener("click",e=>{ if(e.target.closest("[data-lang]")) setTimeout(label,0); });
   addEventListener("appinstalled",()=>{ btn.hidden=true; hint.hidden=true; });
   if(standalone){ try{ addEventListener("load",()=>{ setTimeout(()=>{ if(typeof gcEvent==="function") gcEvent("opened-from-app","Opened from installed app"); },3000); }); }catch(e){} }
+})();
+</script>
+<script>
+(function(){ const sh=document.getElementById("sheet"), bb=document.getElementById("bubble");
+  const sync=()=>{ const o=sh.classList.contains("open"); document.body.classList.toggle("sheet-open",o); if(!o) bb.classList.remove("full"); };
+  new MutationObserver(sync).observe(sh,{attributes:true,attributeFilter:["class"]}); sync();
+  bb.addEventListener("click",()=>{ if(document.body.classList.contains("sheet-open")) bb.classList.toggle("full"); });
 })();
 </script>
 </body>
