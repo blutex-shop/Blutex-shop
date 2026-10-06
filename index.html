@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#061330">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blutex">
 <meta name="description" content="Walk into the Blutex showroom in 3D: tile adhesives, epoxy grout and waterproofing products with data sheets.">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -127,6 +135,8 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .pt{display:grid;gap:2px;min-width:0}.pt small{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}.pt b{font-size:15px}.pt span{font-size:13px;color:var(--mute)}
 .pv{padding:8px 12px;font-size:13px}
 .pnote{margin:0;font-size:12px;color:var(--mute)}
+.install{justify-self:center;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px}
+.ioshint{font-size:13px;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:8px 12px}
 </style>
 
 </head>
@@ -144,6 +154,8 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
     </div>
     <button type="button" class="enter" id="enter" data-t="enter"></button>
     <div class="loading" id="loading"></div>
+    <button type="button" class="install" id="installBtn" hidden></button>
+    <div class="ioshint" id="iosHint" hidden></div>
   </div>
 </div>
 
@@ -1200,6 +1212,31 @@ document.addEventListener("click",e=>{
     if(id!==lastId||now-lastT>5000){ const p=(typeof P!=="undefined")&&P.find(x=>x.id===id); const nm=p?(p.short||p.name):id;
       gcEvent("product: "+nm, nm); lastId=id; lastT=now; }
     return orig.apply(this,arguments); };
+})();
+</script>
+
+<script>
+/* ---- installable app (PWA) ---- */
+(function(){
+  const TXT={en:{btn:"📲 Install Blutex app",ios:"To install: tap Share ⬆️ then “Add to Home Screen”."},
+             ml:{btn:"📲 Blutex ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ",ios:"ഇൻസ്റ്റാൾ ചെയ്യാൻ: Share ⬆️ അമർത്തി “Add to Home Screen” തിരഞ്ഞെടുക്കൂ."}};
+  const L=()=>(typeof lang!=="undefined"&&lang==="ml")?"ml":"en";
+  const btn=document.getElementById("installBtn"), hint=document.getElementById("iosHint");
+  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  let deferred=null;
+  function label(){ btn.textContent=TXT[L()].btn; hint.textContent=TXT[L()].ios; }
+  if("serviceWorker" in navigator) addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferred=e; if(!standalone){ label(); btn.hidden=false; } });
+  btn.addEventListener("click",async()=>{
+    if(deferred){ deferred.prompt(); const r=await deferred.userChoice.catch(()=>null); deferred=null; btn.hidden=true;
+      try{ if(r&&r.outcome==="accepted"&&typeof gcEvent==="function") gcEvent("app-installed","App installed"); }catch(e){} }
+    else if(ios){ hint.hidden=!hint.hidden; }
+  });
+  if(ios&&!standalone){ label(); btn.hidden=false; }
+  document.addEventListener("click",e=>{ if(e.target.closest("[data-lang]")) setTimeout(label,0); });
+  addEventListener("appinstalled",()=>{ btn.hidden=true; hint.hidden=true; });
+  if(standalone){ try{ addEventListener("load",()=>{ setTimeout(()=>{ if(typeof gcEvent==="function") gcEvent("opened-from-app","Opened from installed app"); },3000); }); }catch(e){} }
 })();
 </script>
 </body>
