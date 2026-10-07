@@ -154,6 +154,92 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .pnote{margin:0;font-size:12px;color:var(--mute)}
 .install{justify-self:center;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px}
 .ioshint{font-size:13px;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:8px 12px}
+
+/* ===== BLUTEX Virtual Showroom: landing site, nav, sections ===== */
+#intro{display:block!important;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#intro::before{display:none}
+.snav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;height:58px;margin-bottom:-58px;
+  padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right));padding-top:env(safe-area-inset-top,0px);transition:background .25s,border-color .25s;border-bottom:1px solid transparent}
+.snav.solid{background:rgba(11,14,43,.96);border-bottom-color:rgba(255,255,255,.08)}
+.snav-logo img{height:24px;display:block}
+.snav-links{display:flex;gap:4px}
+.snav-links a{color:#dfe4f5;text-decoration:none;font-family:var(--display);font-weight:600;letter-spacing:.14em;font-size:13px;padding:10px 10px;border-radius:8px}
+.snav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.snav-menu{display:none;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:10px;width:44px;height:40px;font-size:18px}
+@media (max-width:860px){
+  .snav-menu{display:block}
+  .snav-links{display:none;position:absolute;top:58px;left:0;right:0;flex-direction:column;gap:0;background:#0b0e2b;border-bottom:1px solid rgba(255,255,255,.1);padding:6px 8px 12px}
+  .snav.open .snav-links{display:flex}
+  .snav.open{background:#0b0e2b}
+  .snav-links a{font-size:15px;padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,19,57,.55) 0,rgba(15,19,57,0) 12%,rgba(15,19,57,0) 36%,rgba(15,19,57,.9) 52%,rgba(15,19,57,.98) 64%);pointer-events:none}
+@media (max-width:600px){.intro-in .eb{display:none}.intro-in h1{font-size:clamp(30px,8.6vw,44px)!important}}
+.scroll-cue{display:block;text-align:center;color:var(--mute);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:4px 0 0}
+.site{position:relative;background:#0b0e2b;color:#fff}
+.sec{padding:60px 16px;border-top:1px solid rgba(255,255,255,.07)}
+.sec.alt{background:#0f1339}
+.sec-in{max-width:1080px;margin:0 auto}
+.kick{font-family:var(--display);letter-spacing:.24em;font-size:12px;color:var(--gold);text-transform:uppercase}
+.sec h2{font-family:var(--display);font-size:clamp(28px,5vw,40px);line-height:1.05;margin:8px 0 10px;font-weight:700}
+.lead{color:var(--mute);max-width:62ch;margin:0 0 24px;line-height:1.6}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),rgba(244,193,66,0));width:72px;margin:10px 0 18px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.scard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.scard h3{font-family:var(--display);font-size:21px;margin:0;letter-spacing:.02em}
+.scard p{margin:0;color:var(--mute);font-size:14px;line-height:1.55}
+.scard .n{font-family:var(--display);color:var(--gold);font-size:13px;letter-spacing:.16em}
+.pcard2{padding:0;overflow:hidden}
+.pcard2 .ph{background:#fff;height:150px;display:grid;place-items:center}
+.pcard2 .ph img{max-height:132px;max-width:86%;object-fit:contain}
+.pcard2 .pb{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pcard2 .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7fc4ff}
+.swatch{display:flex;gap:6px}.swatch i{width:22px;height:46px;border-radius:4px;display:block}
+.pills{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:16px}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:none;background:transparent;border:1px solid rgba(255,255,255,.18);color:#dfe4f5;border-radius:999px;padding:9px 16px;font-size:14px;min-height:40px}
+.pill[aria-pressed="true"]{background:#fff;color:#0b0e2b;border-color:#fff}
+.sacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.sbtn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;text-decoration:none;font-weight:600;font-size:14px}
+.sbtn.pri{background:var(--blue);border-color:var(--blue)}
+.sbtn.wa{background:#1f9d55;border-color:#1f9d55}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0;border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin-top:26px}
+.trust div{padding:16px 18px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.trust b{display:block;font-family:var(--display);font-size:20px;letter-spacing:.02em}
+.trust span{color:var(--mute);font-size:13px}
+.tds{display:grid;gap:8px}
+.tdsrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:rgba(255,255,255,.02)}
+.tdsrow b{font-size:15px}.tdsrow small{display:block;color:var(--mute);font-size:12px}
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.contact a,.contact div{color:#fff;text-decoration:none}
+.contact .scard b{font-size:16px;word-break:break-word}
+.cta{text-align:center;padding:72px 16px;background:radial-gradient(ellipse 70% 90% at 50% 0%,#1a2160,#0b0e2b 70%);border-top:1px solid rgba(255,255,255,.07)}
+.cta h2{font-family:var(--display);font-size:clamp(28px,6vw,46px);margin:8px 0 6px}
+.cta .sacts{justify-content:center;margin-top:18px}
+.foot{padding:22px 16px calc(90px + env(safe-area-inset-bottom,0px));text-align:center;color:#8d97b8;font-size:12px;border-top:1px solid rgba(255,255,255,.07);background:#0b0e2b}
+/* floating WhatsApp */
+#waFab{position:fixed;z-index:30;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:#1f9d55;display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.35);border:0}
+#waFab svg{width:28px;height:28px;fill:#fff}
+body.in-showroom #waFab{bottom:calc(132px + env(safe-area-inset-bottom,0px));width:50px;height:50px}
+body.sheet-open #waFab{display:none}
+/* showroom: categories above the product chips */
+#strip{display:block!important;overflow:visible!important}
+#strip[hidden]{display:none!important}
+.ctabs,.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.ctabs::-webkit-scrollbar,.chips::-webkit-scrollbar{display:none}
+.ctabs{margin-bottom:8px}
+.ctab{flex:none;background:rgba(15,19,57,.85);border:1px solid rgba(255,255,255,.16);color:#dfe4f5;border-radius:999px;padding:8px 14px;font-size:13px;min-height:38px;white-space:nowrap}
+.ctab[aria-pressed="true"]{background:#fff;color:#0b0e2b;border-color:#fff}
+@media (min-width:900px){.ctabs,.chips{justify-content:center}}
+#projbtn{bottom:calc(132px + env(safe-area-inset-bottom,0px))!important}
+#hint{bottom:calc(186px + env(safe-area-inset-bottom,0px))!important}
+/* product information panel */
+.ipanel{display:grid;gap:10px}
+.iblock{border-top:1px solid var(--line);padding-top:10px}
+.iblock h4{margin:0 0 4px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.iblock p{margin:0;font-size:15px;line-height:1.55}
+.acts .btn{min-height:44px}
 </style>
 
 </head>
@@ -161,6 +247,12 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 <div id="app"><canvas id="c"></canvas></div>
 
 <div id="intro">
+  <header class="snav" id="snav">
+    <a class="snav-logo" href="#home" data-go="home" aria-label="BLUTEX home"><img src="blutex_logo.png" alt="BLUTEX"></a>
+    <nav class="snav-links" id="snavLinks" aria-label="Main"></nav>
+    <button type="button" class="snav-menu" id="snavMenu" aria-expanded="false" aria-label="Menu">☰</button>
+  </header>
+  <section class="hero" id="home">
   <div class="intro-in">
     <div class="eb" data-t="introEb"></div>
     <h1 data-t="introTitle"></h1>
@@ -177,8 +269,12 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
     <div class="loading" id="loading"></div>
     <button type="button" class="install" id="installBtn" hidden></button>
     <div class="ioshint" id="iosHint" hidden></div>
+    <a class="scroll-cue" href="#solutions" data-go="solutions" data-t="scrollCue"></a>
   </div>
+  </section>
+  <div class="site" id="site"></div>
 </div>
+<a id="waFab" class="wa" target="_blank" rel="noopener" aria-label="WhatsApp BLUTEX" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
 
 <div id="top" hidden>
   <div class="brand"><img src="blutex_logo.png" alt="Blutex" style="height:22px;display:block"></div>
@@ -1153,6 +1249,7 @@ function goHome(){
 let last=performance.now();
 let introSkip=0;
 function loop(now){
+  if(!entered&&window.__introScrolled&&window.__introScrolled()){ requestAnimationFrame(loop); return; }
   if(!entered&&!tween){ introSkip=(introSkip+1)%3; if(introSkip){ requestAnimationFrame(loop); return; } }
   const dt=Math.min(.05,(now-last)/1000); last=now;
   if(tween){ const k=Math.min(1,(now-tween.t0)/tween.dur), e=ease(k);
@@ -1371,6 +1468,201 @@ document.addEventListener("click",e=>{
   const sync=()=>{ const o=sh.classList.contains("open"); document.body.classList.toggle("sheet-open",o); if(!o) bb.classList.remove("full"); };
   new MutationObserver(sync).observe(sh,{attributes:true,attributeFilter:["class"]}); sync();
   bb.addEventListener("click",()=>{ if(document.body.classList.contains("sheet-open")) bb.classList.toggle("full"); });
+})();
+</script>
+
+<script>
+/* ===== BLUTEX Virtual Showroom: site layer (landing, sections, categories, product panel) ===== */
+(function(){
+const $$=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const WA_ICON='<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
+const waLink=msg=>"https://wa.me/"+PHONE+"?text="+encodeURIComponent(msg);
+const L=()=>lang==="ml"?"ml":"en", t=v=>typeof v==="object"&&v?v[L()]:v;
+const msgProduct=n=>L()==="ml"?`ഹലോ BLUTEX, എനിക്ക് ${n} ൽ താൽപ്പര്യമുണ്ട്. വിലയും വിവരങ്ങളും അയച്ചുതരാമോ?`:`Hello BLUTEX, I am interested in ${n}. Please share the price and details.`;
+const msgTds=n=>L()==="ml"?`ഹലോ BLUTEX, ${n} ന്റെ ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റ് അയച്ചുതരാമോ?`:`Hello BLUTEX, please share the technical data sheet for ${n}.`;
+const msgGeneral=()=>L()==="ml"?"ഹലോ BLUTEX, നിങ്ങളുടെ കൺസ്ട്രക്ഷൻ കെമിക്കൽ ഉൽപ്പന്നങ്ങളെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു.":"Hello BLUTEX, I would like to know more about your construction chemical products.";
+
+/* categories: built only from the products already in the showroom */
+const CATS=[
+ {id:"wp",ids:["aq","ce","tg"],name:{en:"Waterproofing",ml:"വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Coatings and SBR latex for roofs, terraces, bathrooms, water tanks, balconies and basements.",ml:"ടെറസ്, മേൽക്കൂര, ബാത്ത്റൂം, വാട്ടർ ടാങ്ക്, ബാൽക്കണി, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള കോട്ടിംഗുകളും SBR ലാറ്റക്സും."}},
+ {id:"adh",ids:["l2","l3"],name:{en:"Tile Adhesives",ml:"ടൈൽ അഡ്ഹെസിവ്"},d:{en:"Grey tile adhesives for interior and exterior floors and walls, including tile on tile.",ml:"അകത്തും പുറത്തും ഫ്ലോറിനും ചുമരിനും, പഴയ ടൈലിന് മുകളിലും ഉപയോഗിക്കാവുന്ന ഗ്രേ ടൈൽ അഡ്ഹെസിവ്."}},
+ {id:"grout",ids:["ep","ro","jf"],name:{en:"Tile Grouts",ml:"ടൈൽ ഗ്രൗട്ട്"},d:{en:"Epoxy grouts and joint filler for strong, clean tile joints in matching colours.",ml:"ടൈൽ ജോയിന്റുകൾക്ക് ഉറപ്പുള്ള, വൃത്തിയുള്ള ഫിനിഷിന് എപ്പോക്സി ഗ്രൗട്ടും ജോയിന്റ് ഫില്ലറും."}},
+ {id:"chem",ids:["aq"],name:{en:"Construction Chemicals",ml:"കൺസ്ട്രക്ഷൻ കെമിക്കൽസ്"},d:{en:"SBR latex bonding agent and cement modifier for concrete repair, plaster bond coats and tile or stone bedding.",ml:"കോൺക്രീറ്റ് റിപ്പയർ, പ്ലാസ്റ്റർ ബോണ്ട് കോട്ട്, ടൈൽ / കല്ല് പതിക്കൽ എന്നിവയ്ക്കുള്ള SBR ലാറ്റക്സ് ബോണ്ടിംഗ് ഏജന്റ്."}},
+ {id:"tech",ids:[],name:{en:"Technical Solutions",ml:"ടെക്നിക്കൽ സൊല്യൂഷൻസ്"},d:{en:"Choose your job and area. Blu recommends the products and estimates the quantity.",ml:"നിങ്ങളുടെ പണിയും ഏരിയയും തിരഞ്ഞെടുക്കൂ. ബ്ലൂ ഉൽപ്പന്നങ്ങളും അളവും പറഞ്ഞുതരും."}}];
+const catOf=id=>CATS.find(c=>c.ids.includes(id)&&c.id!=="chem");
+
+const S={
+ en:{nav:[["home","Home"],["showroom","Showroom"],["products","Products"],["solutions","Solutions"],["tds","TDS"],["about","About"],["contact","Contact"]],
+  scrollCue:"Explore BLUTEX ↓",
+  solK:"Our solutions",solH:"Everything for waterproofing and tiling",solL:"Five areas, one showroom. Open any of them to see the products inside.",view:"View in showroom",
+  catK:"Product catalogue",catH:"Our products",catL:"Every product in the BLUTEX showroom. Tap one to see it in 3D, or send an enquiry straight away.",all:"All",inq:"Enquire",in3d:"View in 3D",
+  galK:"Project / application gallery",galH:"Where our products are used",galL:"Pick the job you are working on. Blu walks you to the right product and estimates how much you need.",seeSol:"See the solution",
+  whyK:"Why BLUTEX",whyH:"Choosing the right product made simple",
+  why:[["Trusted brands, one place","Products from Commet, MYK Arment, Cera-Chem, Roff by Pidilite and Syrex."],["The right product for the job","Tell us the job, like bathroom, terrace or water tank, and see what to use."],["Quantity estimate","Enter your area to get an estimate of bags, kits or litres before you buy."],["Malayalam and English","Blu explains every product by voice and text in both languages."]],
+  trust:[["Mukkam, Kerala","Nellikaparamp, Mukkam 673602"],["5 brands","Commet · MYK Arment · Cera-Chem · Roff · Syrex"],["8 products","Waterproofing, tile adhesives and grouts"],["3 data sheets","Manufacturer technical data online"]],
+  supK:"Technical support",supH:"Not sure which product fits?",supL:"Send us your surface, the area and the problem, like a leak, damp or new tiling, on WhatsApp and we will help you choose the product and the quantity.",getRec:"Get a recommendation",waUs:"WhatsApp us",
+  tdsK:"Technical data sheets",tdsH:"Technical data sheets",tdsL:"Data sheets we have online open directly. For the others, request them on WhatsApp.",open:"Open TDS",req:"Request TDS",
+  aboutK:"About BLUTEX",aboutH:"About BLUTEX",about:"BLUTEX supplies waterproofing chemicals, waterproofing solutions and tile adhesives from Mukkam, Kerala. We bring products from Commet, MYK Arment, Cera-Chem, Roff by Pidilite and Syrex under one roof, and help homeowners, masons and contractors pick the right product for each job, in Malayalam and English.",
+  conK:"Contact BLUTEX",conH:"Contact BLUTEX",call:"Call / WhatsApp",mail:"Email",insta:"Instagram",addr:"Address",
+  ctaH:"Need the right construction chemical solution?",ctaS:"Talk to BLUTEX",explore:"Explore products",foot:"© BLUTEX · Waterproofing chemicals · Waterproofing solutions · Tile adhesives",
+  pApps:"Main applications",pBen:"Key benefits",pPack:"Available pack size",pCov:"Coverage",pMeth:"Application method",pTech:"Technical details",pTds:"Technical Data Sheet",pReqTds:"Request Technical Data Sheet",pWa:"WhatsApp Enquiry",menu:"Menu"},
+ ml:{nav:[["home","ഹോം"],["showroom","ഷോറൂം"],["products","ഉൽപ്പന്നങ്ങൾ"],["solutions","സൊല്യൂഷൻസ്"],["tds","TDS"],["about","ഞങ്ങളെക്കുറിച്ച്"],["contact","ബന്ധപ്പെടുക"]],
+  scrollCue:"BLUTEX-നെ അറിയൂ ↓",
+  solK:"ഞങ്ങളുടെ സൊല്യൂഷൻസ്",solH:"വാട്ടർപ്രൂഫിംഗിനും ടൈലിംഗിനും എല്ലാം",solL:"അഞ്ച് വിഭാഗങ്ങൾ, ഒരു ഷോറൂം. ഓരോന്നും തുറന്ന് ഉള്ളിലെ ഉൽപ്പന്നങ്ങൾ കാണൂ.",view:"ഷോറൂമിൽ കാണൂ",
+  catK:"ഉൽപ്പന്ന കാറ്റലോഗ്",catH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",catL:"BLUTEX ഷോറൂമിലെ എല്ലാ ഉൽപ്പന്നങ്ങളും. ഏതിലെങ്കിലും തൊട്ട് 3D-യിൽ കാണാം, അല്ലെങ്കിൽ നേരിട്ട് അന്വേഷിക്കാം.",all:"എല്ലാം",inq:"അന്വേഷിക്കൂ",in3d:"3D-യിൽ കാണൂ",
+  galK:"പ്രോജക്ട് / ഉപയോഗ ഗാലറി",galH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ എവിടെ ഉപയോഗിക്കാം",galL:"നിങ്ങളുടെ പണി തിരഞ്ഞെടുക്കൂ. ബ്ലൂ ശരിയായ ഉൽപ്പന്നത്തിലേക്ക് കൊണ്ടുപോയി എത്ര വേണമെന്ന് കണക്കാക്കിത്തരും.",seeSol:"സൊല്യൂഷൻ കാണൂ",
+  whyK:"എന്തുകൊണ്ട് BLUTEX",whyH:"ശരിയായ ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ എളുപ്പം",
+  why:[["വിശ്വസ്ത ബ്രാൻഡുകൾ ഒരിടത്ത്","Commet, MYK Arment, Cera-Chem, Roff by Pidilite, Syrex ഉൽപ്പന്നങ്ങൾ."],["പണിക്ക് ചേർന്ന ഉൽപ്പന്നം","ബാത്ത്റൂം, ടെറസ്, വാട്ടർ ടാങ്ക് എന്നിങ്ങനെ പണി പറഞ്ഞാൽ എന്ത് ഉപയോഗിക്കണമെന്ന് കാണാം."],["അളവ് കണക്കാക്കാം","ഏരിയ കൊടുത്താൽ എത്ര ബാഗ്, കിറ്റ്, ലിറ്റർ വേണമെന്ന് ഏകദേശം അറിയാം."],["മലയാളത്തിലും ഇംഗ്ലീഷിലും","ഓരോ ഉൽപ്പന്നവും ബ്ലൂ ശബ്ദത്തിലും എഴുത്തിലും വിശദീകരിക്കും."]],
+  trust:[["മുക്കം, കേരളം","നെല്ലിക്കാപറമ്പ്, മുക്കം 673602"],["5 ബ്രാൻഡുകൾ","Commet · MYK Arment · Cera-Chem · Roff · Syrex"],["8 ഉൽപ്പന്നങ്ങൾ","വാട്ടർപ്രൂഫിംഗ്, ടൈൽ അഡ്ഹെസിവ്, ഗ്രൗട്ട്"],["3 ഡാറ്റാ ഷീറ്റുകൾ","നിർമ്മാതാക്കളുടെ ടെക്നിക്കൽ ഡാറ്റ ഓൺലൈനിൽ"]],
+  supK:"ടെക്നിക്കൽ സപ്പോർട്ട്",supH:"ഏത് ഉൽപ്പന്നം വേണമെന്ന് സംശയമുണ്ടോ?",supL:"പ്രതലം, ഏരിയ, പ്രശ്നം (ചോർച്ച, ഈർപ്പം, പുതിയ ടൈലിംഗ്) എന്നിവ WhatsApp-ൽ അയക്കൂ. ശരിയായ ഉൽപ്പന്നവും അളവും തിരഞ്ഞെടുക്കാൻ ഞങ്ങൾ സഹായിക്കാം.",getRec:"നിർദ്ദേശം കാണൂ",waUs:"WhatsApp ചെയ്യൂ",
+  tdsK:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റുകൾ",tdsH:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റുകൾ",tdsL:"ഓൺലൈനിലുള്ള ഡാറ്റാ ഷീറ്റുകൾ നേരിട്ട് തുറക്കാം. മറ്റുള്ളവ WhatsApp-ൽ ചോദിക്കൂ.",open:"TDS തുറക്കൂ",req:"TDS ചോദിക്കൂ",
+  aboutK:"BLUTEX-നെക്കുറിച്ച്",aboutH:"BLUTEX-നെക്കുറിച്ച്",about:"കേരളത്തിലെ മുക്കത്ത് നിന്ന് വാട്ടർപ്രൂഫിംഗ് കെമിക്കലുകളും വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷനുകളും ടൈൽ അഡ്ഹെസിവുകളും നൽകുന്ന സ്ഥാപനമാണ് BLUTEX. Commet, MYK Arment, Cera-Chem, Roff by Pidilite, Syrex എന്നിവയുടെ ഉൽപ്പന്നങ്ങൾ ഒരിടത്ത് ലഭ്യമാക്കുകയും, വീട്ടുടമകൾക്കും മേസൺമാർക്കും കോൺട്രാക്ടർമാർക്കും ഓരോ പണിക്കും ശരിയായ ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ മലയാളത്തിലും ഇംഗ്ലീഷിലും സഹായിക്കുകയും ചെയ്യുന്നു.",
+  conK:"ബന്ധപ്പെടുക",conH:"BLUTEX-നെ ബന്ധപ്പെടുക",call:"കോൾ / WhatsApp",mail:"ഇമെയിൽ",insta:"ഇൻസ്റ്റഗ്രാം",addr:"വിലാസം",
+  ctaH:"ശരിയായ കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷൻ വേണോ?",ctaS:"BLUTEX-നോട് സംസാരിക്കൂ",explore:"ഉൽപ്പന്നങ്ങൾ കാണൂ",foot:"© BLUTEX · വാട്ടർപ്രൂഫിംഗ് കെമിക്കൽസ് · വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷൻസ് · ടൈൽ അഡ്ഹെസിവ്",
+  pApps:"പ്രധാന ഉപയോഗങ്ങൾ",pBen:"പ്രധാന ഗുണങ്ങൾ",pPack:"ലഭ്യമായ പാക്ക്",pCov:"കവറേജ്",pMeth:"പ്രയോഗ രീതി",pTech:"സാങ്കേതിക വിവരങ്ങൾ",pTds:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റ്",pReqTds:"ഡാറ്റാ ഷീറ്റ് ചോദിക്കൂ",pWa:"WhatsApp അന്വേഷണം",menu:"മെനു"}};
+// new hero wording
+Object.assign(T.en,{introEb:"Waterproofing · Tile adhesives · Grouts",introTitle:"BLUTEX Virtual Showroom",introSub:"Explore Construction Chemical Solutions in 3D",enter:"ENTER SHOWROOM",home:"Start"});
+Object.assign(T.ml,{introEb:"വാട്ടർപ്രൂഫിംഗ് · ടൈൽ അഡ്ഹെസിവ് · ഗ്രൗട്ട്",introTitle:"BLUTEX വെർച്വൽ ഷോറൂം",introSub:"കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷനുകൾ 3D-യിൽ കാണൂ",enter:"ഷോറൂമിൽ കയറൂ"});
+T.en.scrollCue=S.en.scrollCue; T.ml.scrollCue=S.ml.scrollCue;
+
+let catFilter="all", stripCat="all";
+const img=p=>p.img?`<img src="${p.img}" alt="${esc(p.name)}" loading="lazy">`:`<div class="swatch">${["#e8e2d4","#9a9a96","#5b4a3f","#f2c230","#2f4f6f","#8a3b2e"].map(c=>`<i style="background:${c}"></i>`).join("")}</div>`;
+const oneLine=p=>t(p.spec.use||p.spec.area)||"";
+
+function renderSite(){
+  const s=S[L()];
+  $$("#snavLinks").innerHTML=s.nav.map(([k,v])=>`<a href="#${k}" data-go="${k}">${v.toUpperCase()}</a>`).join("");
+  $$("#snavMenu").setAttribute("aria-label",s.menu);
+  const prods=P.filter(p=>catFilter==="all"||CATS.find(c=>c.id===catFilter).ids.includes(p.id));
+  $$("#site").innerHTML=`
+  <section class="sec" id="solutions"><div class="sec-in">
+    <div class="kick">${s.solK}</div><h2>${s.solH}</h2><div class="rule"></div><p class="lead">${s.solL}</p>
+    <div class="sgrid">${CATS.map((c,i)=>`<div class="scard"><div class="n">0${i+1}</div><h3>${t(c.name)}</h3><p>${t(c.d)}</p>
+      <div class="sacts"><button type="button" class="sbtn" data-cat-go="${c.id}">${s.view} →</button></div></div>`).join("")}</div>
+  </div></section>
+  <section class="sec alt" id="products"><div class="sec-in">
+    <div class="kick">${s.catK}</div><h2>${s.catH}</h2><div class="rule"></div><p class="lead">${s.catL}</p>
+    <div class="pills" role="group">${[["all",s.all],...CATS.filter(c=>c.id!=="tech").map(c=>[c.id,t(c.name)])].map(([id,n])=>`<button type="button" class="pill" data-filter="${id}" aria-pressed="${catFilter===id}">${n}</button>`).join("")}</div>
+    <div class="sgrid">${prods.map(p=>`<div class="scard pcard2"><div class="ph">${img(p)}</div><div class="pb">
+      <div class="tag">${t((catOf(p.id)||CATS[0]).name)}</div><h3>${esc(p.name)}</h3><p>${esc(oneLine(p))}</p>
+      <div class="sacts"><button type="button" class="sbtn pri" data-p3d="${p.id}">${s.in3d}</button><a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgProduct(p.name))}">${WA_ICON}${s.inq}</a></div></div></div>`).join("")}</div>
+  </div></section>
+  <section class="sec" id="gallery"><div class="sec-in">
+    <div class="kick">${s.galK}</div><h2>${s.galH}</h2><div class="rule"></div><p class="lead">${s.galL}</p>
+    <div class="sgrid">${PROJ.map(pj=>{const mp=P.find(p=>p.id===pj.main);return `<div class="scard pcard2"><div class="ph">${img(mp)}</div><div class="pb">
+      <h3>${t(pj.name)}</h3><p>${t(pj.sub)}</p><div class="tag">${esc(mp.name)}</div>
+      <div class="sacts"><button type="button" class="sbtn" data-proj="${pj.id}">${s.seeSol} →</button></div></div></div>`;}).join("")}</div>
+  </div></section>
+  <section class="sec alt" id="why"><div class="sec-in">
+    <div class="kick">${s.whyK}</div><h2>${s.whyH}</h2><div class="rule"></div>
+    <div class="sgrid">${s.why.map(([h,p],i)=>`<div class="scard"><div class="n">0${i+1}</div><h3>${h}</h3><p>${p}</p></div>`).join("")}</div>
+    <div class="trust">${s.trust.map(([b,sp])=>`<div><b>${b}</b><span>${sp}</span></div>`).join("")}</div>
+  </div></section>
+  <section class="sec" id="support"><div class="sec-in">
+    <div class="kick">${s.supK}</div><h2>${s.supH}</h2><div class="rule"></div><p class="lead">${s.supL}</p>
+    <div class="sacts"><button type="button" class="sbtn pri" data-cat-go="tech">${s.getRec}</button><a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgGeneral())}">${WA_ICON}${s.waUs}</a></div>
+  </div></section>
+  <section class="sec alt" id="tds"><div class="sec-in">
+    <div class="kick">${s.tdsK}</div><h2>${s.tdsH}</h2><div class="rule"></div><p class="lead">${s.tdsL}</p>
+    <div class="tds">${P.map(p=>`<div class="tdsrow"><div><b>${esc(p.name)}</b><small>${t((catOf(p.id)||CATS[0]).name)}</small></div>
+      ${p.pdf?`<a class="sbtn" href="${p.pdf}" target="_blank" rel="noopener">📄 ${s.open}</a>`:`<a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgTds(p.name))}">${WA_ICON}${s.req}</a>`}</div>`).join("")}</div>
+  </div></section>
+  <section class="sec" id="about"><div class="sec-in">
+    <div class="kick">${s.aboutK}</div><h2>${s.aboutH}</h2><div class="rule"></div><p class="lead" style="margin:0">${s.about}</p>
+  </div></section>
+  <section class="sec alt" id="contact"><div class="sec-in">
+    <div class="kick">${s.conK}</div><h2>${s.conH}</h2><div class="rule"></div>
+    <div class="contact">
+      <a class="scard" href="${waLink(msgGeneral())}" target="_blank" rel="noopener"><span class="n">${s.call}</span><b>+91 94004 39967</b></a>
+      <a class="scard" href="mailto:blutexchemicals@gmail.com"><span class="n">${s.mail}</span><b>blutexchemicals@gmail.com</b></a>
+      <a class="scard" href="https://instagram.com/blutexchem" target="_blank" rel="noopener"><span class="n">${s.insta}</span><b>@blutexchem</b></a>
+      <div class="scard"><span class="n">${s.addr}</span><b>Nellikaparamp, Mukkam, Kerala 673602</b></div>
+    </div>
+  </div></section>
+  <section class="cta"><div class="kick">BLUTEX</div><h2>${s.ctaH}</h2><p class="lead" style="margin:0 auto">${s.ctaS}</p>
+    <div class="sacts"><a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgGeneral())}">${WA_ICON}${s.waUs}</a><a class="sbtn" href="#products" data-go="products">${s.explore}</a></div></section>
+  <footer class="foot">${s.foot}</footer>`;
+  updateFab();
+}
+
+/* navigation */
+const intro=$$("#intro"), snav=$$("#snav");
+function enterThen(fn){ if(!entered){ $$("#enter").click(); setTimeout(fn,4200); } else fn(); }
+function go(k){ snav.classList.remove("open"); $$("#snavMenu").setAttribute("aria-expanded","false");
+  if(k==="showroom"){ enterThen(()=>{}); return; }
+  const el=k==="home"?$$("#home"):document.getElementById(k); if(el) intro.scrollTo({top:k==="home"?0:el.getBoundingClientRect().top+intro.scrollTop-58,behavior:"smooth"}); }
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g&&intro.contains(g)){ e.preventDefault(); go(g.dataset.go); return; }
+  const f=e.target.closest("[data-filter]"); if(f){ catFilter=f.dataset.filter; renderSite(); return; }
+  const p3=e.target.closest("[data-p3d]"); if(p3){ const id=p3.dataset.p3d; enterThen(()=>goProduct(id)); return; }
+  const pr=e.target.closest("[data-proj]"); if(pr){ const id=pr.dataset.proj; enterThen(()=>goProject(id)); return; }
+  const cg=e.target.closest("[data-cat-go]"); if(cg){ const c=cg.dataset.catGo; enterThen(()=>openCat(c)); return; }
+});
+$$("#snavMenu").addEventListener("click",()=>{ const o=!snav.classList.contains("open"); snav.classList.toggle("open",o); $$("#snavMenu").setAttribute("aria-expanded",o); });
+intro.addEventListener("scroll",()=>snav.classList.toggle("solid",intro.scrollTop>40),{passive:true});
+window.__introScrolled=()=>!intro.hidden&&intro.scrollTop>innerHeight*.9;
+
+/* back to the site from inside the showroom */
+const menuBtn=document.createElement("button"); menuBtn.type="button"; menuBtn.className="icon"; menuBtn.id="siteBtn"; menuBtn.textContent="☰"; menuBtn.setAttribute("aria-label","Menu");
+$$("#top .tb").appendChild(menuBtn);
+menuBtn.addEventListener("click",()=>{ try{stopAll();}catch(e){} for(const k in STAFF) STAFF[k].talkUntil=0;
+  current=null; try{currentProject=null;}catch(e){} $$("#sheet").classList.remove("open"); $$("#bubble").classList.add("off");
+  ["#top","#strip","#hint","#projbtn"].forEach(s=>{const el=$$(s); if(el) el.hidden=true;});
+  entered=false; tween=null; document.body.classList.remove("in-showroom");
+  intro.hidden=false; intro.scrollTop=0; requestAnimationFrame(()=>{ intro.style.opacity=1; }); try{resize();}catch(e){} });
+$$("#enter").addEventListener("click",()=>document.body.classList.add("in-showroom"));
+
+/* showroom categories */
+function openCat(c){
+  if(c==="tech"){ stripCat="all"; buildStrip(); try{ currentProject=null; projPanel("pick"); }catch(e){} return; }
+  stripCat=c; buildStrip(); const cat=CATS.find(x=>x.id===c), id=cat&&cat.ids[0]; if(!id) return;
+  current=null; $$("#sheet").classList.remove("open"); const s=STOPS[id];
+  flyTo(s.cam,lookYP(s.cam,s.target.clone().add(new THREE.Vector3(0,-.1,0))));
+  Object.assign(STAFF.arun,{target:s.man.clone(),pointAt:s.target.clone(),face:null});
+}
+buildStrip=function(){
+  const tabs=[["all",S[L()].all],...CATS.map(c=>[c.id,t(c.name)])];
+  const list=P.filter(p=>stripCat==="all"||(CATS.find(c=>c.id===stripCat)||{ids:[]}).ids.includes(p.id));
+  $$("#strip").innerHTML=`<div class="ctabs" role="group">${tabs.map(([id,n])=>`<button type="button" class="ctab" data-scat="${id}" aria-pressed="${stripCat===id}">${n}</button>`).join("")}</div>
+   <div class="chips">${list.map(p=>`<button type="button" class="chip ${p.cat} ${p.id===current?"on":""}" data-pid="${p.id}"><small>${t((catOf(p.id)||CATS[0]).name)}</small><span>${p.short||p.name}</span></button>`).join("")}</div>`;
+};
+$$("#strip").addEventListener("click",e=>{ const b=e.target.closest("[data-scat]"); if(!b) return; const c=b.dataset.scat;
+  if(c==="all"){ stripCat="all"; buildStrip(); } else openCat(c); });
+
+/* product information panel: only the facts already stored for each product */
+showSheet=function(id,open=true){
+  const p=P.find(x=>x.id===id), s=S[L()], Lb=T[lang], sp=p.spec, cat=catOf(id)||CATS[0];
+  const block=(h,v)=>v?`<div class="iblock"><h4>${h}</h4><p>${esc(t(v))}</p></div>`:"";
+  const apps=[t(sp.use||sp.area),sp.surf?((K.surf[L()])+": "+t(sp.surf)):""].filter(Boolean).join(". ");
+  const used=new Set(["use","area","surf","feat","pack","cover","coats"]);
+  const rows=Object.entries(sp).filter(([k])=>!used.has(k)&&K[k]).map(([k,v])=>`<tr><th>${K[k][L()]}</th><td>${esc(t(v))}</td></tr>`).join("");
+  $$("#sh").innerHTML=`
+   <div class="sh-top"><div><div class="cat" style="color:${p.cat==="wp"?"#6fc1ff":"var(--gold)"}">${t(cat.name)}</div><h2 id="pname">${esc(p.name)}</h2></div>
+    <button type="button" class="x" id="close" aria-label="Close">✕</button></div>
+   ${p.img?`<img class="pimg" src="${p.img}" alt="${esc(p.name)}">`:`<div style="justify-self:center">${img(p)}</div>`}
+   <p class="desc">${esc(p[lang])}</p>
+   <div class="acts">
+     ${p.pdf?`<a class="btn" href="${p.pdf}" target="_blank" rel="noopener">📄 ${s.pTds}</a>`:`<a class="btn wa" target="_blank" rel="noopener" href="${waLink(msgTds(p.name))}">📄 ${s.pReqTds}</a>`}
+     <a class="btn wa" target="_blank" rel="noopener" href="${waLink(msgProduct(p.name))}">${WA_ICON} ${s.pWa}</a>
+     <button type="button" class="btn" id="listen">▶ ${Lb.listen}</button>
+   </div>
+   <div class="ipanel">
+     ${block(s.pApps,apps)}${block(s.pBen,sp.feat)}${block(s.pPack,sp.pack)}${block(s.pCov,sp.cover)}${block(s.pMeth,sp.coats)}
+     ${rows?`<div class="iblock"><h4>${s.pTech}</h4><table>${rows}</table></div>`:""}
+   </div>`;
+  $$("#close").onclick=()=>goHome();
+  $$("#listen").onclick=()=>speak(p[lang],p.id,whoFor(p.id));
+  if(open) $$("#sheet").classList.add("open");
+  updateFab();
+};
+
+/* floating WhatsApp: mentions the product being viewed */
+const fab=$$("#waFab");
+function updateFab(){ const p=(typeof current!=="undefined"&&current)?P.find(x=>x.id===current):null; fab.href=waLink(p?msgProduct(p.name):msgGeneral()); }
+fab.addEventListener("click",()=>{ updateFab(); try{ if(typeof gcEvent==="function") gcEvent("whatsapp-fab","Floating WhatsApp"); }catch(e){} },true);
+
+const _al=applyLang; applyLang=function(){ _al(); renderSite(); };
+applyLang();
 })();
 </script>
 </body>
