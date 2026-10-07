@@ -194,7 +194,7 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 </div>
 
 <div id="bubble" class="off" aria-live="polite">
-  <div class="av" id="av">A</div>
+  <div class="av" id="av">B</div>
   <div class="bt"><b id="who"></b><p id="say"></p><div class="vnote" id="vnote" hidden></div></div>
 </div>
 
@@ -216,16 +216,16 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 /* ---------------- content ---------------- */
 const T={
  en:{introEb:"Virtual showroom",introTitle:"Walk into Blutex",brandsH:"Brands available",introSub:"Visit our shop from your phone. Our salesman will show you every product, how to use it and its data sheet.",
-  enter:"Enter the shop",home:"Home",outside:"Outside",arunName:"Tex · Blutex",anjaliName:"Anjali · Waterproofing",anjaliHi:"Hi, I'm Anjali. I take care of our waterproofing products for roofs, bathrooms and basements. Tap any of them on the left and I'll explain.",hint:"Drag to look around · Tap a product",
+  enter:"Enter the shop",home:"Home",outside:"Outside",arunName:"Blu · Blutex",anjaliName:"Anjali · Waterproofing",anjaliHi:"Hi, I'm Anjali. I take care of our waterproofing products for roofs, bathrooms and basements. Tap any of them on the left and I'll explain.",hint:"Drag to look around · Tap a product",
   wp:"Waterproofing",ta:"Tile adhesive",demoPrice:"Demo price",listen:"Listen",ds:"Data sheet",order:"Order on WhatsApp",
   sample:"Sample details – to be updated",noVoice:"",
-  greet:"Welcome to Blutex! I'm Tex. Waterproofing products are on the left, tile adhesives on the right. Tap any product and I will explain it.",
+  greet:"Welcome to Blutex! I'm Blu. Waterproofing products are on the left, tile adhesives on the right. Tap any product and I will explain it.",
   homeSay:"Take your time. Tap any product you want to know about.",loading:"Loading the shop…"},
  ml:{introEb:"വെർച്വൽ ഷോറൂം",introTitle:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം",brandsH:"ലഭ്യമായ ബ്രാൻഡുകൾ",introSub:"ഫോണിലൂടെ ഞങ്ങളുടെ കടയിൽ കയറൂ. ഓരോ ഉൽപ്പന്നവും അതിന്റെ ഉപയോഗവും ഡാറ്റാ ഷീറ്റും സെയിൽസ്മാൻ കാണിച്ചുതരും.",
-  enter:"കടയിൽ കയറൂ",home:"തുടക്കം",outside:"പുറത്ത്",arunName:"ടെക്സ് · ബ്ലൂടെക്സ്",anjaliName:"അഞ്ജലി · വാട്ടർപ്രൂഫിംഗ്",anjaliHi:"നമസ്കാരം, ഞാൻ അഞ്ജലി. ടെറസ്, ബാത്ത്റൂം, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ ഞാനാണ് നോക്കുന്നത്. ഇടതുവശത്തുള്ള ഏതെങ്കിലും ഉൽപ്പന്നത്തിൽ തൊട്ടാൽ ഞാൻ വിശദീകരിക്കാം.",hint:"ചുറ്റും നോക്കാൻ വലിക്കൂ · ഉൽപ്പന്നത്തിൽ തൊടൂ",
+  enter:"കടയിൽ കയറൂ",home:"തുടക്കം",outside:"പുറത്ത്",arunName:"ബ്ലൂ · ബ്ലൂടെക്സ്",anjaliName:"അഞ്ജലി · വാട്ടർപ്രൂഫിംഗ്",anjaliHi:"നമസ്കാരം, ഞാൻ അഞ്ജലി. ടെറസ്, ബാത്ത്റൂം, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ ഞാനാണ് നോക്കുന്നത്. ഇടതുവശത്തുള്ള ഏതെങ്കിലും ഉൽപ്പന്നത്തിൽ തൊട്ടാൽ ഞാൻ വിശദീകരിക്കാം.",hint:"ചുറ്റും നോക്കാൻ വലിക്കൂ · ഉൽപ്പന്നത്തിൽ തൊടൂ",
   wp:"വാട്ടർപ്രൂഫിംഗ്",ta:"ടൈൽ അഡ്ഹെസിവ്",demoPrice:"ഡെമോ വില",listen:"കേൾക്കൂ",ds:"ഡാറ്റാ ഷീറ്റ്",order:"WhatsApp-ൽ ഓർഡർ ചെയ്യൂ",
   sample:"സാമ്പിൾ വിവരം – പിന്നീട് മാറ്റും",noVoice:"ഈ ഫോണിൽ മലയാളം ശബ്ദം ഇല്ല, എഴുത്ത് വായിക്കൂ.",
-  greet:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം! ഞാൻ ടെക്സ്. ഇടതുവശത്ത് വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ, വലതുവശത്ത് ടൈൽ അഡ്ഹെസിവ്. ഏത് ഉൽപ്പന്നത്തിൽ തൊട്ടാലും ഞാൻ വിശദീകരിച്ചുതരാം.",
+  greet:"ബ്ലൂടെക്സിലേക്ക് സ്വാഗതം! ഞാൻ ബ്ലൂ. ഇടതുവശത്ത് വാട്ടർപ്രൂഫിംഗ് ഉൽപ്പന്നങ്ങൾ, വലതുവശത്ത് ടൈൽ അഡ്ഹെസിവ്. ഏത് ഉൽപ്പന്നത്തിൽ തൊട്ടാലും ഞാൻ വിശദീകരിച്ചുതരാം.",
   homeSay:"സമയമെടുത്ത് നോക്കൂ. അറിയേണ്ട ഉൽപ്പന്നത്തിൽ തൊട്ടാൽ മതി.",loading:"കട തുറക്കുന്നു…"}
 };
 const K={type:{en:"Type",ml:"തരം"},use:{en:"Use",ml:"ഉപയോഗം"},colour:{en:"Colour",ml:"നിറം"},pack:{en:"Pack",ml:"പാക്ക്"},
@@ -316,11 +316,11 @@ function loadVoices(){ try{ voices=speechSynthesis.getVoices(); }catch(e){} }
 if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
 let typeTimer=null;
 // Owner's own recorded voice: key -> {lang: file}
-const VOICE={greet:{en:'m_greet_en.mp3',ml:'m_greet_ml.mp3'},home:{en:'m_home_en.mp3',ml:'m_home_ml.mp3'},l2:{en:'m_l2_en.mp3',ml:'m_l2_ml.mp3'},l3:{en:'m_l3_en.mp3',ml:'m_l3_ml.mp3'},ep:{en:'m_ep_en.mp3',ml:'m_ep_ml.mp3'},ro:{en:'m_ro_en.mp3',ml:'m_ro_ml.mp3'},jf:{en:'m_jf_en.mp3',ml:'m_jf_ml.mp3'},aq:{en:'m_aq_en.mp3',ml:'m_aq_ml.mp3'},ce:{en:'m_ce_en.mp3',ml:'m_ce_ml.mp3'},tg:{en:'m_tg_en.mp3',ml:'m_tg_ml.mp3'}};
+const VOICE={greet:{en:'b_greet_en.mp3',ml:'b_greet_ml.mp3'},home:{en:'b_home_en.mp3',ml:'b_home_ml.mp3'},l2:{en:'b_l2_en.mp3',ml:'b_l2_ml.mp3'},l3:{en:'b_l3_en.mp3',ml:'b_l3_ml.mp3'},ep:{en:'b_ep_en.mp3',ml:'b_ep_ml.mp3'},ro:{en:'b_ro_en.mp3',ml:'b_ro_ml.mp3'},jf:{en:'b_jf_en.mp3',ml:'b_jf_ml.mp3'},aq:{en:'b_aq_en.mp3',ml:'b_aq_ml.mp3'},ce:{en:'b_ce_en.mp3',ml:'b_ce_ml.mp3'},tg:{en:'b_tg_en.mp3',ml:'b_tg_ml.mp3'}};
 const player=new Audio(); player.preload="auto";
 function setSpeaker(w){ const n=T[lang][w==="anjali"?"anjaliName":"arunName"]; const who=document.getElementById("who"); if(who) who.textContent=n;
   const av=document.getElementById("av"); av.textContent=w==="anjali"?"A":"A"; av.style.borderColor=w==="anjali"?"#2ec4b6":"var(--blue)"; av.style.background=w==="anjali"?"linear-gradient(160deg,#14a3b8,#0b1f4b)":"";
-  av.textContent="T"; }
+  av.textContent="B"; }
 function stopAll(){ try{player.pause();}catch(e){} try{speechSynthesis.cancel();}catch(e){} }
 let speaker="arun";
 function speak(text,key,who="arun",then){
@@ -1035,6 +1035,47 @@ function trimHair(hair,head,K){
     arun.rig={B,rest,morphMeshes,mIdx};
   }
 }
+/* ---------------- Blu: the Blutex salesgirl (Rocketbox Female_Adult_07, MIT licence; ARKit + viseme face) ---------------- */
+function loadBlu(){
+  if(!THREE.FBXLoader||typeof fflate==="undefined") return;
+  fetch("blu_part00.txt").then(r=>{ if(!r.ok) throw 0; return r.text(); }).then(txt=>{
+    const bin=atob(txt.replace(/\s/g,"")); const u8=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
+    const raw=fflate.gunzipSync(u8);
+    onBlu(new THREE.FBXLoader().parse(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),""));
+  }).catch(()=>{ try{ loadFayez(); }catch(e){} });
+}
+function onBlu(fbx){
+  const B={}, morphMeshes=[];
+  const T_={body:tex("blu_body.jpg"),head:tex("blu_head.jpg"),opacity:tex("blu_opacity.png")};
+  fbx.traverse(n=>{
+    if(n.isBone&&!B[n.name]) B[n.name]=n;
+    if(n.isMesh){ n.frustumCulled=false; n.castShadow=true;
+      const morph=!!n.morphTargetDictionary;
+      const conv=m=>{ const part=(m.name||"").split("_").pop(); const op=part==="opacity";
+        return new THREE.MeshStandardMaterial({map:T_[part]||T_.body,roughness:op?.6:.62,metalness:0,skinning:true,morphTargets:morph,
+          transparent:op,alphaTest:op?.35:0,side:op?THREE.DoubleSide:THREE.FrontSide,depthWrite:!op||true}); };
+      n.material=Array.isArray(n.material)?n.material.map(conv):conv(n.material);
+      if(morph) morphMeshes.push(n); }
+  });
+  const A={Hips:"Bip01_Pelvis",Spine2:"Bip01_Spine2",Neck:"Bip01_Neck",Head:"Bip01_Head",
+    LeftArm:"Bip01_L_UpperArm",LeftForeArm:"Bip01_L_Forearm",LeftHand:"Bip01_L_Hand",RightArm:"Bip01_R_UpperArm",RightForeArm:"Bip01_R_Forearm",RightHand:"Bip01_R_Hand",
+    LeftUpLeg:"Bip01_L_Thigh",LeftLeg:"Bip01_L_Calf",LeftFoot:"Bip01_L_Foot",RightUpLeg:"Bip01_R_Thigh",RightLeg:"Bip01_R_Calf",RightFoot:"Bip01_R_Foot"};
+  for(const k in A) if(B[A[k]]) B[k]=B[A[k]];
+  const need=Object.keys(A); if(need.some(n=>!B[n])) return;
+  fbx.scale.setScalar(.0094);                     // centimetres -> metres, about 1.62 m tall
+  const wrap=new THREE.Group(); wrap.add(fbx); scene.add(wrap);
+  wrap.position.copy(arun.g.position); wrap.rotation.y=arun.g.rotation.y; fbx.updateMatrixWorld(true);
+  const rest={}; need.forEach(n=>rest[n]=B[n].quaternion.clone());
+  // give the face channels the same short names Tex used (jawOpen, aa, oh, mouthSmileLeft, eyeBlinkLeft ...)
+  const VIS={aa:"aa",O:"oh",E:"ee",I:"ih",U:"ou"};
+  const mIdx=morphMeshes.map(m=>{ const d=Object.assign({},m.morphTargetDictionary);
+    for(const key in m.morphTargetDictionary){ const s=key.replace(/^.*?\./,""); let mm;
+      if(mm=s.match(/^AK_\d+_(.+)$/)) d[mm[1][0].toLowerCase()+mm[1].slice(1)]=m.morphTargetDictionary[key];
+      else if(mm=s.match(/^AA_VI_\d+_(.+)$/)) d[VIS[mm[1]]||mm[1]]=m.morphTargetDictionary[key]; }
+    return d; });
+  scene.remove(arun.g); arun.g=wrap;
+  arun.rig={B,rest,morphMeshes,mIdx};
+}
 function setMorph(R,name,val){ R.morphMeshes.forEach((m,i)=>{ const k=R.mIdx[i][name]; if(k!==undefined) m.morphTargetInfluences[k]=val; }); }
 function animateRig(S,t,walking,ph,talking){
   const R=S.rig, B=R.B, g=S.g;
@@ -1160,7 +1201,7 @@ function loop(now){
 applyLang();
 $("#loading").textContent="";
 (async()=>{ try{ await Promise.all([document.fonts.load("700 40px 'Barlow Condensed'"),document.fonts.load("500 20px Barlow")]); }catch(e){}
-  build(); camera.rotation.set(0,0,0); requestAnimationFrame(loop); loadFayez(); })();
+  build(); camera.rotation.set(0,0,0); requestAnimationFrame(loop); loadBlu(); })();
 $("#enter").addEventListener("click",()=>{
   entered=true; $("#intro").style.transition="opacity .6s"; $("#intro").style.opacity=0; setTimeout(()=>$("#intro").hidden=true,600);
   ["#top","#strip","#hint"].forEach(s=>$(s).hidden=false);
@@ -1278,7 +1319,7 @@ function goProject(pid){
   btn.onclick=()=>{ currentProject=null; projPanel("pick"); };
   document.body.appendChild(btn);
   $("#enter").addEventListener("click",()=>{ btn.hidden=false; btn.textContent=PT[lang].btn; setTimeout(()=>{ if(!current&&!currentProject) projPanel("pick"); },5200); });
-  PROJ.forEach(p=>{ VOICE["proj_"+p.id]={en:"m_proj_"+p.id+"_en.mp3",ml:"m_proj_"+p.id+"_ml.mp3"}; });
+  PROJ.forEach(p=>{ VOICE["proj_"+p.id]={en:"b_proj_"+p.id+"_en.mp3",ml:"b_proj_"+p.id+"_ml.mp3"}; });
 })();
 
 </script>
