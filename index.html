@@ -156,6 +156,7 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .ioshint{font-size:13px;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:8px 12px}
 
 /* ===== BLUTEX Virtual Showroom: landing site, nav, sections ===== */
+#intro[hidden]{display:none!important}
 #intro{display:block!important;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #intro::before{display:none}
 .snav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;height:58px;margin-bottom:-58px;
@@ -175,7 +176,7 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 }
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,19,57,.55) 0,rgba(15,19,57,0) 12%,rgba(15,19,57,0) 36%,rgba(15,19,57,.9) 52%,rgba(15,19,57,.98) 64%);pointer-events:none}
-@media (max-width:600px){.intro-in .eb{display:none}.intro-in h1{font-size:clamp(30px,8.6vw,44px)!important}}
+@media (max-width:600px){.intro-in h1{font-size:clamp(30px,8.6vw,44px)!important}}
 .scroll-cue{display:block;text-align:center;color:var(--mute);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:4px 0 0}
 .site{position:relative;background:#0b0e2b;color:#fff}
 .sec{padding:60px 16px;border-top:1px solid rgba(255,255,255,.07)}
@@ -252,7 +253,7 @@ body.sheet-open #waFab{display:none}
     <nav class="snav-links" id="snavLinks" aria-label="Main"></nav>
     <button type="button" class="snav-menu" id="snavMenu" aria-expanded="false" aria-label="Menu">☰</button>
   </header>
-  <section class="hero" id="home">
+  <section class="hero" id="hero">
   <div class="intro-in">
     <div class="eb" data-t="introEb"></div>
     <h1 data-t="introTitle"></h1>
@@ -430,7 +431,8 @@ function speak(text,key,who="arun",then){
   const vn=$("#vnote"); vn.hidden=true;
   stopAll();
   const rec=key&&VOICE[key]&&VOICE[key][lang];
-  if(rec&&soundOn){
+  if(lang==="ml") STAFF[who].talkUntil=0;   // Malayalam: text only, no voice
+  if(rec&&soundOn&&lang!=="ml"){
     player.src=rec; player.currentTime=0;
     player.onloadedmetadata=()=>{ STAFF[who].talkUntil=performance.now()+player.duration*1000; };
     player.onended=()=>{ STAFF[who].talkUntil=0; if(then&&speaker===who) then(); };
@@ -438,7 +440,7 @@ function speak(text,key,who="arun",then){
     player.play().catch(()=>{});
     return;
   }
-  if(!soundOn||!("speechSynthesis" in window)){ if(then) setTimeout(()=>{if(speaker===who) then();},Math.min(14000,chars.length*55)+600); return; }
+  if(!soundOn||lang==="ml"||!("speechSynthesis" in window)){ if(then) setTimeout(()=>{if(speaker===who) then();},Math.min(14000,chars.length*55)+600); return; }
   try{
     speechSynthesis.cancel();
     const want=lang==="ml"?"ml":"en-IN";
@@ -722,6 +724,21 @@ function build(){
   (function(){const side=mat({map:B.aq,roughness:.35}),lid=mat({color:lidC.aq}),bot=mat({color:0xdddddd});const geo=new THREE.CylinderGeometry(.2,.18,.46,28);
     [[-.22,0,-.2],[.22,0,-.2],[-.22,0,.22],[.0,.46,0]].forEach(([dx,dy,dz])=>{const m=new THREE.Mesh(geo,[side,lid,bot]);m.position.set(-3.9+dx,.35+dy,-1.45+dz);m.rotation.y=Math.PI/2;m.userData.pid="aq";scene.add(m);pickables.push(m);});})();
 
+
+  // hanging zone signs: each category reads as its own section of the showroom
+  const zoneSign=(txt,num,x,z,acc)=>{ const t=canvasTex(1024,200,(g,w,h)=>{g.fillStyle="#0f1339";g.fillRect(0,0,w,h);
+      g.strokeStyle="rgba(255,255,255,.18)";g.lineWidth=3;g.strokeRect(6,6,w-12,h-12);g.fillStyle=acc;g.fillRect(0,h-12,w,12);
+      g.textAlign="center";g.textBaseline="middle";g.fillStyle=acc;g.font="600 34px 'Barlow',Arial";g.fillText(num,w/2,46);
+      g.fillStyle="#ffffff";let fs=88;do{g.font="700 "+fs+"px 'Barlow Condensed',Arial";fs-=2;}while(g.measureText(txt).width>w*.9);g.fillText(txt,w/2,122);});
+    const mm=new THREE.MeshBasicMaterial({map:t,toneMapped:false,side:THREE.DoubleSide});
+    const s=new THREE.Mesh(new THREE.PlaneGeometry(1.7,.33),mm); s.position.set(x,2.98,z); scene.add(s);
+    const fr=new THREE.Mesh(new THREE.BoxGeometry(1.74,.37,.03),GOLD); fr.position.set(x,2.98,z-.02); scene.add(fr);
+    [-.7,.7].forEach(dx=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,.42,6),GOLD); r.position.set(x+dx,3.37,z); scene.add(r);}); };
+  zoneSign("CONSTRUCTION CHEMICALS","04",-3.25,-2.55,"#3d9bff");
+  zoneSign("WATERPROOFING","01",-2.95,-4.6,"#3d9bff");
+  zoneSign("TILE ADHESIVES","02",3.25,-2.55,"#e9b44c");
+  zoneSign("TILE GROUTS","03",2.95,-6.45,"#e9b44c");
+  zoneSign("TECHNICAL SOLUTIONS","05",-.5,-9.55,"#f4c142");
   // hotspot pins
   const pinT=canvasTex(128,128,(g,w,h)=>{g.fillStyle="#0f1339";g.beginPath();g.arc(64,64,52,0,7);g.fill();g.strokeStyle="#d4a64a";g.lineWidth=8;g.stroke();g.fillStyle="#fff";g.font="700 72px Georgia";g.textAlign="center";g.fillText("i",64,90);});
   const pinM=new THREE.SpriteMaterial({map:pinT,depthTest:false,toneMapped:false});
@@ -1415,7 +1432,7 @@ function goProject(pid){
   const btn=document.createElement("button"); btn.type="button"; btn.id="projbtn"; btn.hidden=true; btn.textContent=PT[lang].btn;
   btn.onclick=()=>{ currentProject=null; projPanel("pick"); };
   document.body.appendChild(btn);
-  $("#enter").addEventListener("click",()=>{ btn.hidden=false; btn.textContent=PT[lang].btn; setTimeout(()=>{ if(!current&&!currentProject) projPanel("pick"); },5200); });
+  $("#enter").addEventListener("click",()=>{ btn.hidden=false; btn.textContent=PT[lang].btn; });
   PROJ.forEach(p=>{ VOICE["proj_"+p.id]={en:"b_proj_"+p.id+"_en.mp3",ml:"b_proj_"+p.id+"_ml.mp3"}; });
 })();
 
@@ -1478,51 +1495,57 @@ const $$=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({"
 const WA_ICON='<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
 const waLink=msg=>"https://wa.me/"+PHONE+"?text="+encodeURIComponent(msg);
 const L=()=>lang==="ml"?"ml":"en", t=v=>typeof v==="object"&&v?v[L()]:v;
-const msgProduct=n=>L()==="ml"?`ഹലോ BLUTEX, എനിക്ക് ${n} ൽ താൽപ്പര്യമുണ്ട്. വിലയും വിവരങ്ങളും അയച്ചുതരാമോ?`:`Hello BLUTEX, I am interested in ${n}. Please share the price and details.`;
+const msgProduct=n=>L()==="ml"?`ഹലോ BLUTEX, എനിക്ക് ${n} ൽ താൽപ്പര്യമുണ്ട്. വിലയും ടെക്നിക്കൽ വിവരങ്ങളും അയച്ചുതരാമോ?`:`Hello BLUTEX, I am interested in ${n}. Please share the price and technical details.`;
 const msgTds=n=>L()==="ml"?`ഹലോ BLUTEX, ${n} ന്റെ ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റ് അയച്ചുതരാമോ?`:`Hello BLUTEX, please share the technical data sheet for ${n}.`;
 const msgGeneral=()=>L()==="ml"?"ഹലോ BLUTEX, നിങ്ങളുടെ കൺസ്ട്രക്ഷൻ കെമിക്കൽ ഉൽപ്പന്നങ്ങളെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു.":"Hello BLUTEX, I would like to know more about your construction chemical products.";
 
 /* categories: built only from the products already in the showroom */
 const CATS=[
- {id:"wp",ids:["aq","ce","tg"],name:{en:"Waterproofing",ml:"വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Coatings and SBR latex for roofs, terraces, bathrooms, water tanks, balconies and basements.",ml:"ടെറസ്, മേൽക്കൂര, ബാത്ത്റൂം, വാട്ടർ ടാങ്ക്, ബാൽക്കണി, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള കോട്ടിംഗുകളും SBR ലാറ്റക്സും."}},
+ {id:"wp",ids:["ce","tg","aq"],name:{en:"Waterproofing",ml:"വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Coatings and SBR latex for roofs, terraces, bathrooms, water tanks, balconies and basements.",ml:"ടെറസ്, മേൽക്കൂര, ബാത്ത്റൂം, വാട്ടർ ടാങ്ക്, ബാൽക്കണി, ബേസ്‌മെന്റ് എന്നിവയ്ക്കുള്ള കോട്ടിംഗുകളും SBR ലാറ്റക്സും."}},
  {id:"adh",ids:["l2","l3"],name:{en:"Tile Adhesives",ml:"ടൈൽ അഡ്ഹെസിവ്"},d:{en:"Grey tile adhesives for interior and exterior floors and walls, including tile on tile.",ml:"അകത്തും പുറത്തും ഫ്ലോറിനും ചുമരിനും, പഴയ ടൈലിന് മുകളിലും ഉപയോഗിക്കാവുന്ന ഗ്രേ ടൈൽ അഡ്ഹെസിവ്."}},
  {id:"grout",ids:["ep","ro","jf"],name:{en:"Tile Grouts",ml:"ടൈൽ ഗ്രൗട്ട്"},d:{en:"Epoxy grouts and joint filler for strong, clean tile joints in matching colours.",ml:"ടൈൽ ജോയിന്റുകൾക്ക് ഉറപ്പുള്ള, വൃത്തിയുള്ള ഫിനിഷിന് എപ്പോക്സി ഗ്രൗട്ടും ജോയിന്റ് ഫില്ലറും."}},
  {id:"chem",ids:["aq"],name:{en:"Construction Chemicals",ml:"കൺസ്ട്രക്ഷൻ കെമിക്കൽസ്"},d:{en:"SBR latex bonding agent and cement modifier for concrete repair, plaster bond coats and tile or stone bedding.",ml:"കോൺക്രീറ്റ് റിപ്പയർ, പ്ലാസ്റ്റർ ബോണ്ട് കോട്ട്, ടൈൽ / കല്ല് പതിക്കൽ എന്നിവയ്ക്കുള്ള SBR ലാറ്റക്സ് ബോണ്ടിംഗ് ഏജന്റ്."}},
  {id:"tech",ids:[],name:{en:"Technical Solutions",ml:"ടെക്നിക്കൽ സൊല്യൂഷൻസ്"},d:{en:"Choose your job and area. Blu recommends the products and estimates the quantity.",ml:"നിങ്ങളുടെ പണിയും ഏരിയയും തിരഞ്ഞെടുക്കൂ. ബ്ലൂ ഉൽപ്പന്നങ്ങളും അളവും പറഞ്ഞുതരും."}}];
+const APPS=[
+ {proj:"bath",img:"ce",name:{en:"Bathroom waterproofing",ml:"ബാത്ത്റൂം വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Floor and wet walls before tiling.",ml:"ടൈൽ ഇടുന്നതിന് മുമ്പ് ഫ്ലോറും നനയുന്ന ചുമരുകളും."}},
+ {proj:"terrace",img:"tg",name:{en:"Terrace waterproofing",ml:"ടെറസ് വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Open roof slabs exposed to rain and sun.",ml:"മഴയും വെയിലും ഏൽക്കുന്ന തുറന്ന സ്ലാബുകൾ."}},
+ {proj:"basement",img:"ce",name:{en:"Wall waterproofing",ml:"ചുമർ വാട്ടർപ്രൂഫിംഗ്"},d:{en:"Damp walls and basements with seepage.",ml:"ഈർപ്പമുള്ള ചുമരുകളും ചോർച്ചയുള്ള ബേസ്‌മെന്റും."}},
+ {proj:"indoor",img:"l2",name:{en:"Tile adhesive application",ml:"ടൈൽ അഡ്ഹെസിവ് ഉപയോഗം"},d:{en:"Fixing floor and wall tiles, including tile on tile.",ml:"ഫ്ലോറിലും ചുമരിലും ടൈൽ ഒട്ടിക്കൽ, പഴയ ടൈലിന് മുകളിലും."}},
+ {prod:"ep",img:"ep",name:{en:"Tile grout application",ml:"ടൈൽ ഗ്രൗട്ട് ഉപയോഗം"},d:{en:"Filling tile joints for a clean, water-resistant finish.",ml:"ടൈൽ ജോയിന്റുകൾ നിറച്ച് വൃത്തിയുള്ള, വെള്ളം കടക്കാത്ത ഫിനിഷ്."}}];
 const catOf=id=>CATS.find(c=>c.ids.includes(id)&&c.id!=="chem");
 
 const S={
  en:{nav:[["home","Home"],["showroom","Showroom"],["products","Products"],["solutions","Solutions"],["tds","TDS"],["about","About"],["contact","Contact"]],
   scrollCue:"Explore BLUTEX ↓",
   solK:"Our solutions",solH:"Everything for waterproofing and tiling",solL:"Five areas, one showroom. Open any of them to see the products inside.",view:"View in showroom",
-  catK:"Product catalogue",catH:"Our products",catL:"Every product in the BLUTEX showroom. Tap one to see it in 3D, or send an enquiry straight away.",all:"All",inq:"Enquire",in3d:"View in 3D",
-  galK:"Project / application gallery",galH:"Where our products are used",galL:"Pick the job you are working on. Blu walks you to the right product and estimates how much you need.",seeSol:"See the solution",
+  catK:"Product catalogue",catH:"Our products",catL:"Every product in the BLUTEX showroom. Tap one to see it in 3D, or send an enquiry straight away.",all:"All",inq:"Enquire now",in3d:"View in 3D",
+  galK:"Project / application gallery",galH:"Where our products are used",galL:"Typical applications for our products. Tap one and Blu shows you the right product in the showroom.",seeSol:"See the solution",galPh:"Product shown. Site photos will be added.",
   whyK:"Why BLUTEX",whyH:"Choosing the right product made simple",
-  why:[["Trusted brands, one place","Products from Commet, MYK Arment, Cera-Chem, Roff by Pidilite and Syrex."],["The right product for the job","Tell us the job, like bathroom, terrace or water tank, and see what to use."],["Quantity estimate","Enter your area to get an estimate of bags, kits or litres before you buy."],["Malayalam and English","Blu explains every product by voice and text in both languages."]],
+  why:[["Quality Products","Branded products from Commet, MYK Arment, Cera-Chem, Roff by Pidilite and Syrex."],["Technical Support","Manufacturer data sheets, product guidance in Malayalam and English, and help on WhatsApp."],["Construction Solutions","Choose your job, like bathroom, terrace or water tank, to see the right products and a quantity estimate."],["Professional Service","Talk to us directly by call or WhatsApp, and visit this 3D showroom any time."]],
   trust:[["Mukkam, Kerala","Nellikaparamp, Mukkam 673602"],["5 brands","Commet · MYK Arment · Cera-Chem · Roff · Syrex"],["8 products","Waterproofing, tile adhesives and grouts"],["3 data sheets","Manufacturer technical data online"]],
   supK:"Technical support",supH:"Not sure which product fits?",supL:"Send us your surface, the area and the problem, like a leak, damp or new tiling, on WhatsApp and we will help you choose the product and the quantity.",getRec:"Get a recommendation",waUs:"WhatsApp us",
   tdsK:"Technical data sheets",tdsH:"Technical data sheets",tdsL:"Data sheets we have online open directly. For the others, request them on WhatsApp.",open:"Open TDS",req:"Request TDS",
   aboutK:"About BLUTEX",aboutH:"About BLUTEX",about:"BLUTEX supplies waterproofing chemicals, waterproofing solutions and tile adhesives from Mukkam, Kerala. We bring products from Commet, MYK Arment, Cera-Chem, Roff by Pidilite and Syrex under one roof, and help homeowners, masons and contractors pick the right product for each job, in Malayalam and English.",
   conK:"Contact BLUTEX",conH:"Contact BLUTEX",call:"Call / WhatsApp",mail:"Email",insta:"Instagram",addr:"Address",
-  ctaH:"Need the right construction chemical solution?",ctaS:"Talk to BLUTEX",explore:"Explore products",foot:"© BLUTEX · Waterproofing chemicals · Waterproofing solutions · Tile adhesives",
-  pApps:"Main applications",pBen:"Key benefits",pPack:"Available pack size",pCov:"Coverage",pMeth:"Application method",pTech:"Technical details",pTds:"Technical Data Sheet",pReqTds:"Request Technical Data Sheet",pWa:"WhatsApp Enquiry",menu:"Menu"},
+  ctaH:"Need the right construction chemical solution?",ctaS:"Talk to BLUTEX",explore:"Explore showroom",foot:"© BLUTEX · Waterproofing chemicals · Waterproofing solutions · Tile adhesives",
+  pApps:"Main applications",pBen:"Key benefits",pPack:"Available pack size",pCov:"Coverage",pMeth:"Application method",pTech:"Technical details",pTds:"Technical Data Sheet",pReqTds:"Request TDS on WhatsApp",pWa:"Enquire now",menu:"Menu"},
  ml:{nav:[["home","ഹോം"],["showroom","ഷോറൂം"],["products","ഉൽപ്പന്നങ്ങൾ"],["solutions","സൊല്യൂഷൻസ്"],["tds","TDS"],["about","ഞങ്ങളെക്കുറിച്ച്"],["contact","ബന്ധപ്പെടുക"]],
   scrollCue:"BLUTEX-നെ അറിയൂ ↓",
   solK:"ഞങ്ങളുടെ സൊല്യൂഷൻസ്",solH:"വാട്ടർപ്രൂഫിംഗിനും ടൈലിംഗിനും എല്ലാം",solL:"അഞ്ച് വിഭാഗങ്ങൾ, ഒരു ഷോറൂം. ഓരോന്നും തുറന്ന് ഉള്ളിലെ ഉൽപ്പന്നങ്ങൾ കാണൂ.",view:"ഷോറൂമിൽ കാണൂ",
-  catK:"ഉൽപ്പന്ന കാറ്റലോഗ്",catH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",catL:"BLUTEX ഷോറൂമിലെ എല്ലാ ഉൽപ്പന്നങ്ങളും. ഏതിലെങ്കിലും തൊട്ട് 3D-യിൽ കാണാം, അല്ലെങ്കിൽ നേരിട്ട് അന്വേഷിക്കാം.",all:"എല്ലാം",inq:"അന്വേഷിക്കൂ",in3d:"3D-യിൽ കാണൂ",
-  galK:"പ്രോജക്ട് / ഉപയോഗ ഗാലറി",galH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ എവിടെ ഉപയോഗിക്കാം",galL:"നിങ്ങളുടെ പണി തിരഞ്ഞെടുക്കൂ. ബ്ലൂ ശരിയായ ഉൽപ്പന്നത്തിലേക്ക് കൊണ്ടുപോയി എത്ര വേണമെന്ന് കണക്കാക്കിത്തരും.",seeSol:"സൊല്യൂഷൻ കാണൂ",
+  catK:"ഉൽപ്പന്ന കാറ്റലോഗ്",catH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ",catL:"BLUTEX ഷോറൂമിലെ എല്ലാ ഉൽപ്പന്നങ്ങളും. ഏതിലെങ്കിലും തൊട്ട് 3D-യിൽ കാണാം, അല്ലെങ്കിൽ നേരിട്ട് അന്വേഷിക്കാം.",all:"എല്ലാം",inq:"ഇപ്പോൾ അന്വേഷിക്കൂ",in3d:"3D-യിൽ കാണൂ",
+  galK:"പ്രോജക്ട് / ഉപയോഗ ഗാലറി",galH:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ എവിടെ ഉപയോഗിക്കാം",galL:"ഞങ്ങളുടെ ഉൽപ്പന്നങ്ങളുടെ സാധാരണ ഉപയോഗങ്ങൾ. ഏതിലെങ്കിലും തൊട്ടാൽ ബ്ലൂ ഷോറൂമിൽ ശരിയായ ഉൽപ്പന്നം കാണിച്ചുതരും.",seeSol:"സൊല്യൂഷൻ കാണൂ",galPh:"ഉൽപ്പന്ന ചിത്രം. സൈറ്റ് ഫോട്ടോകൾ പിന്നീട് ചേർക്കും.",
   whyK:"എന്തുകൊണ്ട് BLUTEX",whyH:"ശരിയായ ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ എളുപ്പം",
-  why:[["വിശ്വസ്ത ബ്രാൻഡുകൾ ഒരിടത്ത്","Commet, MYK Arment, Cera-Chem, Roff by Pidilite, Syrex ഉൽപ്പന്നങ്ങൾ."],["പണിക്ക് ചേർന്ന ഉൽപ്പന്നം","ബാത്ത്റൂം, ടെറസ്, വാട്ടർ ടാങ്ക് എന്നിങ്ങനെ പണി പറഞ്ഞാൽ എന്ത് ഉപയോഗിക്കണമെന്ന് കാണാം."],["അളവ് കണക്കാക്കാം","ഏരിയ കൊടുത്താൽ എത്ര ബാഗ്, കിറ്റ്, ലിറ്റർ വേണമെന്ന് ഏകദേശം അറിയാം."],["മലയാളത്തിലും ഇംഗ്ലീഷിലും","ഓരോ ഉൽപ്പന്നവും ബ്ലൂ ശബ്ദത്തിലും എഴുത്തിലും വിശദീകരിക്കും."]],
+  why:[["ഗുണമേന്മയുള്ള ഉൽപ്പന്നങ്ങൾ","Commet, MYK Arment, Cera-Chem, Roff by Pidilite, Syrex ബ്രാൻഡ് ഉൽപ്പന്നങ്ങൾ."],["ടെക്നിക്കൽ സപ്പോർട്ട്","നിർമ്മാതാക്കളുടെ ഡാറ്റാ ഷീറ്റുകൾ, മലയാളത്തിലും ഇംഗ്ലീഷിലും ഉൽപ്പന്ന വിവരണം, WhatsApp-ൽ സഹായം."],["കൺസ്ട്രക്ഷൻ സൊല്യൂഷൻസ്","ബാത്ത്റൂം, ടെറസ്, വാട്ടർ ടാങ്ക് എന്നിങ്ങനെ പണി തിരഞ്ഞെടുത്താൽ ശരിയായ ഉൽപ്പന്നവും ഏകദേശ അളവും കാണാം."],["പ്രൊഫഷണൽ സർവീസ്","കോളിലും WhatsApp-ലും നേരിട്ട് സംസാരിക്കാം, ഈ 3D ഷോറൂം എപ്പോൾ വേണമെങ്കിലും സന്ദർശിക്കാം."]],
   trust:[["മുക്കം, കേരളം","നെല്ലിക്കാപറമ്പ്, മുക്കം 673602"],["5 ബ്രാൻഡുകൾ","Commet · MYK Arment · Cera-Chem · Roff · Syrex"],["8 ഉൽപ്പന്നങ്ങൾ","വാട്ടർപ്രൂഫിംഗ്, ടൈൽ അഡ്ഹെസിവ്, ഗ്രൗട്ട്"],["3 ഡാറ്റാ ഷീറ്റുകൾ","നിർമ്മാതാക്കളുടെ ടെക്നിക്കൽ ഡാറ്റ ഓൺലൈനിൽ"]],
   supK:"ടെക്നിക്കൽ സപ്പോർട്ട്",supH:"ഏത് ഉൽപ്പന്നം വേണമെന്ന് സംശയമുണ്ടോ?",supL:"പ്രതലം, ഏരിയ, പ്രശ്നം (ചോർച്ച, ഈർപ്പം, പുതിയ ടൈലിംഗ്) എന്നിവ WhatsApp-ൽ അയക്കൂ. ശരിയായ ഉൽപ്പന്നവും അളവും തിരഞ്ഞെടുക്കാൻ ഞങ്ങൾ സഹായിക്കാം.",getRec:"നിർദ്ദേശം കാണൂ",waUs:"WhatsApp ചെയ്യൂ",
   tdsK:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റുകൾ",tdsH:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റുകൾ",tdsL:"ഓൺലൈനിലുള്ള ഡാറ്റാ ഷീറ്റുകൾ നേരിട്ട് തുറക്കാം. മറ്റുള്ളവ WhatsApp-ൽ ചോദിക്കൂ.",open:"TDS തുറക്കൂ",req:"TDS ചോദിക്കൂ",
   aboutK:"BLUTEX-നെക്കുറിച്ച്",aboutH:"BLUTEX-നെക്കുറിച്ച്",about:"കേരളത്തിലെ മുക്കത്ത് നിന്ന് വാട്ടർപ്രൂഫിംഗ് കെമിക്കലുകളും വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷനുകളും ടൈൽ അഡ്ഹെസിവുകളും നൽകുന്ന സ്ഥാപനമാണ് BLUTEX. Commet, MYK Arment, Cera-Chem, Roff by Pidilite, Syrex എന്നിവയുടെ ഉൽപ്പന്നങ്ങൾ ഒരിടത്ത് ലഭ്യമാക്കുകയും, വീട്ടുടമകൾക്കും മേസൺമാർക്കും കോൺട്രാക്ടർമാർക്കും ഓരോ പണിക്കും ശരിയായ ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ മലയാളത്തിലും ഇംഗ്ലീഷിലും സഹായിക്കുകയും ചെയ്യുന്നു.",
   conK:"ബന്ധപ്പെടുക",conH:"BLUTEX-നെ ബന്ധപ്പെടുക",call:"കോൾ / WhatsApp",mail:"ഇമെയിൽ",insta:"ഇൻസ്റ്റഗ്രാം",addr:"വിലാസം",
-  ctaH:"ശരിയായ കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷൻ വേണോ?",ctaS:"BLUTEX-നോട് സംസാരിക്കൂ",explore:"ഉൽപ്പന്നങ്ങൾ കാണൂ",foot:"© BLUTEX · വാട്ടർപ്രൂഫിംഗ് കെമിക്കൽസ് · വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷൻസ് · ടൈൽ അഡ്ഹെസിവ്",
-  pApps:"പ്രധാന ഉപയോഗങ്ങൾ",pBen:"പ്രധാന ഗുണങ്ങൾ",pPack:"ലഭ്യമായ പാക്ക്",pCov:"കവറേജ്",pMeth:"പ്രയോഗ രീതി",pTech:"സാങ്കേതിക വിവരങ്ങൾ",pTds:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റ്",pReqTds:"ഡാറ്റാ ഷീറ്റ് ചോദിക്കൂ",pWa:"WhatsApp അന്വേഷണം",menu:"മെനു"}};
+  ctaH:"ശരിയായ കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷൻ വേണോ?",ctaS:"BLUTEX-നോട് സംസാരിക്കൂ",explore:"ഷോറൂം കാണൂ",foot:"© BLUTEX · വാട്ടർപ്രൂഫിംഗ് കെമിക്കൽസ് · വാട്ടർപ്രൂഫിംഗ് സൊല്യൂഷൻസ് · ടൈൽ അഡ്ഹെസിവ്",
+  pApps:"പ്രധാന ഉപയോഗങ്ങൾ",pBen:"പ്രധാന ഗുണങ്ങൾ",pPack:"ലഭ്യമായ പാക്ക്",pCov:"കവറേജ്",pMeth:"പ്രയോഗ രീതി",pTech:"സാങ്കേതിക വിവരങ്ങൾ",pTds:"ടെക്നിക്കൽ ഡാറ്റാ ഷീറ്റ്",pReqTds:"TDS WhatsApp-ൽ ചോദിക്കൂ",pWa:"ഇപ്പോൾ അന്വേഷിക്കൂ",menu:"മെനു"}};
 // new hero wording
-Object.assign(T.en,{introEb:"Waterproofing · Tile adhesives · Grouts",introTitle:"BLUTEX Virtual Showroom",introSub:"Explore Construction Chemical Solutions in 3D",enter:"ENTER SHOWROOM",home:"Start"});
-Object.assign(T.ml,{introEb:"വാട്ടർപ്രൂഫിംഗ് · ടൈൽ അഡ്ഹെസിവ് · ഗ്രൗട്ട്",introTitle:"BLUTEX വെർച്വൽ ഷോറൂം",introSub:"കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷനുകൾ 3D-യിൽ കാണൂ",enter:"ഷോറൂമിൽ കയറൂ"});
+Object.assign(T.en,{introEb:"Interactive 3D showroom",introTitle:"BLUTEX VIRTUAL SHOWROOM",introSub:"Explore Construction Chemical Solutions in 3D",enter:"ENTER SHOWROOM",home:"Start"});
+Object.assign(T.ml,{introEb:"ഇന്ററാക്ടീവ് 3D ഷോറൂം",introTitle:"BLUTEX വെർച്വൽ ഷോറൂം",introSub:"കൺസ്ട്രക്ഷൻ കെമിക്കൽ സൊല്യൂഷനുകൾ 3D-യിൽ കാണൂ",enter:"ഷോറൂമിൽ കയറൂ"});
 T.en.scrollCue=S.en.scrollCue; T.ml.scrollCue=S.ml.scrollCue;
 
 let catFilter="all", stripCat="all";
@@ -1549,9 +1572,10 @@ function renderSite(){
   </div></section>
   <section class="sec" id="gallery"><div class="sec-in">
     <div class="kick">${s.galK}</div><h2>${s.galH}</h2><div class="rule"></div><p class="lead">${s.galL}</p>
-    <div class="sgrid">${PROJ.map(pj=>{const mp=P.find(p=>p.id===pj.main);return `<div class="scard pcard2"><div class="ph">${img(mp)}</div><div class="pb">
-      <h3>${t(pj.name)}</h3><p>${t(pj.sub)}</p><div class="tag">${esc(mp.name)}</div>
-      <div class="sacts"><button type="button" class="sbtn" data-proj="${pj.id}">${s.seeSol} →</button></div></div></div>`;}).join("")}</div>
+    <div class="sgrid">${APPS.map(a=>{const mp=P.find(p=>p.id===a.img);return `<div class="scard pcard2"><div class="ph">${img(mp)}</div><div class="pb">
+      <h3>${t(a.name)}</h3><p>${t(a.d)}</p><div class="tag">${esc(mp.name)}</div>
+      <div class="sacts"><button type="button" class="sbtn" ${a.proj?`data-proj="${a.proj}"`:`data-p3d="${a.prod}"`}>${s.seeSol} →</button></div></div></div>`;}).join("")}</div>
+    <p class="lead" style="margin:14px 0 0;font-size:13px">${s.galPh}</p>
   </div></section>
   <section class="sec alt" id="why"><div class="sec-in">
     <div class="kick">${s.whyK}</div><h2>${s.whyH}</h2><div class="rule"></div>
@@ -1580,7 +1604,7 @@ function renderSite(){
     </div>
   </div></section>
   <section class="cta"><div class="kick">BLUTEX</div><h2>${s.ctaH}</h2><p class="lead" style="margin:0 auto">${s.ctaS}</p>
-    <div class="sacts"><a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgGeneral())}">${WA_ICON}${s.waUs}</a><a class="sbtn" href="#products" data-go="products">${s.explore}</a></div></section>
+    <div class="sacts"><a class="sbtn wa" target="_blank" rel="noopener" href="${waLink(msgGeneral())}">${WA_ICON}${s.waUs.toUpperCase()}</a><a class="sbtn pri" href="#showroom" data-go="showroom">${s.explore}</a></div></section>
   <footer class="foot">${s.foot}</footer>`;
   updateFab();
 }
@@ -1590,7 +1614,7 @@ const intro=$$("#intro"), snav=$$("#snav");
 function enterThen(fn){ if(!entered){ $$("#enter").click(); setTimeout(fn,4200); } else fn(); }
 function go(k){ snav.classList.remove("open"); $$("#snavMenu").setAttribute("aria-expanded","false");
   if(k==="showroom"){ enterThen(()=>{}); return; }
-  const el=k==="home"?$$("#home"):document.getElementById(k); if(el) intro.scrollTo({top:k==="home"?0:el.getBoundingClientRect().top+intro.scrollTop-58,behavior:"smooth"}); }
+  const el=k==="home"?$$("#hero"):document.getElementById(k); if(el) intro.scrollTo({top:k==="home"?0:el.getBoundingClientRect().top+intro.scrollTop-58,behavior:"smooth"}); }
 document.addEventListener("click",e=>{
   const g=e.target.closest("[data-go]"); if(g&&intro.contains(g)){ e.preventDefault(); go(g.dataset.go); return; }
   const f=e.target.closest("[data-filter]"); if(f){ catFilter=f.dataset.filter; renderSite(); return; }
