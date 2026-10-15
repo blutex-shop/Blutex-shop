@@ -486,8 +486,11 @@ $("#out").addEventListener("click",()=>{ current=null; $("#sheet").classList.rem
 
 /* ---------------- 3D ---------------- */
 const canvas=$("#c");
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+// performance: lighter settings on phones / low-power devices
+const LITE=(matchMedia("(pointer:coarse)").matches||Math.min(screen.width,screen.height)<820||(navigator.hardwareConcurrency||8)<=4);
+const MAX_PR=LITE?1.25:1.5; let curPR=Math.min(devicePixelRatio,MAX_PR);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:!LITE,powerPreference:"high-performance"});
+renderer.setPixelRatio(curPR);
 document.getElementById("enter").addEventListener("click",()=>{ setTimeout(()=>{ try{resize();}catch(e){} },0); });
 renderer.outputEncoding=THREE.sRGBEncoding;
 const scene=new THREE.Scene();
@@ -521,13 +524,19 @@ function build(){
   }catch(e){}
 
   // lights: warm gallery light
-  scene.add(new THREE.HemisphereLight(0xfff3e0,0x0f1339,.22));
+  scene.add(new THREE.HemisphereLight(0xfff3e0,0x0f1339,LITE?.42:.22));
   scene.add(new THREE.AmbientLight(0xffffff,.08));
-  [[0,-3],[0,-7.5],[0,-10.4]].forEach(([x,z])=>{const l=new THREE.PointLight(0xffe8cc,.5,9,2); l.position.set(x,3.2,z); scene.add(l);});
+  [[0,-3],[0,-7.5],[0,-10.4]].forEach(([x,z])=>{const l=new THREE.PointLight(0xffe8cc,LITE?.95:.5,9,2); l.position.set(x,3.2,z); scene.add(l);});
   // gallery spotlights on every shelf bay + the podiums
   const spot=(x,z,tx,ty,tz,k)=>{const s=new THREE.SpotLight(0xfff0dc,k,9,.62,.7,1.6); s.position.set(x,3.45,z); s.target.position.set(tx,ty,tz); scene.add(s); scene.add(s.target);};
-  [-3.2,-5.5,-7.8].forEach(z=>{ spot(-2.6,z,-4.7,1.3,z,1.15); spot(2.6,z,4.7,1.3,z,1.15); });
-  spot(1.6,-4.6,1.6,.4,-6.5,1.0); spot(-.4,-4.4,-.35,.7,-6.0,.7); spot(-.5,-8.8,-.5,1.0,-10.6,.9);
+  if(!LITE){
+    [-3.2,-5.5,-7.8].forEach(z=>{ spot(-2.6,z,-4.7,1.3,z,1.15); spot(2.6,z,4.7,1.3,z,1.15); });
+    spot(1.6,-4.6,1.6,.4,-6.5,1.0); spot(-.4,-4.4,-.35,.7,-6.0,.7); spot(-.5,-8.8,-.5,1.0,-10.6,.9);
+  } else {
+    // phones: 2 wide spots replace the 9 shelf/podium spots
+    const s1=new THREE.SpotLight(0xfff0dc,1.3,10,1.1,.9,1.4); s1.position.set(-1.2,3.45,-5.5); s1.target.position.set(-4.7,1.2,-5.5); scene.add(s1); scene.add(s1.target);
+    const s2=new THREE.SpotLight(0xfff0dc,1.3,10,1.1,.9,1.4); s2.position.set(1.2,3.45,-5.5); s2.target.position.set(4.7,1.2,-5.5); scene.add(s2); scene.add(s2.target);
+  }
 
   // textures
   const rnd=(()=>{let s=7;return()=>{s=(s*16807)%2147483647;return s/2147483647;};})();
@@ -560,9 +569,10 @@ function build(){
   // floor + ceiling
   const fm=navyMarbleT; fm.repeat.set(4,5);
   // mirror-polished floor: real-time reflection under a thin marble layer
-  if(THREE.Reflector){ try{ const rf=new THREE.Reflector(new THREE.PlaneGeometry(W,D),{textureWidth:768,textureHeight:768,color:0x8a95b0,clipBias:.003});
+  const USE_MIRROR=!!THREE.Reflector&&!LITE;
+  if(USE_MIRROR){ try{ const rf=new THREE.Reflector(new THREE.PlaneGeometry(W,D),{textureWidth:512,textureHeight:512,color:0x8a95b0,clipBias:.003});
     rf.rotation.x=-Math.PI/2; rf.position.set(0,-.002,-D/2); scene.add(rf); }catch(e){} }
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(W,D),mat({map:fm,roughness:.12,metalness:.05,envMapIntensity:.6,transparent:!!THREE.Reflector,opacity:THREE.Reflector?.78:1}));
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(W,D),mat({map:fm,roughness:.12,metalness:.05,envMapIntensity:.6,transparent:USE_MIRROR,opacity:USE_MIRROR?.78:1}));
   floor.rotation.x=-Math.PI/2; floor.position.set(0,0,-D/2); scene.add(floor);
   const ceil=new THREE.Mesh(new THREE.PlaneGeometry(W,D),mat({color:0x0a0f1e,roughness:.9}));
   ceil.rotation.x=Math.PI/2; ceil.position.set(0,Hh,-D/2); scene.add(ceil);
@@ -761,11 +771,16 @@ function build(){
   buildExterior();
 
   // realistic soft shadows from the ceiling lights
-  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=LITE?THREE.PCFShadowMap:THREE.PCFSoftShadowMap;
+  renderer.shadowMap.autoUpdate=false; // room is static: draw shadows once, not every frame
   const key=new THREE.DirectionalLight(0xfff1dd,.42); key.position.set(1.5,9,-3); key.target.position.set(0,0,-6.5); scene.add(key); scene.add(key.target);
-  key.castShadow=true; key.shadow.mapSize.set(2048,2048); Object.assign(key.shadow.camera,{left:-6,right:6,top:7.5,bottom:-7.5,near:1,far:16}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=4;
+  key.castShadow=true; key.shadow.mapSize.set(LITE?1024:1536,LITE?1024:1536); Object.assign(key.shadow.camera,{left:-6,right:6,top:7.5,bottom:-7.5,near:1,far:16}); key.shadow.bias=-.0006; key.shadow.normalBias=.02; key.shadow.radius=4;
   scene.traverse(o=>{ if(!o.isMesh) return; const wp=new THREE.Vector3(); o.getWorldPosition(wp);
     if(wp.z<.4&&wp.z>-12.2&&Math.abs(wp.x)<5.1){ o.receiveShadow=true; const pl=o.geometry&&o.geometry.type==="PlaneGeometry"; if(!pl&&wp.y<3.2&&wp.y>-.05) o.castShadow=true; }});
+  // moving things (staff, doors) don't cast into the baked shadow map
+  try{ arun.g.traverse(o=>o.castShadow=false); }catch(e){}
+  try{ DOORS.forEach(d=>d&&d.traverse&&d.traverse(o=>o.castShadow=false)); }catch(e){}
+  renderer.shadowMap.needsUpdate=true;
 }
 const pins=[]; let STOPS={};
 /* ---------------- exterior: storefront modelled on the shop photo ---------------- */
@@ -1162,7 +1177,7 @@ function onBlu(fbx){
   const T_={body:tex("blu_body.jpg"),head:tex("blu_head.jpg"),opacity:tex("blu_opacity.png")};
   fbx.traverse(n=>{
     if(n.isBone&&!B[n.name]) B[n.name]=n;
-    if(n.isMesh){ n.frustumCulled=false; n.castShadow=true;
+    if(n.isMesh){ n.frustumCulled=false; n.castShadow=false;
       const morph=!!n.morphTargetDictionary;
       const conv=m=>{ const part=(m.name||"").split("_").pop(); const op=part==="opacity";
         return new THREE.MeshStandardMaterial({map:T_[part]||T_.body,roughness:op?.6:.62,metalness:0,skinning:true,morphTargets:morph,
@@ -1177,6 +1192,9 @@ function onBlu(fbx){
   const need=Object.keys(A); if(need.some(n=>!B[n])) return;
   fbx.scale.setScalar(.0094);                     // centimetres -> metres, about 1.62 m tall
   const wrap=new THREE.Group(); wrap.add(fbx); scene.add(wrap);
+  { const bt=canvasTex(128,128,(g,w,h)=>{const gr=g.createRadialGradient(w/2,h/2,0,w/2,h/2,w/2);gr.addColorStop(0,"rgba(0,0,0,.45)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(0,0,w,h);});
+    const blob=new THREE.Mesh(new THREE.PlaneGeometry(.75,.75),new THREE.MeshBasicMaterial({map:bt,transparent:true,depthWrite:false}));
+    blob.rotation.x=-Math.PI/2; blob.position.y=.006; wrap.add(blob); }
   wrap.position.copy(arun.g.position); wrap.rotation.y=arun.g.rotation.y; fbx.updateMatrixWorld(true);
   const rest={}; need.forEach(n=>rest[n]=B[n].quaternion.clone());
   // give the face channels the same short names Tex used (jawOpen, aa, oh, mouthSmileLeft, eyeBlinkLeft ...)
@@ -1308,8 +1326,12 @@ function loop(now){
 
   pins.forEach((p,i)=>{p.visible=entered&&camera.position.z<0; p.position.y=p.userData.baseY+Math.sin(t*2+i)*.05;});
   renderer.render(scene,camera);
+  // adaptive resolution: if the phone can't keep up, lower the pixel ratio a step
+  if(entered){ perfN++; perfT+=dt; if(perfN>=90){ const avg=perfT/perfN; perfN=0; perfT=0;
+    if(avg>.024&&curPR>1){ curPR=Math.max(1,curPR-.25); renderer.setPixelRatio(curPR); resize(); } } }
   requestAnimationFrame(loop);
 }
+let perfN=0, perfT=0;
 
 /* ---------------- start ---------------- */
 applyLang();
