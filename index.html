@@ -1233,14 +1233,18 @@ function animateRig(S,t,walking,ph,talking){
     aimBone(B.LeftUpLeg,B.LeftLeg,D(.02,-1,0)); aimBone(B.RightUpLeg,B.RightLeg,D(-.02,-1,0));
   }
   // right arm: point at product, swing, or relax
-  if(!walking&&S.pointAt){
-    _v1.setFromMatrixPosition(B.RightArm.matrixWorld);
+  // products on the left wall (waterproofing) are shown with the left hand, the rest with the right
+  const useL=!walking&&S.pointAt&&S.pointAt.x<-2;
+  const point=(arm,fore,hand)=>{ _v1.setFromMatrixPosition(arm.matrixWorld);
     const dir=S.pointAt.clone().sub(_v1).normalize(); dir.y=Math.max(dir.y,-.15); dir.normalize();
-    aimBone(B.RightArm,B.RightForeArm,dir); aimBone(B.RightForeArm,B.RightHand,dir.clone().add(new THREE.Vector3(0,.05,0)).normalize());
+    aimBone(arm,fore,dir); aimBone(fore,hand,dir.clone().add(new THREE.Vector3(0,.05,0)).normalize()); };
+  if(!walking&&S.pointAt&&!useL){ point(B.RightArm,B.RightForeArm,B.RightHand);
+  } else if(useL&&talking){ aimBone(B.RightArm,B.RightForeArm,D(-.16,-1,.08+Math.sin(t*2.6)*.04)); aimBone(B.RightForeArm,B.RightHand,D(-.3-Math.sin(t*3.4)*.06,-.75,.28));
   } else if(walking){ aimBone(B.RightArm,B.RightForeArm,D(-.1,-1,sw*.45)); aimBone(B.RightForeArm,B.RightHand,D(-.05,-1,sw*.45+.3)); }
   else { aimBone(B.RightArm,B.RightForeArm,D(-.13,-1,.02+br*.01)); aimBone(B.RightForeArm,B.RightHand,D(-.06,-1,.2)); }
   // left arm: talk gesture, swing, or relax
-  if(walking){ aimBone(B.LeftArm,B.LeftForeArm,D(.1,-1,-sw*.45)); aimBone(B.LeftForeArm,B.LeftHand,D(.05,-1,-sw*.45+.3)); }
+  if(useL){ point(B.LeftArm,B.LeftForeArm,B.LeftHand); }
+  else if(walking){ aimBone(B.LeftArm,B.LeftForeArm,D(.1,-1,-sw*.45)); aimBone(B.LeftForeArm,B.LeftHand,D(.05,-1,-sw*.45+.3)); }
   else if(talking){ aimBone(B.LeftArm,B.LeftForeArm,D(.16,-1,.08+Math.sin(t*2.6)*.04)); aimBone(B.LeftForeArm,B.LeftHand,D(.3+Math.sin(t*3.4)*.06,-.75,.28)); }
   else { aimBone(B.LeftArm,B.LeftForeArm,D(.13,-1,.02+br*.01)); aimBone(B.LeftForeArm,B.LeftHand,D(.06,-1,.2)); }
   // head + breathing
