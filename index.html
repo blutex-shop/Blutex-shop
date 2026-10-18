@@ -254,6 +254,22 @@ body.sheet-open #waFab{display:none}
 
 </head>
 <body>
+<!-- opening animation "Light Split": a gold light line appears, the logo opens out of it, then the splash fades (tap to skip) -->
+<style>
+#splash{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse 80% 60% at 50% 45%,#1a2160,#0b0e2b 70%);display:grid;place-items:center;transition:opacity .6s ease}
+#splash.out{opacity:0;pointer-events:none}
+#splash .sp{position:relative;display:grid;justify-items:center;gap:18px;width:min(76vw,520px)}
+#splash img{width:100%;height:auto;display:block;clip-path:inset(50% 0 50% 0);animation:spOpen .9s cubic-bezier(.65,0,.35,1) .75s forwards}
+#splash .slit{position:absolute;left:50%;top:42%;height:2px;width:0;transform:translate(-50%,-50%);background:#f4c142;box-shadow:0 0 18px #f4c142;opacity:0;animation:spSlit 1.6s ease .15s forwards}
+#splash .ln{height:2px;width:0;background:linear-gradient(90deg,rgba(244,193,66,0),#f4c142,rgba(244,193,66,0));animation:spLine .7s ease 1.5s forwards}
+@keyframes spSlit{0%{opacity:0;width:0}25%{opacity:1;width:80%}55%{opacity:1;width:80%}100%{opacity:0;width:80%}}
+@keyframes spOpen{to{clip-path:inset(0 0 0 0)}}
+@keyframes spLine{to{width:60%}}
+@media (prefers-reduced-motion:reduce){#splash img{animation:none;clip-path:none}#splash .slit{display:none}#splash .ln{animation:none;width:60%}}
+</style>
+<div id="splash" aria-hidden="true"><div class="sp"><div class="slit"></div><img src="logo_blutex_full.png" alt=""><div class="ln"></div></div></div>
+<script>(function(){const s=document.getElementById("splash");let done=false;const hide=()=>{if(done)return;done=true;s.classList.add("out");setTimeout(()=>s.remove(),700);};
+setTimeout(hide,2700);s.addEventListener("click",hide);})();</script>
 <div id="app"><canvas id="c"></canvas></div>
 
 <div id="intro">
