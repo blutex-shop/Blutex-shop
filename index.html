@@ -767,7 +767,7 @@ function build(){
 
   STOPS={};
   [["aq",LX,Z[0],1],["ce",LX,Z[1],1],["tg",LX,Z[2],1],["l2",RX,Z[0],-1],["l3",RX,Z[1],-1],["ep",RX,Z[2],-1],["ro",RX,Z[2],-1]].forEach(([id,x,z,f])=>{
-    STOPS[id]={target:new THREE.Vector3(x,1.25,z),cam:new THREE.Vector3(x+f*3.1,1.6,z+1.1),man:new THREE.Vector3(x+f*1.0,0,z+1.35)};
+    STOPS[id]={target:new THREE.Vector3(x,1.25,z),cam:new THREE.Vector3(x+f*3.1,1.6,z+1.1),man:new THREE.Vector3(x+f*1.0,0,f>0?z-1.35:z+1.35)};   // left wall: stand past the product so it is on her right hand side
   });
   STOPS.ro.target.y=1.85; STOPS.ep.target.y=.75;
   STOPS.jf={target:new THREE.Vector3(-.35,.85,-6.0),cam:new THREE.Vector3(-.35,1.55,-3.7),man:new THREE.Vector3(.55,0,-5.25)};
@@ -1234,7 +1234,7 @@ function animateRig(S,t,walking,ph,talking){
   }
   // right arm: point at product, swing, or relax
   // products on the left wall (waterproofing) are shown with the left hand, the rest with the right
-  const useL=!walking&&S.pointAt&&S.pointAt.x<-2;
+  const useL=false;   // always point with the right hand (left-wall stops place Blu so the product is on her right)
   const point=(arm,fore,hand)=>{ _v1.setFromMatrixPosition(arm.matrixWorld);
     const dir=S.pointAt.clone().sub(_v1).normalize(); dir.y=Math.max(dir.y,-.15); dir.normalize();
     aimBone(arm,fore,dir); aimBone(fore,hand,dir.clone().add(new THREE.Vector3(0,.05,0)).normalize()); };
