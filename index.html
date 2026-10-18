@@ -962,7 +962,7 @@ function buildExterior(){
   const drawSlog=()=>{ const g=slogC.getContext("2d"),w=2048,h=880, Y="#f4c142"; g.clearRect(0,0,w,h);
     g.textAlign="center"; g.textBaseline="middle"; g.fillStyle=Y;
     const fit=(t,font,size,maxW,ls)=>{ if(g.letterSpacing!==undefined) g.letterSpacing=ls+"px"; let z=size; do{g.font=font.replace("{s}",z);z-=2;}while(g.measureText(t).width>maxW&&z>20); };
-    const L1="BLUTEX IS NOT JUST A SHOP", L2="IT'S AN EXPERIENCE", F="500 {s}px Montserrat,'Helvetica Neue',Arial,sans-serif";
+    const L1="BLUTEX IS NOT JUST A SHOWROOM", L2="IT'S AN EXPERIENCE", F="500 {s}px Montserrat,'Helvetica Neue',Arial,sans-serif";
     fit(L1,F,170,w*.76,16); const s1=parseInt(g.font); g.fillText(L1,w/2,h*.33);
     g.fillRect(w*.2,h*.5,w*.6,4);
     fit(L2,F,s1,w*.72,22); g.fillText(L2,w/2,h*.67);
