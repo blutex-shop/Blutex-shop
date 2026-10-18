@@ -1,6 +1,6 @@
 // Blutex app: page loads fresh when online (so updates show at once), cached copy when offline.
-const CACHE="blutex-v1";
-const CORE=["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./blutex_logo.png"];
+const CACHE="blutex-v2";
+const CORE=["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./logo_blutex_new.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}));self.skipWaiting();});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener("fetch",e=>{

@@ -148,10 +148,19 @@ th{color:var(--mute);font-weight:500;width:40%;padding-right:10px}
 .plist{display:grid;gap:8px}
 .prec{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;background:#121640;border:1px solid var(--line);border-radius:12px;padding:8px}
 .prec.main{border-color:var(--gold)}
+.prec.alt{border-style:dashed}.prec.alt .pt small{color:#7fc4ff}
 .prec img,.pimg0{width:52px;height:52px;object-fit:cover;border-radius:8px;background:#fff}
 .pt{display:grid;gap:2px;min-width:0}.pt small{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}.pt b{font-size:15px}.pt span{font-size:13px;color:var(--mute)}
 .pv{padding:8px 12px;font-size:13px}
 .pnote{margin:0;font-size:12px;color:var(--mute)}
+.pstep{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;margin-top:4px}.pstep i{font-style:normal;flex:none;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#1a1300;display:grid;place-items:center;font-size:13px;font-weight:700}
+.pstep.res{border-top:1px solid var(--line);padding-top:14px;margin-top:6px}.pstep.res i{background:#1f9d55;color:#fff}
+.pcard[aria-pressed="true"]{border-color:var(--gold);background:#2a2a5c}
+.punit.pj{width:max-content;max-width:100%}.punit.pj button{min-height:42px;padding:0 16px}
+.psel{height:44px;border-radius:10px;border:1px solid var(--line);background:#0b0e2b;color:var(--ink);padding:0 10px;font:16px var(--body);max-width:100%}
+.px{align-self:center;color:var(--mute)}.pres{display:grid;gap:12px}
+.gopt{display:grid;gap:10px}.gopt .punit{width:max-content;max-width:100%}.gopt .punit button{min-height:40px;padding:0 14px}
+.gopt select{height:44px;border-radius:10px;border:1px solid var(--line);background:#0b0e2b;color:var(--ink);padding:0 10px;font:16px var(--body);max-width:100%}
 .install{justify-self:center;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:9px 18px;font-weight:600;font-size:15px}
 .ioshint{font-size:13px;color:var(--mute);border:1px dashed var(--line);border-radius:12px;padding:8px 12px}
 
@@ -249,7 +258,7 @@ body.sheet-open #waFab{display:none}
 
 <div id="intro">
   <header class="snav" id="snav">
-    <a class="snav-logo" href="#home" data-go="home" aria-label="BLUTEX home"><img src="blutex_logo.png" alt="BLUTEX"></a>
+    <a class="snav-logo" href="#home" data-go="home" aria-label="BLUTEX home"><img src="logo_blutex_new.png" alt="blutex"></a>
     <nav class="snav-links" id="snavLinks" aria-label="Main"></nav>
     <button type="button" class="snav-menu" id="snavMenu" aria-expanded="false" aria-label="Menu">☰</button>
   </header>
@@ -278,7 +287,7 @@ body.sheet-open #waFab{display:none}
 <a id="waFab" class="wa" target="_blank" rel="noopener" aria-label="WhatsApp BLUTEX" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
 
 <div id="top" hidden>
-  <div class="brand"><img src="blutex_logo.png" alt="Blutex" style="height:22px;display:block"></div>
+  <div class="brand"><img src="logo_blutex_new.png" alt="blutex" style="height:22px;display:block"></div>
   <div class="tb">
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -329,17 +338,17 @@ const K={type:{en:"Type",ml:"തരം"},use:{en:"Use",ml:"ഉപയോഗം"},
  bed:{en:"Bed thickness",ml:"കനം"},open:{en:"Open time",ml:"ഓപ്പൺ ടൈം"},surf:{en:"Surfaces",ml:"പ്രതലങ്ങൾ"},area:{en:"Areas",ml:"ഇടങ്ങൾ"},
  coats:{en:"Application",ml:"പ്രയോഗം"},feat:{en:"Features",ml:"ഗുണങ്ങൾ"},cover:{en:"Coverage",ml:"കവറേജ്"},std:{en:"Standard",ml:"നിലവാരം"},shelf:{en:"Shelf life",ml:"ഷെൽഫ് ലൈഫ്"},cure:{en:"Ready for",ml:"ഉപയോഗിക്കാൻ"},brand:{en:"Brand",ml:"ബ്രാൻഡ്"},finish:{en:"Finish",ml:"ഫിനിഷ്"}};
 const P=[
- {id:"l2",cat:"ta",name:"Commet Tile Master L2",short:"Tile Master L2",img:"l2.jpg",sample:false,
+ {id:"l2",cat:"ta",name:"Commet Tile Master L2",short:"Tile Master L2",img:"l2_w.jpg",sample:false,
   en:"Tile Master L2 is a C1TE Type 2 grey tile adhesive for indoor floors and walls. It has a longer open time, so the mason gets more working time. It works for tile on tile with small and medium tiles, up to 12 millimetre bed. Twenty kilo bag.",
   ml:"കോമെറ്റ് ടൈൽ മാസ്റ്റർ L2. വീടിനുള്ളിലെ ഫ്ലോറിനും ചുമരിനും ടൈൽ ഒട്ടിക്കാനുള്ള C1TE ടൈപ്പ് 2 ഗ്രേ അഡ്ഹെസിവ് ആണ്. ഓപ്പൺ ടൈം കൂടുതൽ ഉള്ളതുകൊണ്ട് പണി എളുപ്പമാണ്. പഴയ ടൈലിന് മുകളിലും ചെറുതും ഇടത്തരവുമായ ടൈലുകൾ ഒട്ടിക്കാം. 12 മില്ലിമീറ്റർ വരെ കനത്തിൽ ഉപയോഗിക്കാം. 20 കിലോ ബാഗിൽ ലഭ്യമാണ്.",
   spec:{type:"C1TE / Type 2",use:{en:"Interior floor & wall",ml:"വീടിനുള്ളിലെ ഫ്ലോറും ചുമരും"},colour:{en:"Grey",ml:"ഗ്രേ"},pack:"20 kg",bed:{en:"Up to 12 mm",ml:"12 mm വരെ"},open:{en:"Extended",ml:"കൂടുതൽ"},
    surf:{en:"Concrete, block & brick masonry, cement mortar beds, plaster, ceramic tiles, terrazzo, natural stone",ml:"കോൺക്രീറ്റ്, ബ്ലോക്ക്, ഇഷ്ടിക, സിമന്റ് മോർട്ടാർ, പ്ലാസ്റ്റർ, സെറാമിക് ടൈൽ, ടെറാസോ, പ്രകൃതിദത്ത കല്ല്"}}},
- {id:"l3",cat:"ta",name:"Commet Tile Master L3",short:"Tile Master L3",img:"l3.jpg",sample:false,
+ {id:"l3",cat:"ta",name:"Commet Tile Master L3",short:"Tile Master L3",img:"l3_w.jpg",sample:false,
   en:"Tile Master L3 is a C2TE Type 2 grey adhesive for both interior and exterior floors and walls. It is the right choice for exterior wall fixing and is water resistant. You can fix over existing vitrified and ceramic tiles, up to 12 millimetre bed. Twenty kilo bag.",
   ml:"കോമെറ്റ് ടൈൽ മാസ്റ്റർ L3. അകത്തും പുറത്തും ഫ്ലോറിലും ചുമരിലും ഉപയോഗിക്കാവുന്ന C2TE ടൈപ്പ് 2 ഗ്രേ അഡ്ഹെസിവ്. പുറം ചുമരിൽ ടൈൽ ഒട്ടിക്കാൻ ഏറ്റവും നല്ലത്. വെള്ളത്തെ ചെറുക്കും. പഴയ വിട്രിഫൈഡ്, സെറാമിക് ടൈലുകൾക്ക് മുകളിലും ഒട്ടിക്കാം. 12 മില്ലിമീറ്റർ വരെ കനം. 20 കിലോ ബാഗിൽ ലഭ്യമാണ്.",
   spec:{type:"C2TE / Type 2",use:{en:"Interior & exterior floor & wall",ml:"അകത്തും പുറത്തും ഫ്ലോറും ചുമരും"},colour:{en:"Grey",ml:"ഗ്രേ"},pack:"20 kg",bed:{en:"Up to 12 mm",ml:"12 mm വരെ"},open:{en:"Extended",ml:"കൂടുതൽ"},
    surf:{en:"Concrete, masonry, cement mortar beds, plaster, terrazzo, natural stone, existing vitrified & ceramic tile",ml:"കോൺക്രീറ്റ്, മേസൺറി, സിമന്റ് മോർട്ടാർ, പ്ലാസ്റ്റർ, ടെറാസോ, കല്ല്, പഴയ വിട്രിഫൈഡ് / സെറാമിക് ടൈൽ"}}},
- {id:"ep",cat:"ta",name:"SyrexEasy Epoxy Grout",short:"Epoxy Grout",img:"epoxy.jpg",sample:false,
+ {id:"ep",cat:"ta",name:"SyrexEasy Epoxy Grout",short:"Epoxy Grout",img:"epoxy_w.jpg",sample:false,
   en:"SyrexEasy from Syrex is a two-component epoxy tile grout. It gives a high strength bond, resists stains and chemicals, keeps water out of the joints and leaves a smooth finish. It comes in more than 20 colours. It comes in one kilo and five kilo packs.",
   ml:"സൈറെക്സ് ഈസി, ടു-കമ്പോണന്റ് എപ്പോക്സി ടൈൽ ഗ്രൗട്ട്. നല്ല ഉറപ്പുള്ള ബോണ്ട് തരും, കറയും കെമിക്കലും പിടിക്കില്ല, ജോയിന്റുകളിൽ വെള്ളം കയറുന്നത് തടയും, മിനുസമുള്ള ഫിനിഷ്. ഇരുപതിലധികം നിറങ്ങളിൽ ലഭ്യമാണ്. 1 കിലോ, 5 കിലോ പാക്കുകളിൽ ലഭ്യമാണ്.",
   spec:{type:{en:"Two-component epoxy tile grout (SI-EATG)",ml:"ടു-കമ്പോണന്റ് എപ്പോക്സി ടൈൽ ഗ്രൗട്ട് (SI-EATG)"},use:{en:"Tile joints, floor & wall",ml:"ടൈൽ ജോയിന്റുകൾ, ഫ്ലോറും ചുമരും"},
@@ -366,7 +375,7 @@ const P=[
    std:{en:"Meets ASTM C 190",ml:"ASTM C 190 നിലവാരം"},
    pack:{en:"500 ml, 1, 5, 10, 20 & 50 L",ml:"500 ml, 1, 5, 10, 20, 50 ലിറ്റർ"},
    shelf:{en:"24 months, store cool & dry",ml:"24 മാസം, തണുത്ത ഉണങ്ങിയ സ്ഥലത്ത്"}}},
- {id:"ce",cat:"wp",name:"Cera-Chem Ceralastic",short:"Ceralastic",img:"ceralastic.jpg",pdf:"ceralastic-tds.pdf",sample:false,
+ {id:"ce",cat:"wp",name:"Cera-Chem Ceralastic",short:"Ceralastic",img:"ceralastic_w.jpg",pdf:"ceralastic-tds.pdf",sample:false,
   en:"Ceralastic from Cera-Chem is a two component, flexible cementitious waterproof coating with acrylic co-polymers. It bridges hairline cracks up to 0.3 millimetre and is non-toxic, so it is safe even for drinking water tanks. Use it on bathrooms, toilets, balconies, terraces, roofs, basements, water tanks and swimming pools. Brush on at least two coats, letting the first coat dry for 8 to 10 hours. One kilo covers about 1.25 square metres per coat.",
   ml:"സെറാ-കെം സെറാലാസ്റ്റിക്. രണ്ട് ഘടകങ്ങളുള്ള, വഴക്കമുള്ള സിമന്റ് ബേസ്ഡ് വാട്ടർപ്രൂഫ് കോട്ടിംഗ് ആണ്. 0.3 മില്ലിമീറ്റർ വരെയുള്ള ചെറിയ വിള്ളലുകൾ മൂടും. വിഷാംശം ഇല്ലാത്തതിനാൽ കുടിവെള്ള ടാങ്കിലും ഉപയോഗിക്കാം. ബാത്ത്റൂം, ടോയ്‌ലറ്റ്, ബാൽക്കണി, ടെറസ്, മേൽക്കൂര, ബേസ്‌മെന്റ്, വാട്ടർ ടാങ്ക്, സ്വിമ്മിംഗ് പൂൾ എന്നിവയ്ക്ക് നല്ലതാണ്. കുറഞ്ഞത് രണ്ട് കോട്ട് ബ്രഷ് ചെയ്യുക, ആദ്യത്തെ കോട്ട് 8 മുതൽ 10 മണിക്കൂർ ഉണങ്ങാൻ വിടുക. ഒരു കിലോ ഒരു കോട്ടിന് ഏകദേശം 1.25 ചതുരശ്ര മീറ്റർ കവർ ചെയ്യും.",
   spec:{type:{en:"2K elastomeric cementitious waterproof coating",ml:"2K ഇലാസ്റ്റോമെറിക് സിമന്റീഷ്യസ് വാട്ടർപ്രൂഫ് കോട്ടിംഗ്"},
@@ -386,7 +395,7 @@ const P=[
    coats:{en:"Powder : liquid = 3 : 1 by weight, 2 brush coats 6–8 h apart on pre-wetted surface",ml:"പൗഡർ : ലിക്വിഡ് = 3 : 1 (ഭാരം), നനച്ച പ്രതലത്തിൽ 6–8 മണിക്കൂർ ഇടവിട്ട് 2 കോട്ട്"},
    cover:{en:"1.5 – 2.5 kg/m²",ml:"1.5 – 2.5 കിലോ/ച.മീ"},
    cure:{en:"Rain: vertical after ~4 h, horizontal after ~12 h · foot traffic after ~2 days",ml:"മഴ: ചുമരിന് ~4 മണിക്കൂർ, തറയ്ക്ക് ~12 മണിക്കൂർ · നടക്കാൻ ~2 ദിവസം"},
-   pack:{en:"24 kg powder (Comp. A) + polymer liquid (Comp. B)",ml:"24 കിലോ പൗഡർ (A) + പോളിമർ ലിക്വിഡ് (B)"}}}
+   pack:{en:"40 kg kit: 30 kg powder (Comp. A) + 10 L polymer liquid (Comp. B), mix 3 : 1",ml:"40 കിലോ കിറ്റ്: 30 കിലോ പൗഡർ (A) + 10 ലിറ്റർ പോളിമർ ലിക്വിഡ് (B), 3 : 1 മിക്സ്"}}}
 ];
 const PHONE="919400439967";
 
@@ -595,7 +604,7 @@ function build(){
 
   // back feature wall: wood slats + backlit logo
   for(let i=0;i<34;i++){const s=new THREE.Mesh(new THREE.BoxGeometry(.09,3.0,.06),woodM);s.position.set(-2.9+i*.16,1.5,-D+.05);scene.add(s);}
-  const logoImgT=tex("blutex_logo.png");
+  const logoImgT=tex("logo_blutex_full.png");
   const logo=new THREE.Mesh(new THREE.PlaneGeometry(3.0,1.14),basic({map:logoImgT,transparent:true,depthWrite:false})); logo.position.set(-.2,2.55,-D+.1); scene.add(logo);
   const tagT=canvasTex(1024,96,(g,w,h)=>{g.textAlign="center";g.fillStyle="#f3e2bf";g.font="600 50px 'Barlow',Arial";g.fillText("BUILD STRONGER · LAST LONGER",w/2,66);});
   const tg2=new THREE.Mesh(new THREE.PlaneGeometry(3.0,.28),basic({map:tagT,transparent:true,depthWrite:false})); tg2.position.set(-.2,1.78,-D+.1); scene.add(tg2);
@@ -625,7 +634,7 @@ function build(){
   const cg=new THREE.Mesh(new THREE.BoxGeometry(2.6,.02,.02),GOLD); cg.position.set(-.5,.98,-10.2); scene.add(cg);
   const cled=new THREE.Mesh(new THREE.BoxGeometry(2.5,.015,.02),LEDB); cled.position.set(-.5,.03,-10.2); scene.add(cled);
   floorGlow(-.5,-10.1,2.6);
-  const ctrLogo=new THREE.Mesh(new THREE.PlaneGeometry(1.1,.42),basic({map:tex("blutex_logo.png"),transparent:true,depthWrite:false}));
+  const ctrLogo=new THREE.Mesh(new THREE.PlaneGeometry(1.1,.42),basic({map:tex("logo_blutex_new.png"),transparent:true,depthWrite:false}));
   ctrLogo.position.set(-.5,.62,-10.19); scene.add(ctrLogo);
   const mon=new THREE.Mesh(new THREE.BoxGeometry(.5,.32,.02),mat({color:0x0b0b0e,roughness:.3})); mon.position.set(-.9,1.32,-10.75); scene.add(mon);
 
@@ -961,7 +970,7 @@ function buildExterior(){
   drawSlog();
   try{ Promise.all([document.fonts.load("500 60px Montserrat")]).then(drawSlog,()=>{}); }catch(e){}
   add(new THREE.PlaneGeometry(10.6,4.55),new THREE.MeshBasicMaterial({map:slog,transparent:true,toneMapped:false,fog:false}),0,8.05,.285);
-  const LOGO=tex("blutex_logo.png");
+  const LOGO=tex("logo_blutex_new.png");
   add(new THREE.PlaneGeometry(3.6,1.37),new THREE.MeshBasicMaterial({map:LOGO,transparent:true,toneMapped:false,depthWrite:false}),0,4.8,.73);
   // frameless glass: two bays, door beside the centre column in each bay
   const glassM=new THREE.MeshStandardMaterial({color:0xd6e6ff,transparent:true,opacity:.06,roughness:.02,metalness:.1,envMapIntensity:.5,depthWrite:false,side:THREE.DoubleSide});
@@ -1154,7 +1163,7 @@ function trimHair(hair,head,K){
     // BLUTEX logo on the left chest, attached to the chest bone
     let best=null; fbx.traverse(n=>{ if(n.name==="outfit"&&n.isMesh){ const pa=n.geometry.attributes.position, v=new THREE.Vector3();
       for(let i=0;i<pa.count;i+=1){ v.fromBufferAttribute(pa,i).applyMatrix4(n.matrixWorld); if(Math.abs(v.x-.085)<.03&&Math.abs(v.y-1.33)<.03&&(!best||v.z>best.z)) best=v.clone(); } } });
-    if(best){ const lt=tex("blutex_logo_dark.png");
+    if(best){ const lt=tex("logo_blutex_dark.png");
       const lg=new THREE.Mesh(new THREE.PlaneGeometry(.12,.046),new THREE.MeshBasicMaterial({map:lt,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));
       lg.position.copy(fbx.worldToLocal(best.clone().add(new THREE.Vector3(0,0,.006)))); fbx.add(lg); fbx.updateMatrixWorld(true); B.Spine2.attach(lg); }
     const rest={}; need.forEach(n=>rest[n]=B[n].quaternion.clone());
@@ -1170,7 +1179,7 @@ function loadBlu(){
     const bin=atob(txt.replace(/\s/g,"")); const u8=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
     const raw=fflate.gunzipSync(u8);
     onBlu(new THREE.FBXLoader().parse(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),""));
-  }).catch(()=>{ try{ loadFayez(); }catch(e){} });
+  }).catch(()=>{});
 }
 function onBlu(fbx){
   const B={}, morphMeshes=[];
@@ -1349,89 +1358,109 @@ $("#enter").addEventListener("click",()=>{
 });
 /* ---------------- project selection: pick the job, Tex recommends products + quantities ---------------- */
 const PROJ=[
- {id:"bath",main:"ce",items:["ce","aq","l2","ep","ro","jf"],
+ {id:"bath",main:"ce",items:[{id:"ce",r:"main",q:"bath",note:{en:"Floor + 30 cm up the walls. Shower walls need extra.",ml:"തറ + ചുമരിൽ 30 cm വരെ. ഷവർ ചുമരിന് കൂടുതൽ വേണം."}},{id:"aq",r:"with",q:"none",note:{en:"Small quantity for the sunken portion and screed",ml:"സൺക് ഭാഗത്തിനും സ്ക്രീഡിനും കുറച്ച് മതി"}},{id:"l2",r:"with",note:{en:"Floor tiles only",ml:"ഫ്ലോർ ടൈലിന് മാത്രം"}},{id:"ep",r:"with"},{id:"ro",r:"alt"},{id:"jf",r:"alt"}],
   name:{en:"Bathroom / Toilet",ml:"ബാത്ത്റൂം / ടോയ്‌ലറ്റ്"},sub:{en:"Floor & wet walls",ml:"തറയും നനയുന്ന ചുമരും"},
   en:"For a bathroom, first waterproof the floor and the lower walls with Ceralastic, in two coats. Use AquaArm Latex 45 in the sunken portion and in the screed. After that, fix the tiles with Tile Master L2 and fill the joints with epoxy grout, so no water gets in.",
   ml:"ബാത്ത്റൂമിന് ആദ്യം തറയും ചുമരിന്റെ താഴ്ഭാഗവും സെറാലാസ്റ്റിക് കൊണ്ട് 2 കോട്ട് വാട്ടർപ്രൂഫ് ചെയ്യുക. സൺക് ഭാഗത്തും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക. പിന്നെ ടൈൽ മാസ്റ്റർ L2 കൊണ്ട് ടൈൽ ഒട്ടിച്ച്, ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക. അപ്പോൾ വെള്ളം ഒട്ടും ഇറങ്ങില്ല."},
- {id:"terrace",main:"tg",items:["tg","ce","aq"],
+ {id:"terrace",main:"tg",items:[{id:"tg",r:"main"},{id:"ce",r:"alt"},{id:"aq",r:"with",q:"none",note:{en:"For crack and plaster repair – small quantity",ml:"വിള്ളൽ / പ്ലാസ്റ്റർ റിപ്പയറിന് – കുറച്ച് മതി"}}],
   name:{en:"Terrace / Roof",ml:"ടെറസ് / മേൽക്കൂര"},sub:{en:"Open slab, rain & sun",ml:"മഴയും വെയിലും ഏൽക്കുന്ന സ്ലാബ്"},
   en:"For a terrace or roof, use AquaArm TopGuard. It is flexible, breathable and self-curing, and handles rain and hot sun. Apply two coats on the wet slab. Ceralastic is also a good choice. Use AquaArm Latex 45 to repair cracks and in the protective screed.",
   ml:"ടെറസിനും മേൽക്കൂരയ്ക്കും അക്വാആം ടോപ്ഗാർഡ് ഉപയോഗിക്കുക. വഴക്കമുള്ളതും സ്വയം ക്യൂർ ആകുന്നതുമാണ്, മഴയും വെയിലും താങ്ങും. നനച്ച സ്ലാബിൽ 2 കോട്ട് അടിക്കുക. സെറാലാസ്റ്റിക്കും നല്ലതാണ്. വിള്ളലുകൾ നന്നാക്കാനും സ്ക്രീഡിലും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
- {id:"tank",main:"ce",items:["ce"],
+ {id:"tank",main:"ce",items:[{id:"ce",r:"main",note:{en:"Inside walls and floor of the tank",ml:"ടാങ്കിന്റെ ഉള്ളിലെ ചുമരും തറയും"}}],
   name:{en:"Water tank",ml:"വാട്ടർ ടാങ്ക്"},sub:{en:"Drinking water safe",ml:"കുടിവെള്ളത്തിന് സുരക്ഷിതം"},
   en:"For a water tank, use Ceralastic. It is non-toxic, so it is safe for drinking water tanks. Apply at least two coats on the inside of the tank, and let it cure well before filling water.",
   ml:"വാട്ടർ ടാങ്കിന് സെറാലാസ്റ്റിക് ഉപയോഗിക്കുക. വിഷാംശം ഇല്ലാത്തതുകൊണ്ട് കുടിവെള്ള ടാങ്കിനും സുരക്ഷിതമാണ്. ടാങ്കിന്റെ ഉള്ളിൽ കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക, വെള്ളം നിറയ്ക്കുന്നതിന് മുമ്പ് നന്നായി ഉണങ്ങാൻ വിടുക."},
- {id:"balcony",main:"tg",items:["tg","aq"],
+ {id:"balcony",main:"tg",items:[{id:"tg",r:"main"},{id:"aq",r:"alt",note:{en:"For small areas and repairs",ml:"ചെറിയ ഭാഗങ്ങൾക്കും റിപ്പയറിനും"}}],
   name:{en:"Balcony / Sunshade",ml:"ബാൽക്കണി / സൺഷേഡ്"},sub:{en:"Chajja, ledges",ml:"ഛജ്ജ, ലെഡ്ജ്"},
   en:"For balconies and sunshades, use AquaArm TopGuard in two coats. For small areas and repairs, AquaArm Latex 45 mixed with cement also works well as a waterproof coat.",
   ml:"ബാൽക്കണിക്കും സൺഷേഡിനും അക്വാആം ടോപ്ഗാർഡ് 2 കോട്ട് അടിക്കുക. ചെറിയ ഭാഗങ്ങൾക്കും റിപ്പയറിനും അക്വാആം ലാറ്റക്സ് 45 സിമന്റുമായി ചേർത്ത് വാട്ടർപ്രൂഫ് കോട്ടായും ഉപയോഗിക്കാം."},
- {id:"basement",main:"ce",items:["ce","aq"],
+ {id:"basement",main:"ce",items:[{id:"ce",r:"main"},{id:"aq",r:"with",q:"none",note:{en:"For crack and plaster repair – small quantity",ml:"വിള്ളൽ / പ്ലാസ്റ്റർ റിപ്പയറിന് – കുറച്ച് മതി"}}],
   name:{en:"Basement / Wet wall",ml:"ബേസ്‌മെന്റ് / നനവുള്ള ചുമർ"},sub:{en:"Damp, seepage",ml:"ഈർപ്പം, ചോർച്ച"},
   en:"For basements and damp walls, use Ceralastic in at least two coats. Use AquaArm Latex 45 to repair and bond the plaster before coating.",
   ml:"ബേസ്‌മെന്റിനും നനവുള്ള ചുമരിനും സെറാലാസ്റ്റിക് കുറഞ്ഞത് 2 കോട്ട് അടിക്കുക. കോട്ട് ചെയ്യുന്നതിന് മുമ്പ് പ്ലാസ്റ്റർ നന്നാക്കാനും ബോണ്ട് ചെയ്യാനും അക്വാആം ലാറ്റക്സ് 45 ഉപയോഗിക്കുക."},
- {id:"indoor",main:"l2",items:["l2","ep","ro","jf"],
+ {id:"indoor",main:"l2",items:[{id:"l2",r:"main"},{id:"ep",r:"with"},{id:"ro",r:"alt"},{id:"jf",r:"alt"}],
   name:{en:"Indoor tiling",ml:"വീടിനുള്ളിലെ ടൈൽ"},sub:{en:"Floor & wall, tile on tile",ml:"ഫ്ലോറും ചുമരും, ടൈലിന് മുകളിൽ ടൈൽ"},
   en:"For indoor floor and wall tiles, use Tile Master L2. It also works for tile on tile. Finish the joints with SyrexEasy or Roff Starlike epoxy grout, or the joint filler in a matching colour.",
   ml:"വീടിനുള്ളിലെ ഫ്ലോറിനും ചുമരിനും ടൈൽ മാസ്റ്റർ L2 ഉപയോഗിക്കുക. പഴയ ടൈലിന് മുകളിലും ഒട്ടിക്കാം. ജോയിന്റുകൾ സൈറെക്സ് ഈസി അല്ലെങ്കിൽ റോഫ് സ്റ്റാർലൈക്ക് എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ടോ, ചേരുന്ന നിറത്തിലുള്ള ജോയിന്റ് ഫില്ലർ കൊണ്ടോ നിറയ്ക്കുക."},
- {id:"outdoor",main:"l3",items:["l3","ep","ro"],
+ {id:"outdoor",main:"l3",items:[{id:"l3",r:"main"},{id:"ep",r:"with"},{id:"ro",r:"alt"}],
   name:{en:"Outdoor / Exterior tiling",ml:"പുറം ചുമർ / പുറത്തെ ടൈൽ"},sub:{en:"Exterior walls, sit-outs",ml:"പുറം ചുമർ, സിറ്റൗട്ട്"},
   en:"For exterior walls and outdoor floors, use Tile Master L3. It is water resistant and bonds strongly outside. Finish the joints with epoxy grout so rain water cannot get behind the tiles.",
   ml:"പുറം ചുമരിനും പുറത്തെ ഫ്ലോറിനും ടൈൽ മാസ്റ്റർ L3 ഉപയോഗിക്കുക. വെള്ളത്തെ ചെറുക്കും, പുറത്ത് നല്ല ഉറപ്പോടെ ഒട്ടും. മഴവെള്ളം ടൈലിന് പിന്നിൽ കയറാതിരിക്കാൻ ജോയിന്റുകൾ എപ്പോക്സി ഗ്രൗട്ട് കൊണ്ട് നിറയ്ക്കുക."}
 ];
 const PT={
  en:{btn:"Choose your project",title:"What are you working on?",areaQ:"Area (optional)",areaPh:"e.g. 40",show:"Show products",back:"Back",
-     rec:"Recommended for",main:"Main product",also:"Also used",need:"You need about",view:"View",calcNote:"Estimates from the data sheets. Actual use depends on the surface – confirm on WhatsApp.",
-     noArea:"Add the area above to see quantities.",estTile:"1 bag covers about 35 sq ft",dep:"Depends on tile size and joint width",change:"Change project"},
+     rec:"Recommended for",main:"Main product",also:"Also used",need:"You need about",or:"Or instead",view:"View",calcNote:"Estimates from the data sheets. Actual use depends on the surface – confirm on WhatsApp.",
+     noArea:"Add the area above to see quantities.",estTile:"1 bag covers 35 sq ft",dep:"Depends on tile size and joint width",change:"Change project"},
  ml:{btn:"പ്രോജക്ട് തിരഞ്ഞെടുക്കൂ",title:"എന്ത് ജോലിയാണ് ചെയ്യുന്നത്?",areaQ:"ഏരിയ (ഇല്ലെങ്കിലും മതി)",areaPh:"ഉദാ. 40",show:"ഉൽപ്പന്നങ്ങൾ കാണിക്കൂ",back:"തിരികെ",
-     rec:"ഇതിന് നല്ലത്",main:"പ്രധാന ഉൽപ്പന്നം",also:"ഇതും വേണം",need:"ഏകദേശം വേണ്ടത്",view:"കാണുക",calcNote:"ഡാറ്റാ ഷീറ്റ് അനുസരിച്ചുള്ള ഏകദേശ കണക്ക്. പ്രതലം അനുസരിച്ച് മാറാം – WhatsApp-ൽ ഉറപ്പാക്കൂ.",
-     noArea:"അളവ് കാണാൻ മുകളിൽ ഏരിയ കൊടുക്കൂ.",estTile:"ഒരു ബാഗ് ഏകദേശം 35 sq ft",dep:"ടൈലിന്റെ വലിപ്പവും ജോയിന്റ് വീതിയും അനുസരിച്ച്",change:"പ്രോജക്ട് മാറ്റുക"}
+     rec:"ഇതിന് നല്ലത്",main:"പ്രധാന ഉൽപ്പന്നം",also:"ഇതും വേണം",need:"ഏകദേശം വേണ്ടത്",or:"അല്ലെങ്കിൽ ഇത്",view:"കാണുക",calcNote:"ഡാറ്റാ ഷീറ്റ് അനുസരിച്ചുള്ള ഏകദേശ കണക്ക്. പ്രതലം അനുസരിച്ച് മാറാം – WhatsApp-ൽ ഉറപ്പാക്കൂ.",
+     noArea:"അളവ് കാണാൻ മുകളിൽ ഏരിയ കൊടുക്കൂ.",estTile:"ഒരു ബാഗ് 35 sq ft കവർ ചെയ്യും",dep:"ടൈലിന്റെ വലിപ്പവും ജോയിന്റ് വീതിയും അനുസരിച്ച്",change:"പ്രോജക്ട് മാറ്റുക"}
 };
-let currentProject=null, projArea=null, projUnit="sqft";
+let currentProject=null, projArea=null, projUnit="sqft", projJoint=3, projTile="600x600", projCL=600, projCW=600;
+// epoxy grout: kg/m² = (L+W)/(L×W) × joint width × joint depth × 1.6 (mm); depth ≈ tile thickness; +10% wastage
+// common Indian tile sizes (mm) with typical thickness = joint depth
+const TILES=[["200x200",7],["250x375",7],["300x300",8],["300x450",8],["300x600",9],["400x400",8],["600x600",9],["150x900",9],["200x1200",9],["600x1200",9],["800x800",10],["800x1200",10],["800x1600",10],["1000x1000",10],["1200x1200",10],["1200x1800",10],["1200x2400",9]];
+function groutKg(m2){ const cu=projTile==="custom", [a,b]=cu?[projCL,projCW]:projTile.split("x").map(Number), d=cu?9:(TILES.find(t=>t[0]===projTile)||[0,9])[1]; return (a+b)/(a*b)*projJoint*d*1.6*m2*1.1; }
 function qtyFor(id,m2){
   const ml=lang==="ml", r=n=>Math.ceil(n), f=n=>(Math.round(n*10)/10).toString();
   if(!m2) return null;
   if(id==="ce"){ const kg=m2/0.625; let n24=Math.floor(kg/24), rest=kg-n24*24, n6=r(rest/6); if(n6>=4){n24++;n6=0;}
     return ml?`≈ ${r(kg)} കിലോ (2 കോട്ട്) → ${n24?n24+" × 24 കിലോ":""}${n24&&n6?" + ":""}${n6?n6+" × 6 കിലോ":""}`
              :`≈ ${r(kg)} kg (2 coats) → ${n24?n24+" × 24 kg":""}${n24&&n6?" + ":""}${n6?n6+" × 6 kg":""}`; }
-  if(id==="tg"){ const lo=m2*1.5, hi=m2*2.5, kits=r(m2*2/32);
-    return ml?`≈ ${r(lo)}–${r(hi)} കിലോ മിക്സ് → ഏകദേശം ${kits} കിറ്റ് (24 കിലോ പൗഡർ + ലിക്വിഡ്)`:`≈ ${r(lo)}–${r(hi)} kg mixed → about ${kits} kit${kits>1?"s":""} (24 kg powder + liquid)`; }
+  if(id==="tg"){ const lo=m2*1.5, hi=m2*2.5, kits=r(m2*2/40);   // 1 kit = 30 kg powder + 10 L liquid (3 : 1) = 40 kg mixed; 2 kg/m² typical
+    return ml?`≈ ${r(lo)}–${r(hi)} കിലോ മിക്സ് → ഏകദേശം ${kits} കിറ്റ് (ഒരു കിറ്റ്: 30 കിലോ പൗഡർ + 10 ലിറ്റർ ലിക്വിഡ്)`:`≈ ${r(lo)}–${r(hi)} kg mixed → about ${kits} kit${kits>1?"s":""} (1 kit: 30 kg powder + 10 L liquid)`; }
   if(id==="aq"){ const L=m2/2, cem=L*1.75;
     return ml?`≈ ${f(L)} ലിറ്റർ + ${r(cem)} കിലോ സിമന്റ് (വാട്ടർപ്രൂഫ് കോട്ട്, 2 കോട്ട്)`:`≈ ${f(L)} L + ${r(cem)} kg cement (waterproof coat, 2 coats)`; }
   if(id==="l2"||id==="l3"){ const bags=r(m2*10.764/35);
     return ml?`≈ ${bags} ബാഗ് (20 കിലോ) – ${PT.ml.estTile}`:`≈ ${bags} bag${bags>1?"s":""} of 20 kg – ${PT.en.estTile}`; }
+  if(id==="ep"||id==="ro"){ const kg=groutKg(m2), t=(projTile==="custom"?projCL+"×"+projCW:projTile.replace("x","×"))+" mm, "+projJoint+" mm "+(ml?"ജോയിന്റ്":"joint");
+    if(id==="ro"){ const n=r(kg/5); return ml?`≈ ${f(kg)} കിലോ → ${n} × 5 കിലോ ബക്കറ്റ് (${t})`:`≈ ${f(kg)} kg → ${n} × 5 kg bucket${n>1?"s":""} (${t})`; }
+    let n5=Math.floor(kg/5), n1=r(kg-n5*5); if(n1>=4){n5++;n1=0;} if(!n5&&!n1) n1=1;
+    const pk=ml?[n5?n5+" × 5 കിലോ":"",n1?n1+" × 1 കിലോ":""].filter(Boolean).join(" + "):[n5?n5+" × 5 kg":"",n1?n1+" × 1 kg":""].filter(Boolean).join(" + ");
+    return ml?`≈ ${f(kg)} കിലോ → ${pk} (${t})`:`≈ ${f(kg)} kg → ${pk} (${t})`; }
   return PT[lang].dep;
 }
 function projPanel(step){
-  const L=PT[lang], body=$("#sh");
-  if(step==="pick"){
-    body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.btn}</div><h2>${L.title}</h2></div>
+  // one panel, top to bottom: 1 project · 2 area · 3 epoxy joint · 4 tile size · results (update live)
+  const L=PT[lang], body=$("#sh"), ml=lang==="ml";
+  const pj=step&&step!=="pick"?PROJ.find(x=>x.id===step):null;
+  const ep=pj&&pj.items.some(it=>it.id==="ep");
+  const num=(n,t)=>`<div class="pstep"><i>${n}</i>${t}</div>`;
+  body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.btn}</div><h2>${pj?pj.name[lang]:L.title}</h2></div>
       <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
-<label class="parea" for="parea">${L.areaQ}
-        <span class="prow"><input id="parea" inputmode="decimal" placeholder="${L.areaPh}" value="${projArea||""}">
-        <span class="punit" role="group"><button type="button" data-unit="sqft" aria-pressed="${projUnit==="sqft"}">sq ft</button><button type="button" data-unit="m2" aria-pressed="${projUnit==="m2"}">m²</button></span></span></label>
-      <div class="pgrid">${PROJ.map(p=>`<button type="button" class="pcard" data-proj="${p.id}"><b>${p.name[lang]}</b><span>${p.sub[lang]}</span></button>`).join("")}</div>`;
-    $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
-    body.querySelectorAll("[data-unit]").forEach(b=>b.onclick=()=>{ projUnit=b.dataset.unit; body.querySelectorAll("[data-unit]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.unit===projUnit)); });
-    body.querySelectorAll("[data-proj]").forEach(b=>b.onclick=()=>{ const v=parseFloat(($("#parea").value||"").replace(",",".")); projArea=v>0?v:null; goProject(b.dataset.proj); });
-    $("#sheet").classList.add("open");
-    return;
-  }
-  const pj=PROJ.find(x=>x.id===step), m2=projArea?(projUnit==="sqft"?projArea/10.764:projArea):null;
-  const row=(id,isMain)=>{ const p=P.find(x=>x.id===id); const q=qtyFor(id,m2);
-    return `<div class="prec${isMain?" main":""}">${p.img?`<img src="${p.img}" alt="">`:`<div class="pimg0"></div>`}
-      <div class="pt"><small>${isMain?L.main:L.also}</small><b>${p.short||p.name}</b>${q?`<span>${q}</span>`:""}</div>
-      <button type="button" class="btn pv" data-go="${id}">${L.view}</button></div>`; };
-  body.innerHTML=`<div class="sh-top"><div><div class="cat" style="color:var(--gold)">${L.rec}</div><h2>${pj.name[lang]}</h2></div>
-     <button type="button" class="x" id="pclose" aria-label="Close">✕</button></div>
-     ${m2?`<div class="badge" style="justify-self:start">${projUnit==="sqft"?projArea+" sq ft ≈ "+(Math.round(m2*10)/10)+" m²":projArea+" m²"}</div>`:""}
-     <p class="desc">${pj[lang]}</p>
-     <div class="plist">${pj.items.map(id=>row(id,id===pj.main)).join("")}</div>
-     <p class="pnote">${m2?L.calcNote:L.noArea}</p>
-     <div class="acts"><button type="button" class="btn" id="pchange">${L.change}</button>
-     <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${PHONE}?text=${encodeURIComponent((lang==="ml"?"ഹലോ ബ്ലൂടെക്സ്, എന്റെ പ്രോജക്ട്: ":"Hello Blutex, my project: ")+pj.name[lang]+(m2?(" – "+(projUnit==="sqft"?projArea+" sq ft":projArea+" m²")):"")+". "+(lang==="ml"?"ഉൽപ്പന്നങ്ങളും വിലയും അറിയിക്കാമോ?":"Please share products and price."))}">${T[lang].order}</a></div>`;
+    ${num(1,ml?"പ്രോജക്ട് തിരഞ്ഞെടുക്കൂ":"Choose your project")}
+    <div class="pgrid">${PROJ.map(p=>`<button type="button" class="pcard" data-proj="${p.id}" aria-pressed="${!!pj&&pj.id===p.id}"><b>${p.name[lang]}</b><span>${p.sub[lang]}</span></button>`).join("")}</div>
+    ${num(2,ml?"ഏരിയ":"Area")}
+    <span class="prow"><input id="parea" inputmode="decimal" placeholder="${L.areaPh}" value="${projArea||""}" aria-label="${L.areaQ}">
+      <span class="punit" role="group"><button type="button" data-unit="sqft" aria-pressed="${projUnit==="sqft"}">sq ft</button><button type="button" data-unit="m2" aria-pressed="${projUnit==="m2"}">m²</button></span></span>
+    ${ep?`${num(3,ml?"എപ്പോക്സി ജോയിന്റ് വീതി":"Epoxy joint width")}
+    <span class="punit pj" role="group">${[2,3,4,5].map(n=>`<button type="button" data-joint="${n}" aria-pressed="${projJoint===n}">${n} mm</button>`).join("")}</span>
+    ${num(4,ml?"ടൈൽ സൈസ്":"Tile size")}
+    <select id="ptile" class="psel">${TILES.map(([t])=>`<option value="${t}"${t===projTile?" selected":""}>${t.replace("x"," × ")} mm</option>`).join("")}<option value="custom"${projTile==="custom"?" selected":""}>${ml?"മറ്റ് സൈസ് (Custom)":"Other size (custom)"}</option></select>
+    ${projTile==="custom"?`<span class="prow"><input id="pcl" inputmode="numeric" value="${projCL}" aria-label="Length mm"><span class="px">×</span><input id="pcw" inputmode="numeric" value="${projCW}" aria-label="Width mm"><span class="px">mm</span></span>`:""}`:""}
+    <div id="pres" class="pres"></div>`;
+  const res=()=>{ const box=$("#pres");
+    if(!pj){ box.innerHTML=`<p class="pnote">${ml?"മുകളിൽ ഒരു പ്രോജക്ട് തിരഞ്ഞെടുക്കൂ.":"Choose a project above to see the products."}</p>`; return; }
+    const m2=projArea?(projUnit==="sqft"?projArea/10.764:projArea):null, RL={main:L.main,with:L.also,alt:L.or};
+    const row=it=>{ const id=it.id, p=P.find(x=>x.id===id);
+      const a=(it.q==="bath"&&m2)?m2+4*Math.sqrt(m2)*0.3:m2;   // bathroom: floor + 30 cm up the walls of a roughly square room
+      const q=it.q==="none"?null:qtyFor(id,a), txt=[q,it.note?it.note[lang]:""].filter(Boolean).join(" · ");
+      return `<div class="prec${it.r==="main"?" main":""}${it.r==="alt"?" alt":""}">${p.img?`<img src="${p.img}" alt="">`:`<div class="pimg0"></div>`}
+        <div class="pt"><small>${RL[it.r]}</small><b>${p.short||p.name}</b>${txt?`<span>${txt}</span>`:""}</div>
+        <button type="button" class="btn pv" data-go="${id}">${L.view}</button></div>`; };
+    box.innerHTML=`<div class="pstep res"><i>✓</i>${L.rec} ${pj.name[lang]}${m2?` · ${projUnit==="sqft"?projArea+" sq ft":projArea+" m²"}`:""}</div>
+      <p class="desc">${pj[lang]}</p>
+      <div class="plist">${pj.items.map(row).join("")}</div>
+      <p class="pnote">${m2?L.calcNote:L.noArea}</p>
+      <div class="acts"><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${PHONE}?text=${encodeURIComponent((ml?"ഹലോ ബ്ലൂടെക്സ്, എന്റെ പ്രോജക്ട്: ":"Hello Blutex, my project: ")+pj.name[lang]+(m2?(" – "+(projUnit==="sqft"?projArea+" sq ft":projArea+" m²")):"")+(ep&&m2?(", "+(projTile==="custom"?projCL+"×"+projCW:projTile)+" mm tile, "+projJoint+" mm joint"):"")+". "+(ml?"ഉൽപ്പന്നങ്ങളും വിലയും അറിയിക്കാമോ?":"Please share products and price."))}">${T[lang].order}</a></div>`;
+    box.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ currentProject=null; goProduct(b.dataset.go); }); };
   $("#pclose").onclick=()=>{ $("#sheet").classList.remove("open"); };
-  $("#pchange").onclick=()=>projPanel("pick");
-  body.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ currentProject=null; goProduct(b.dataset.go); });
+  body.querySelectorAll("[data-proj]").forEach(b=>b.onclick=()=>goProject(b.dataset.proj));
+  $("#parea").oninput=e=>{ const v=parseFloat((e.target.value||"").replace(",",".")); projArea=v>0?v:null; res(); };
+  body.querySelectorAll("[data-unit]").forEach(b=>b.onclick=()=>{ projUnit=b.dataset.unit; body.querySelectorAll("[data-unit]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.unit===projUnit)); res(); });
+  body.querySelectorAll("[data-joint]").forEach(b=>b.onclick=()=>{ projJoint=+b.dataset.joint; body.querySelectorAll("[data-joint]").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.joint===projJoint)); res(); });
+  const ts=$("#ptile"); if(ts) ts.onchange=()=>{ projTile=ts.value; projPanel(step); };
+  [["#pcl","projCL"],["#pcw","projCW"]].forEach(([q,k])=>{ const el=$(q); if(el) el.oninput=()=>{ const v=parseFloat(el.value); if(v>=50&&v<=3000){ if(k==="projCL") projCL=v; else projCW=v; res(); } }; });
+  res();
   $("#sheet").classList.add("open");
 }
 function goProject(pid){
